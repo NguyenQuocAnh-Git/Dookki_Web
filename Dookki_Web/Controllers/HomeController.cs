@@ -13,5 +13,7 @@ namespace Dookki_Web.Contents
         {
             return View();
         }
+        public ActionResult test()
+        { return View(); }
     }
 }
