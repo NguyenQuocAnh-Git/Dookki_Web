@@ -43,7 +43,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -162,6 +168,16 @@
     <Content Include="Contents\vendor\swiper\swiper-bundle.min.css" />
     <Content Include="Contents\vendor\swiper\swiper-bundle.min.js" />
     <Content Include="Global.asax" />
+    <Content Include="Models\DOOKKI.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DOOKKI.Context.cs</LastGenOutput>
+      <DependentUpon>DOOKKI.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\DOOKKI.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DOOKKI.edmx</DependentUpon>
+      <LastGenOutput>DOOKKI1.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +185,55 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Admin.cs">
+      <DependentUpon>DOOKKI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>DOOKKI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>DOOKKI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DayWork.cs">
+      <DependentUpon>DOOKKI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DOOKKI.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DOOKKI.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DOOKKI.Designer.cs">
+      <DependentUpon>DOOKKI.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\DOOKKI1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DOOKKI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee.cs">
+      <DependentUpon>DOOKKI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Map\mapEmployee.cs" />
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>DOOKKI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderDetail.cs">
+      <DependentUpon>DOOKKI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Payment.cs">
+      <DependentUpon>DOOKKI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PaymentMethod.cs">
+      <DependentUpon>DOOKKI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>DOOKKI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ticket.cs">
+      <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -203,6 +268,13 @@
     <Content Include="Contents\vendor\bootstrap\js\bootstrap.min.js.map" />
     <Content Include="Contents\vendor\purecounter\purecounter_vanilla.js.map" />
     <Content Include="Contents\vendor\swiper\swiper-bundle.min.js.map" />
+    <EntityDeploy Include="Models\DOOKKI.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DOOKKI.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DOOKKI.edmx.diagram">
+      <DependentUpon>DOOKKI.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Views\Share\_LayoutPage1.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -216,8 +288,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Scripts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -13,7 +13,14 @@ namespace Dookki_Web.Contents
         {
             return View();
         }
-        public ActionResult test()
-        { return View(); }
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(string username, string password)
+        {
+            return View();
+        }
     }
 }

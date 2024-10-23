@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8b318324fefc4d9aa0b528e33e035e16" Name="Diagram1">
+        <EntityTypeShape EntityType="DOOKKIModel.Admin" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOOKKIModel.Category" Width="1.5" PointX="5.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOOKKIModel.Customer" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOOKKIModel.DayWork" Width="1.5" PointX="10" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOOKKIModel.Employee" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOOKKIModel.Order" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOOKKIModel.OrderDetail" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOOKKIModel.Payment" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOOKKIModel.PaymentMethod" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOOKKIModel.Product" Width="1.5" PointX="8" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOOKKIModel.Ticket" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <AssociationConnector Association="DOOKKIModel.FK_Product_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="DOOKKIModel.FK_Order_customerID" ManuallyRouted="false" />
+        <AssociationConnector Association="DOOKKIModel.FK_DayWork_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="DOOKKIModel.FK_OrderDetail_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="DOOKKIModel.FK_OrderDetail_Payment" ManuallyRouted="false" />
+        <AssociationConnector Association="DOOKKIModel.FK_OrderDetail_Ticket" ManuallyRouted="false" />
+        <AssociationConnector Association="DOOKKIModel.FK_Payment_PaymentMethod" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
