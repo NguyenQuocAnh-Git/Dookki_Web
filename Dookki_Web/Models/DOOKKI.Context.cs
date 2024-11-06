@@ -12,6 +12,9 @@ namespace Dookki_Web.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
     
     public partial class DOOKKIEntities : DbContext
     {
@@ -36,5 +39,14 @@ namespace Dookki_Web.Models
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
+    
+        public virtual int sp_UpdateCustomerMarks(Nullable<int> orderID)
+        {
+            var orderIDParameter = orderID.HasValue ?
+                new ObjectParameter("orderID", orderID) :
+                new ObjectParameter("orderID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateCustomerMarks", orderIDParameter);
+        }
     }
 }

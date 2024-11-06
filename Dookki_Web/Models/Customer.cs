@@ -26,6 +26,7 @@ namespace Dookki_Web.Models
         public string customerEmail { get; set; }
         public string customerAddress { get; set; }
         public string customerName { get; set; }
+        public Nullable<int> customerMark { get; set; }
     
         public virtual ICollection<Order> Orders { get; set; }
     }

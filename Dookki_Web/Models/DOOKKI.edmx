@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DOOKKIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DOOKKIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="adminID" />
@@ -34,6 +34,7 @@
           <Property Name="customerEmail" Type="nvarchar" MaxLength="255" />
           <Property Name="customerAddress" Type="nvarchar" MaxLength="255" />
           <Property Name="customerName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="customerMark" Type="int" />
         </EntityType>
         <EntityType Name="DayWork">
           <Key>
@@ -62,6 +63,7 @@
           <Property Name="orderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="orderTime" Type="time" Precision="7" Nullable="false" />
           <Property Name="customerID" Type="int" />
+          <Property Name="discount" Type="int" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -192,6 +194,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_UpdateCustomerMarks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="orderID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="DOOKKIModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -233,8 +238,7 @@
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DOOKKIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -269,6 +273,7 @@
           <Property Name="customerAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="customerName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Order_customerID" FromRole="Customer" ToRole="Order" />
+          <Property Name="customerMark" Type="Int32" />
         </EntityType>
         <EntityType Name="DayWork">
           <Key>
@@ -301,6 +306,7 @@
           <Property Name="customerID" Type="Int32" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_Order_customerID" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
+          <Property Name="discount" Type="Int32" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -479,6 +485,9 @@
             <End Role="PaymentMethod" EntitySet="PaymentMethods" />
             <End Role="Payment" EntitySet="Payments" />
           </AssociationSet>
+          <FunctionImport Name="sp_UpdateCustomerMarks">
+            <Parameter Name="orderID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -509,6 +518,7 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="DOOKKIModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="customerMark" ColumnName="customerMark" />
                 <ScalarProperty Name="customerID" ColumnName="customerID" />
                 <ScalarProperty Name="customerUserName" ColumnName="customerUserName" />
                 <ScalarProperty Name="customerPassword" ColumnName="customerPassword" />
@@ -544,6 +554,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="DOOKKIModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="discount" ColumnName="discount" />
                 <ScalarProperty Name="orderID" ColumnName="orderID" />
                 <ScalarProperty Name="orderTime" ColumnName="orderTime" />
                 <ScalarProperty Name="customerID" ColumnName="customerID" />
@@ -600,6 +611,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_UpdateCustomerMarks" FunctionName="DOOKKIModel.Store.sp_UpdateCustomerMarks" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
