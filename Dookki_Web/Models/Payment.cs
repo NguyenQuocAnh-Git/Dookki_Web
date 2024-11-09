@@ -19,7 +19,7 @@ namespace Dookki_Web.Models
             this.OrderDetails = new HashSet<OrderDetail>();
         }
     
-        public int paymentID { get; set; }
+        public int ID { get; set; }
         public System.DateTime day { get; set; }
         public decimal amount { get; set; }
         public Nullable<int> paymentMethodID { get; set; }

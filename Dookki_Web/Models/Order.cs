@@ -19,8 +19,8 @@ namespace Dookki_Web.Models
             this.OrderDetails = new HashSet<OrderDetail>();
         }
     
-        public int orderID { get; set; }
-        public System.TimeSpan orderTime { get; set; }
+        public int ID { get; set; }
+        public System.TimeSpan Time { get; set; }
         public Nullable<int> customerID { get; set; }
         public Nullable<int> discount { get; set; }
     

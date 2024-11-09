@@ -14,11 +14,11 @@ namespace Dookki_Web.Models
     
     public partial class Admin
     {
-        public int adminID { get; set; }
-        public string adminUserName { get; set; }
-        public string adminPassword { get; set; }
-        public string adminPhone { get; set; }
-        public string adminName { get; set; }
-        public string roles { get; set; }
+        public int ID { get; set; }
+        public string Phone { get; set; }
+        public string Name { get; set; }
+        public Nullable<int> IDAccount { get; set; }
+    
+        public virtual ACCOUNT ACCOUNT { get; set; }
     }
 }

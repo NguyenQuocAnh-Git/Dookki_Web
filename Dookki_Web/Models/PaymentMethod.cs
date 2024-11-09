@@ -19,8 +19,8 @@ namespace Dookki_Web.Models
             this.Payments = new HashSet<Payment>();
         }
     
-        public int paymentMethodID { get; set; }
-        public string paymentMethodName { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
     
         public virtual ICollection<Payment> Payments { get; set; }
     }

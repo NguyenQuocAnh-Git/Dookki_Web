@@ -13,7 +13,7 @@ namespace Dookki_Web.Models.Map
         {
             try
             {
-                var listEmployee = db.Employees.OrderBy(m=>m.employeeName).ToList(); 
+                var listEmployee = db.Employees.OrderBy(m=>m.Name).ToList(); 
                 return listEmployee;
             }
             catch 
@@ -40,7 +40,7 @@ namespace Dookki_Web.Models.Map
             {
                 db.Employees.Add(newModel);
                 db.SaveChanges();
-                return newModel.employeeID;
+                return newModel.ID;
             }
             catch
             {
@@ -53,8 +53,8 @@ namespace Dookki_Web.Models.Map
             try
             {
                 //1. Tim doi tuong can cap nhat
-                var employee = db.Employees.Find(upModel.employeeID);
-                employee.employeeName = upModel.employeeName;
+                var employee = db.Employees.Find(upModel.ID);
+                employee.Name = upModel.Name;
                 employee.phone = upModel.phone;
                 employee.email = upModel.email;
                 employee.amountWage = upModel.amountWage;

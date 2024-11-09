@@ -19,8 +19,8 @@ namespace Dookki_Web.Models
             this.Products = new HashSet<Product>();
         }
     
-        public int categoryID { get; set; }
-        public string categoryName { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
     
         public virtual ICollection<Product> Products { get; set; }
     }

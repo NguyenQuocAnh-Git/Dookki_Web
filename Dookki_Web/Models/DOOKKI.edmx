@@ -4,53 +4,59 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DOOKKIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DOOKKIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACCOUNT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
         <EntityType Name="Admin">
           <Key>
-            <PropertyRef Name="adminID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="adminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="adminUserName" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="adminPassword" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="adminPhone" Type="nvarchar" MaxLength="12" Nullable="false" />
-          <Property Name="adminName" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="roles" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="IDAccount" Type="int" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
-            <PropertyRef Name="categoryID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="categoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="categoryName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
-            <PropertyRef Name="customerID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="customerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="customerUserName" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="customerPassword" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="customerPhone" Type="nvarchar" MaxLength="15" Nullable="false" />
-          <Property Name="customerEmail" Type="nvarchar" MaxLength="255" />
-          <Property Name="customerAddress" Type="nvarchar" MaxLength="255" />
-          <Property Name="customerName" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="customerMark" Type="int" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Marks" Type="int" />
+          <Property Name="IDAccount" Type="int" />
         </EntityType>
         <EntityType Name="DayWork">
           <Key>
-            <PropertyRef Name="dayWorkId" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="dayWorkId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="timeWork" Type="int" />
           <Property Name="day" Type="date" />
           <Property Name="employeeID" Type="int" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
-            <PropertyRef Name="employeeID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="employeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="employeeName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="phone" Type="nvarchar" MaxLength="12" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="amountWage" Type="decimal" Precision="18" Scale="0" Nullable="false" />
@@ -58,18 +64,18 @@
         </EntityType>
         <EntityType Name="Order">
           <Key>
-            <PropertyRef Name="orderID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="orderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="orderTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="7" Nullable="false" />
           <Property Name="customerID" Type="int" />
           <Property Name="discount" Type="int" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
-            <PropertyRef Name="orderDetailID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="orderDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="quantily" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ticketID" Type="int" />
           <Property Name="paymentID" Type="int" />
@@ -77,26 +83,26 @@
         </EntityType>
         <EntityType Name="Payment">
           <Key>
-            <PropertyRef Name="paymentID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="paymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="day" Type="date" Nullable="false" />
           <Property Name="amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="paymentMethodID" Type="int" />
         </EntityType>
         <EntityType Name="PaymentMethod">
           <Key>
-            <PropertyRef Name="paymentMethodID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="paymentMethodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="paymentMethodName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
-            <PropertyRef Name="productID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="productID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="productName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="MFG" Type="date" Nullable="false" />
           <Property Name="EXP" Type="date" Nullable="false" />
           <Property Name="unitInStock" Type="int" Nullable="false" />
@@ -104,18 +110,42 @@
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
-            <PropertyRef Name="ticketID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ticketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ticketName" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="ticketPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Admin__IDAccount__4D94879B">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="IDAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customer__IDAcco__52593CB8">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="IDAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DayWork_Employee">
           <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
           <End Role="DayWork" Type="Self.DayWork" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
-              <PropertyRef Name="employeeID" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="DayWork">
               <PropertyRef Name="employeeID" />
@@ -127,7 +157,7 @@
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
-              <PropertyRef Name="customerID" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="customerID" />
@@ -139,7 +169,7 @@
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
-              <PropertyRef Name="orderID" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="OrderDetail">
               <PropertyRef Name="orderID" />
@@ -151,7 +181,7 @@
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Payment">
-              <PropertyRef Name="paymentID" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="OrderDetail">
               <PropertyRef Name="paymentID" />
@@ -163,7 +193,7 @@
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Ticket">
-              <PropertyRef Name="ticketID" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="OrderDetail">
               <PropertyRef Name="ticketID" />
@@ -175,7 +205,7 @@
           <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PaymentMethod">
-              <PropertyRef Name="paymentMethodID" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Payment">
               <PropertyRef Name="paymentMethodID" />
@@ -187,17 +217,15 @@
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
-              <PropertyRef Name="categoryID" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="categoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="sp_UpdateCustomerMarks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="orderID" Type="int" Mode="In" />
-        </Function>
         <EntityContainer Name="DOOKKIModelStoreContainer">
+          <EntitySet Name="ACCOUNT" EntityType="Self.ACCOUNT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
@@ -209,6 +237,14 @@
           <EntitySet Name="PaymentMethod" EntityType="Self.PaymentMethod" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Admin__IDAccount__4D94879B" Association="Self.FK__Admin__IDAccount__4D94879B">
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customer__IDAcco__52593CB8" Association="Self.FK__Customer__IDAcco__52593CB8">
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
           <AssociationSet Name="FK_DayWork_Employee" Association="Self.FK_DayWork_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="DayWork" EntitySet="DayWork" />
@@ -238,48 +274,59 @@
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DOOKKIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ACCOUNT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Admins" Relationship="Self.FK__Admin__IDAccount__4D94879B" FromRole="ACCOUNT" ToRole="Admin" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK__Customer__IDAcco__52593CB8" FromRole="ACCOUNT" ToRole="Customer" />
+        </EntityType>
         <EntityType Name="Admin">
           <Key>
-            <PropertyRef Name="adminID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="adminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="adminUserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="adminPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="adminPhone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="adminName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="roles" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IDAccount" Type="Int32" />
+          <NavigationProperty Name="ACCOUNT" Relationship="Self.FK__Admin__IDAccount__4D94879B" FromRole="Admin" ToRole="ACCOUNT" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
-            <PropertyRef Name="categoryID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="categoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="categoryName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Product_Category" FromRole="Category" ToRole="Product" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
-            <PropertyRef Name="customerID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="customerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="customerUserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="customerPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="customerPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="customerEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="customerAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="customerName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Marks" Type="Int32" />
+          <Property Name="IDAccount" Type="Int32" />
+          <NavigationProperty Name="ACCOUNT" Relationship="Self.FK__Customer__IDAcco__52593CB8" FromRole="Customer" ToRole="ACCOUNT" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Order_customerID" FromRole="Customer" ToRole="Order" />
-          <Property Name="customerMark" Type="Int32" />
         </EntityType>
         <EntityType Name="DayWork">
           <Key>
-            <PropertyRef Name="dayWorkId" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="dayWorkId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="timeWork" Type="Int32" />
           <Property Name="day" Type="DateTime" Precision="0" />
           <Property Name="employeeID" Type="Int32" />
@@ -287,10 +334,10 @@
         </EntityType>
         <EntityType Name="Employee">
           <Key>
-            <PropertyRef Name="employeeID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="employeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="employeeName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="amountWage" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
@@ -299,20 +346,20 @@
         </EntityType>
         <EntityType Name="Order">
           <Key>
-            <PropertyRef Name="orderID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="orderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="orderTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
           <Property Name="customerID" Type="Int32" />
+          <Property Name="discount" Type="Int32" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_Order_customerID" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
-          <Property Name="discount" Type="Int32" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
-            <PropertyRef Name="orderDetailID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="orderDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="quantily" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ticketID" Type="Int32" />
           <Property Name="paymentID" Type="Int32" />
@@ -323,9 +370,9 @@
         </EntityType>
         <EntityType Name="Payment">
           <Key>
-            <PropertyRef Name="paymentID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="paymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="day" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="amount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="paymentMethodID" Type="Int32" />
@@ -334,18 +381,18 @@
         </EntityType>
         <EntityType Name="PaymentMethod">
           <Key>
-            <PropertyRef Name="paymentMethodID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="paymentMethodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="paymentMethodName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_PaymentMethod" FromRole="PaymentMethod" ToRole="Payment" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
-            <PropertyRef Name="productID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="productID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="productName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MFG" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EXP" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="unitInStock" Type="Int32" Nullable="false" />
@@ -354,19 +401,43 @@
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
-            <PropertyRef Name="ticketID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ticketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ticketName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ticketPrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Ticket" FromRole="Ticket" ToRole="OrderDetail" />
         </EntityType>
+        <Association Name="FK__Admin__IDAccount__4D94879B">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="IDAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customer__IDAcco__52593CB8">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="IDAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
-              <PropertyRef Name="categoryID" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="categoryID" />
@@ -378,7 +449,7 @@
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
-              <PropertyRef Name="customerID" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="customerID" />
@@ -390,7 +461,7 @@
           <End Role="DayWork" Type="Self.DayWork" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
-              <PropertyRef Name="employeeID" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="DayWork">
               <PropertyRef Name="employeeID" />
@@ -402,7 +473,7 @@
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
-              <PropertyRef Name="orderID" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="OrderDetail">
               <PropertyRef Name="orderID" />
@@ -414,7 +485,7 @@
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Payment">
-              <PropertyRef Name="paymentID" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="OrderDetail">
               <PropertyRef Name="paymentID" />
@@ -426,7 +497,7 @@
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Ticket">
-              <PropertyRef Name="ticketID" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="OrderDetail">
               <PropertyRef Name="ticketID" />
@@ -438,7 +509,7 @@
           <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PaymentMethod">
-              <PropertyRef Name="paymentMethodID" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Payment">
               <PropertyRef Name="paymentMethodID" />
@@ -446,6 +517,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DOOKKIEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACCOUNTs" EntityType="Self.ACCOUNT" />
           <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
@@ -457,6 +529,14 @@
           <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethod" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Tickets" EntityType="Self.Ticket" />
+          <AssociationSet Name="FK__Admin__IDAccount__4D94879B" Association="Self.FK__Admin__IDAccount__4D94879B">
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+            <End Role="Admin" EntitySet="Admins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customer__IDAcco__52593CB8" Association="Self.FK__Customer__IDAcco__52593CB8">
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
           <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
@@ -485,9 +565,6 @@
             <End Role="PaymentMethod" EntitySet="PaymentMethods" />
             <End Role="Payment" EntitySet="Payments" />
           </AssociationSet>
-          <FunctionImport Name="sp_UpdateCustomerMarks">
-            <Parameter Name="orderID" Mode="In" Type="Int32" />
-          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -495,44 +572,51 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DOOKKIModelStoreContainer" CdmEntityContainer="DOOKKIEntities">
+          <EntitySetMapping Name="ACCOUNTs">
+            <EntityTypeMapping TypeName="DOOKKIModel.ACCOUNT">
+              <MappingFragment StoreEntitySet="ACCOUNT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="DOOKKIModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
-                <ScalarProperty Name="adminID" ColumnName="adminID" />
-                <ScalarProperty Name="adminUserName" ColumnName="adminUserName" />
-                <ScalarProperty Name="adminPassword" ColumnName="adminPassword" />
-                <ScalarProperty Name="adminPhone" ColumnName="adminPhone" />
-                <ScalarProperty Name="adminName" ColumnName="adminName" />
-                <ScalarProperty Name="roles" ColumnName="roles" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="DOOKKIModel.Category">
               <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="categoryID" ColumnName="categoryID" />
-                <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="DOOKKIModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="customerMark" ColumnName="customerMark" />
-                <ScalarProperty Name="customerID" ColumnName="customerID" />
-                <ScalarProperty Name="customerUserName" ColumnName="customerUserName" />
-                <ScalarProperty Name="customerPassword" ColumnName="customerPassword" />
-                <ScalarProperty Name="customerPhone" ColumnName="customerPhone" />
-                <ScalarProperty Name="customerEmail" ColumnName="customerEmail" />
-                <ScalarProperty Name="customerAddress" ColumnName="customerAddress" />
-                <ScalarProperty Name="customerName" ColumnName="customerName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Marks" ColumnName="Marks" />
+                <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DayWorks">
             <EntityTypeMapping TypeName="DOOKKIModel.DayWork">
               <MappingFragment StoreEntitySet="DayWork">
-                <ScalarProperty Name="dayWorkId" ColumnName="dayWorkId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="timeWork" ColumnName="timeWork" />
                 <ScalarProperty Name="day" ColumnName="day" />
                 <ScalarProperty Name="employeeID" ColumnName="employeeID" />
@@ -542,8 +626,8 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="DOOKKIModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
-                <ScalarProperty Name="employeeName" ColumnName="employeeName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="amountWage" ColumnName="amountWage" />
@@ -554,17 +638,17 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="DOOKKIModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="discount" ColumnName="discount" />
-                <ScalarProperty Name="orderID" ColumnName="orderID" />
-                <ScalarProperty Name="orderTime" ColumnName="orderTime" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="customerID" ColumnName="customerID" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrderDetails">
             <EntityTypeMapping TypeName="DOOKKIModel.OrderDetail">
               <MappingFragment StoreEntitySet="OrderDetail">
-                <ScalarProperty Name="orderDetailID" ColumnName="orderDetailID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="quantily" ColumnName="quantily" />
                 <ScalarProperty Name="ticketID" ColumnName="ticketID" />
                 <ScalarProperty Name="paymentID" ColumnName="paymentID" />
@@ -575,7 +659,7 @@
           <EntitySetMapping Name="Payments">
             <EntityTypeMapping TypeName="DOOKKIModel.Payment">
               <MappingFragment StoreEntitySet="Payment">
-                <ScalarProperty Name="paymentID" ColumnName="paymentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="day" ColumnName="day" />
                 <ScalarProperty Name="amount" ColumnName="amount" />
                 <ScalarProperty Name="paymentMethodID" ColumnName="paymentMethodID" />
@@ -585,16 +669,16 @@
           <EntitySetMapping Name="PaymentMethods">
             <EntityTypeMapping TypeName="DOOKKIModel.PaymentMethod">
               <MappingFragment StoreEntitySet="PaymentMethod">
-                <ScalarProperty Name="paymentMethodID" ColumnName="paymentMethodID" />
-                <ScalarProperty Name="paymentMethodName" ColumnName="paymentMethodName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="DOOKKIModel.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="productID" ColumnName="productID" />
-                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="MFG" ColumnName="MFG" />
                 <ScalarProperty Name="EXP" ColumnName="EXP" />
                 <ScalarProperty Name="unitInStock" ColumnName="unitInStock" />
@@ -605,13 +689,12 @@
           <EntitySetMapping Name="Tickets">
             <EntityTypeMapping TypeName="DOOKKIModel.Ticket">
               <MappingFragment StoreEntitySet="Ticket">
-                <ScalarProperty Name="ticketID" ColumnName="ticketID" />
-                <ScalarProperty Name="ticketName" ColumnName="ticketName" />
-                <ScalarProperty Name="ticketPrice" ColumnName="ticketPrice" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_UpdateCustomerMarks" FunctionName="DOOKKIModel.Store.sp_UpdateCustomerMarks" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -14,7 +14,7 @@ namespace Dookki_Web.Models
     
     public partial class DayWork
     {
-        public int dayWorkId { get; set; }
+        public int ID { get; set; }
         public Nullable<int> timeWork { get; set; }
         public Nullable<System.DateTime> day { get; set; }
         public Nullable<int> employeeID { get; set; }

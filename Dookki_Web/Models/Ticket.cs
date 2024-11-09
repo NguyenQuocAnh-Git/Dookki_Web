@@ -19,9 +19,9 @@ namespace Dookki_Web.Models
             this.OrderDetails = new HashSet<OrderDetail>();
         }
     
-        public int ticketID { get; set; }
-        public string ticketName { get; set; }
-        public decimal ticketPrice { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
     
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }

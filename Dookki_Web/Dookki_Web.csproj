@@ -137,6 +137,16 @@
     <Content Include="Contents\img\undraw_profile_2.svg" />
     <Content Include="Contents\img\undraw_profile_3.svg" />
     <Content Include="Contents\img\undraw_rocket.svg" />
+    <Content Include="Models\DOOKKI.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DOOKKI.edmx</DependentUpon>
+      <LastGenOutput>DOOKKI.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DOOKKI.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DOOKKI.edmx</DependentUpon>
+      <LastGenOutput>DOOKKI.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\chart-area-demo.js" />
     <Content Include="Scripts\chart-bar-demo.js" />
     <Content Include="Scripts\chart-pie-demo.js" />
@@ -1847,16 +1857,6 @@
     <Content Include="Contents\vendor\swiper\swiper-bundle.min.css" />
     <Content Include="Contents\vendor\swiper\swiper-bundle.min.js" />
     <Content Include="Global.asax" />
-    <Content Include="Models\DOOKKI.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DOOKKI.Context.cs</LastGenOutput>
-      <DependentUpon>DOOKKI.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\DOOKKI.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DOOKKI.edmx</DependentUpon>
-      <LastGenOutput>DOOKKI1.cs</LastGenOutput>
-    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1869,6 +1869,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ACCOUNT.cs">
+      <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Admin.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
@@ -1887,15 +1890,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DOOKKI.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DOOKKI.Designer.cs">
-      <DependentUpon>DOOKKI.edmx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Models\DOOKKI1.cs">
+    <Compile Include="Models\DOOKKI.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DOOKKI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DOOKKI.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DOOKKI.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Employee.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
@@ -1952,13 +1955,6 @@
     <Content Include="Contents\vendor\bootstrap\js\bootstrap.min.js.map" />
     <Content Include="Contents\vendor\purecounter\purecounter_vanilla.js.map" />
     <Content Include="Contents\vendor\swiper\swiper-bundle.min.js.map" />
-    <EntityDeploy Include="Models\DOOKKI.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DOOKKI.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DOOKKI.edmx.diagram">
-      <DependentUpon>DOOKKI.edmx</DependentUpon>
-    </Content>
     <Content Include="Contents\scss\navs\_global.scss" />
     <Content Include="Contents\scss\navs\_sidebar.scss" />
     <Content Include="Contents\scss\navs\_topbar.scss" />
@@ -2039,6 +2035,13 @@
     <Content Include="Contents\vendor\jquery\jquery.slim.min.map" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
+    <EntityDeploy Include="Models\DOOKKI.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DOOKKI.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DOOKKI.edmx.diagram">
+      <DependentUpon>DOOKKI.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Views\Share\_LayoutPage1.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -2062,10 +2065,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Contents\js\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Scripts\" />
+    <Folder Include="Contents\js\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

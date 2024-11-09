@@ -19,15 +19,15 @@ namespace Dookki_Web.Models
             this.Orders = new HashSet<Order>();
         }
     
-        public int customerID { get; set; }
-        public string customerUserName { get; set; }
-        public string customerPassword { get; set; }
-        public string customerPhone { get; set; }
-        public string customerEmail { get; set; }
-        public string customerAddress { get; set; }
-        public string customerName { get; set; }
-        public Nullable<int> customerMark { get; set; }
+        public int ID { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public string Address { get; set; }
+        public string Name { get; set; }
+        public Nullable<int> Marks { get; set; }
+        public Nullable<int> IDAccount { get; set; }
     
+        public virtual ACCOUNT ACCOUNT { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

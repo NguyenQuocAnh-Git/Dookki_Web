@@ -12,20 +12,20 @@ namespace Dookki_Web.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee
+    public partial class ACCOUNT
     {
-        public Employee()
+        public ACCOUNT()
         {
-            this.DayWorks = new HashSet<DayWork>();
+            this.Admins = new HashSet<Admin>();
+            this.Customers = new HashSet<Customer>();
         }
     
         public int ID { get; set; }
-        public string Name { get; set; }
-        public string phone { get; set; }
-        public string email { get; set; }
-        public decimal amountWage { get; set; }
-        public string position { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string Role { get; set; }
     
-        public virtual ICollection<DayWork> DayWorks { get; set; }
+        public virtual ICollection<Admin> Admins { get; set; }
+        public virtual ICollection<Customer> Customers { get; set; }
     }
 }

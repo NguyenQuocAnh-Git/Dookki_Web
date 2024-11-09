@@ -14,7 +14,7 @@ namespace Dookki_Web.Models
     
     public partial class OrderDetail
     {
-        public int orderDetailID { get; set; }
+        public int ID { get; set; }
         public decimal quantily { get; set; }
         public Nullable<int> ticketID { get; set; }
         public Nullable<int> paymentID { get; set; }
