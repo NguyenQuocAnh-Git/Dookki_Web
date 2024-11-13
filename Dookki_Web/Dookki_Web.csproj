@@ -1861,11 +1861,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AdminHomeController.cs" />
-    <Compile Include="Controllers\AdminManagementController.cs" />
-    <Compile Include="Controllers\AdminOrderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminOrderController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1903,6 +1902,7 @@
     <Compile Include="Models\Employee.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Map\mapAccount.cs" />
     <Compile Include="Models\Map\mapEmployee.cs" />
     <Compile Include="Models\Order.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
@@ -2034,7 +2034,6 @@
     <Content Include="Contents\vendor\jquery\jquery.min.map" />
     <Content Include="Contents\vendor\jquery\jquery.slim.min.map" />
     <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
     <EntityDeploy Include="Models\DOOKKI.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DOOKKI.Designer.cs</LastGenOutput>
@@ -2042,20 +2041,22 @@
     <Content Include="Models\DOOKKI.edmx.diagram">
       <DependentUpon>DOOKKI.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Share\_LayoutPage1.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\test.cshtml" />
-    <Content Include="Views\Share\_LayoutAdmin.cshtml" />
-    <Content Include="Views\AdminHome\Index.cshtml" />
-    <Content Include="Views\AdminHome\Statistical.cshtml" />
-    <Content Include="Views\AdminOrder\Display.cshtml" />
-    <Content Include="Views\AdminOrder\AddItem.cshtml" />
-    <Content Include="Views\AdminOrder\EditItem.cshtml" />
-    <Content Include="Views\AdminOrder\RemoveItem.cshtml" />
-    <Content Include="Views\AdminManagement\AddAdmin.cshtml" />
-    <Content Include="Views\AdminManagement\EditAdmin.cshtml" />
-    <Content Include="Views\AdminManagement\RemoveAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminHome\Statistical.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOrder\Display.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOrder\AddItem.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOrder\EditItem.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOrder\RemoveItem.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminManagement\AddAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminManagement\EditAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminManagement\RemoveAdmin.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2066,7 +2067,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Contents\js\" />
   </ItemGroup>
   <ItemGroup>

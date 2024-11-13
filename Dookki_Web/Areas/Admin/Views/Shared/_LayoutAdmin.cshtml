@@ -88,7 +88,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href='@Url.Action("Index","Home")'>
+                <a class="nav-link" href="/Home/Index">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Web user</span>
                 </a>
@@ -114,8 +114,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Chỉnh sửa</h6>
                         <a class="collapse-item" href='@Url.Action("AddAdmin","AdminManagement")'>Thêm tài khoản admin</a>
-                        <a class="collapse-item" href='@Url.Action("Edit","AdminManagement")'>Chỉnh sửa tài khoản admin</a>
-                        <a class="collapse-item" href='@Url.Action("Statistical","AdminManagement")'>Xóa tài khoản admin</a>
+                        <a class="collapse-item" href='@Url.Action("EditAdmin","AdminManagement")'>Chỉnh sửa tài khoản admin</a>
+                        <a class="collapse-item" href='@Url.Action("RemoveAdmin","AdminManagement")'>Xóa tài khoản admin</a>
                     </div>
                 </div>
             </li>
@@ -231,20 +231,20 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
-     @*Core plugin JavaScript*@ 
+    @*Core plugin JavaScript*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
-     @*Custom scripts for all pages*@ 
+    @*Custom scripts for all pages*@
     <script src="https://cdn.jsdelivr.net/npm/sb-admin-2@4.0.0/dist/js/sb-admin-2.min.js"></script>
 
-     @*Bootstrap core JavaScript*@
+    @*Bootstrap core JavaScript*@
     <script src="~/Contents/vendor/jquery/jquery.min.js"></script>
     <script src="~/Contents/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-     @*Core plugin JavaScript*@
+    @*Core plugin JavaScript*@
     <script src="~/Contents/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-     @*Custom scripts for all pages*@
+    @*Custom scripts for all pages*@
     <script src="~/Scripts/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->

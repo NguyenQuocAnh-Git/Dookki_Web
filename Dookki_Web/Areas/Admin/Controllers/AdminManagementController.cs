@@ -4,11 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Dookki_Web.Controllers
+namespace Dookki_Web.Areas.Admin.Controllers
 {
     public class AdminManagementController : Controller
     {
-        // GET: AdminManagement
+        // GET: Admin/AdminManagement
         public ActionResult Index()
         {
             return View();
