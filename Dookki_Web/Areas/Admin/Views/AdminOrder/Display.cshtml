@@ -1,7 +1,43 @@
-﻿
+﻿@model  IEnumerable<Dookki_Web.Models.Ticket>
+
 @{
     ViewBag.Title = "Display";
 }
 
-<h2>Hiển thị thông tin sản phẩm</h2>
+<h2>QUẢN LÝ VÉ</h2>
 
+
+<table class="table" border="1">
+    <p>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("AddItem", "AdminOrder")'">
+            Thêm mới vé
+        </button>
+    </p>
+
+    <tr>
+        <th style="width: 100px;">Tên Vé</th>
+        <th style="width: 100px; text-align: right">Giá bán</th>
+        <th style="width: 200px;"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td style="text-align:right">
+                @string.Format("{0:N0}", item.Price) VNĐ
+                
+            </td>
+            <td style="text-align:right">
+                <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("EditItem", "AdminOrder", new { id = item.ID })'">
+                    Sửa vé
+                </button> |
+                <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("RemoveItem", "AdminOrder", new { id = item.ID })'">
+                    Xóa vé
+                </button>
+            </td>
+        </tr>
+    }
+</table>

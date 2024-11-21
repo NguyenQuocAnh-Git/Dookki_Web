@@ -66,14 +66,14 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                    aria-expanded="false" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Order</span>
+                    <span>Vé</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href='@Url.Action("Display","AdminOrder")'>Xem thông tin</a>
-                        <a class="collapse-item" href='@Url.Action("AddItem","AdminOrder")'>Thêm món</a>
-                        <a class="collapse-item" href='@Url.Action("EditItem","AdminOrder")'>Sửa món</a>
-                        <a class="collapse-item" href='@Url.Action("RemoveItem","AdminOrder")'>Xóa món</a>
+                        <a class="collapse-item" href='@Url.Action("Display","AdminOrder")'>Xem thông tin vé</a>
+                        <a class="collapse-item" href='@Url.Action("AddItem","AdminOrder")'>Thêm vé mới</a>
+                        @*<a class="collapse-item" href='@Url.Action("EditItem","AdminOrder")'>Sửa món</a>
+                        <a class="collapse-item" href='@Url.Action("RemoveItem","AdminOrder")'>Xóa món</a>*@
                     </div>
                 </div>
             </li>
@@ -162,16 +162,16 @@
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
-                            <!-- Dropdown - Messages -->
+                            <!-- Dropdown - Search -->
                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                  aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
+                                <form method="get" action="@Url.Action("Display", "AdminOrder")" class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
+                                        <input type="text" name="searchTerm" class="form-control bg-light border-0 small"
                                                placeholder="Tìm kiếm" aria-label="Search"
                                                aria-describedby="basic-addon2">
                                         <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
+                                            <button class="btn btn-primary" type="submit">
                                                 <i class="fas fa-search fa-sm"></i>
                                             </button>
                                         </div>
