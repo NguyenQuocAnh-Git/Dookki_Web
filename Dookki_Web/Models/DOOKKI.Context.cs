@@ -37,5 +37,6 @@ namespace Dookki_Web.Models
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<C__EFMigrationsHistory> C__EFMigrationsHistory { get; set; }
     }
 }
