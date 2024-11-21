@@ -26,6 +26,7 @@
         <AssociationConnector Association="DOOKKIModel.FK_OrderDetail_Payment" ManuallyRouted="false" />
         <AssociationConnector Association="DOOKKIModel.FK_OrderDetail_Ticket" ManuallyRouted="false" />
         <AssociationConnector Association="DOOKKIModel.FK_Payment_PaymentMethod" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DOOKKIModel.C__EFMigrationsHistory" Width="1.5" PointX="0.75" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

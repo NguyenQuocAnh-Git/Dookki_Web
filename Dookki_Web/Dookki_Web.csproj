@@ -101,27 +101,29 @@
     <Content Include="Contents\css\main.css" />
     <Content Include="Contents\css\sb-admin-2.css" />
     <Content Include="Contents\css\sb-admin-2.min.css" />
+    <Content Include="Contents\img\about dookki.jpg" />
     <Content Include="Contents\img\about-2.jpg" />
     <Content Include="Contents\img\about.jpg" />
     <Content Include="Contents\img\apple-touch-icon.png" />
-    <Content Include="Contents\img\chefs\chefs-1.jpg" />
-    <Content Include="Contents\img\chefs\chefs-2.jpg" />
-    <Content Include="Contents\img\chefs\chefs-3.jpg" />
+    <Content Include="Contents\img\dookki-bg.jpg" />
     <Content Include="Contents\img\events-1.jpg" />
     <Content Include="Contents\img\events-2.jpg" />
     <Content Include="Contents\img\events-3.jpg" />
     <Content Include="Contents\img\events-4.jpg" />
     <Content Include="Contents\img\favicon.png" />
-    <Content Include="Contents\img\gallery\gallery-1.jpg" />
-    <Content Include="Contents\img\gallery\gallery-2.jpg" />
-    <Content Include="Contents\img\gallery\gallery-3.jpg" />
-    <Content Include="Contents\img\gallery\gallery-4.jpg" />
-    <Content Include="Contents\img\gallery\gallery-5.jpg" />
-    <Content Include="Contents\img\gallery\gallery-6.jpg" />
-    <Content Include="Contents\img\gallery\gallery-7.jpg" />
-    <Content Include="Contents\img\gallery\gallery-8.jpg" />
+    <Content Include="Contents\img\gallery\1.jpg" />
+    <Content Include="Contents\img\gallery\2.jpg" />
+    <Content Include="Contents\img\gallery\3.jpg" />
+    <Content Include="Contents\img\gallery\4.jpg" />
+    <Content Include="Contents\img\gallery\5.jpg" />
+    <Content Include="Contents\img\gallery\6.jpg" />
+    <Content Include="Contents\img\gallery\7.jpg" />
+    <Content Include="Contents\img\gallery\8.jpg" />
     <Content Include="Contents\img\hero-img.png" />
+    <Content Include="Contents\img\hotpot.png" />
     <Content Include="Contents\img\logo.png" />
+    <Content Include="Contents\img\menu-dookki-buffet.jpg" />
+    <Content Include="Contents\img\menu-dookki.jpg" />
     <Content Include="Contents\img\menu\menu-item-1.png" />
     <Content Include="Contents\img\menu\menu-item-2.png" />
     <Content Include="Contents\img\menu\menu-item-3.png" />
@@ -1887,6 +1889,9 @@
     <Compile Include="Models\Customer.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\C__EFMigrationsHistory.cs">
+      <DependentUpon>DOOKKI.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DayWork.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
@@ -2053,7 +2058,7 @@
     <Content Include="Areas\Admin\Views\AdminHome\Login.cshtml" />
     <Content Include="Areas\Admin\Views\AdminManagement\AddAdmin.cshtml" />
     <None Include="packages.config" />
-    <Content Include="Views\Share\_LayoutPage1.cshtml" />
+    <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\test.cshtml" />
     <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
