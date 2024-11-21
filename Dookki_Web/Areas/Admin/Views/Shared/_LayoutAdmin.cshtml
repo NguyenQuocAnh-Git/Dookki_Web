@@ -73,7 +73,7 @@
                         <a class="collapse-item" href='@Url.Action("Display","AdminOrder")'>Xem thông tin vé</a>
                         <a class="collapse-item" href='@Url.Action("AddItem","AdminOrder")'>Thêm vé mới</a>
                         @*<a class="collapse-item" href='@Url.Action("EditItem","AdminOrder")'>Sửa món</a>
-                        <a class="collapse-item" href='@Url.Action("RemoveItem","AdminOrder")'>Xóa món</a>*@
+                            <a class="collapse-item" href='@Url.Action("RemoveItem","AdminOrder")'>Xóa món</a>*@
                     </div>
                 </div>
             </li>
@@ -141,44 +141,47 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm..."
-                                   aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <!--<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+            <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm..."
+                   aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+        </div>
+    </form>-->
+                    
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Search -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                 aria-labelledby="searchDropdown">
-                                <form method="get" action="@Url.Action("Display", "AdminOrder")" class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" name="searchTerm" class="form-control bg-light border-0 small"
-                                               placeholder="Tìm kiếm" aria-label="Search"
-                                               aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="submit">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
+                        <ul class="navbar-nav ml-auto">
+                            @*Nav Item - Search Dropdown (Visible Only XS)*@
+                            <li class="nav-item dropdown no-arrow d-sm-none">
+                                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-search fa-fw"></i>
+                                </a>
+                                Dropdown - Search
+                                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                     aria-labelledby="searchDropdown">
+                                    <form method="get" action="@Url.Action("Display", "AdminOrder")" class="form-inline mr-auto w-100 navbar-search">
+                                        <div class="input-group">
+                                            <input type="text" name="searchTerm" class="form-control bg-light border-0 small"
+                                                   placeholder="Tìm kiếm" aria-label="Search"
+                                                   aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="submit">
+                                                    <i class="fas fa-search fa-sm"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
