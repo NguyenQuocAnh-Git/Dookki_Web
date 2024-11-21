@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dookki_Web.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Dookki_Web.Areas.Admin.Controllers
 {
+    [RoleUser]
     public class AdminOrderController : Controller
     {
         // GET: Admin/AdminOrder
