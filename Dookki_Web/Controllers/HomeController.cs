@@ -1,4 +1,5 @@
-﻿using Dookki_Web.Models.Map;
+﻿using Dookki_Web.Models;
+using Dookki_Web.Models.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Dookki_Web.Contents
 {
     public class HomeController : Controller
     {
+        DOOKKIEntities db = new DOOKKIEntities();
         // GET: Home
         public ActionResult Index()
         {
@@ -26,13 +28,17 @@ namespace Dookki_Web.Contents
 
             //1. Co: sang trang dashboard admin
             if(user != null)
-            {
+            {   
                 return Redirect("/Admin/AdminHome/Index");
             }
 
             //2. ko co: Quay lai trang login, bao loi
             ViewBag.error = "Tên đăng nhập hoặc mật khẩu không đúng";
             return View();
+        }
+        public ActionResult Order()
+        {
+            return View(db.Tickets.ToList());
         }
     }
 }
