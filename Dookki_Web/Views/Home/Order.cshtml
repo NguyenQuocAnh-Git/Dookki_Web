@@ -32,11 +32,11 @@
                                 <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
                                 <div class="price">
                                     <div>
-                                        <p>@decimal.Parse(@Html.DisplayFor(modelItem => item.Price).ToString()).ToString("#,###") VND </p>
+                                        <p>@decimal.Parse(@Html.DisplayFor(modelItem => item.Price).ToString()).ToString("#,###")đ</p>
                                     </div>
                                     <div style="border: 1px solid #ce1212; border-radius: 10px; background-color: #ce1212; cursor: pointer; margin: 0 150px" onclick="location.href='@Url.Action("AddtoCart", "Order", new { @ticketID = item.ID})'">
                                         <a class="btn-getstarted" style="color: white" href="#">Select</a>
-                                    </div>  
+                                    </div>
                                 </div>
                             </div><!-- Menu Item -->
                             }

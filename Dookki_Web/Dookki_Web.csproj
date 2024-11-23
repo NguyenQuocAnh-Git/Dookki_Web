@@ -2082,6 +2082,7 @@
     <Content Include="Views\Home\Order.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Order\DisplayCart.cshtml" />
+    <Content Include="Views\Order\Checkout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
