@@ -64,10 +64,42 @@ namespace Dookki_Web.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult Statistical()
+        public ActionResult Statistical(int? year)
         {
+            // caculate year
+            // Generate a list of years (e.g., from 2000 to the current year)
+            int currentYear = DateTime.Now.Year;
+            List<int> years = new List<int>();
+            for (int i = currentYear; i >= 2018; i--) // Adjust the range as needed
+            {
+                years.Add(i);
+            }
 
-            return RedirectToAction("Index");
+            // Pass the list to the view
+            ViewBag.Years = new SelectList(years);
+
+            // Default selected year
+            ViewBag.Year = year ?? currentYear;
+
+            // pie chart
+            double[] chartPieData = GetChartPieData(year ?? currentYear);
+            string[] chartPieLable = { "Khách không có tài khoản", "Khách có tài khoản" };
+
+
+            // line chart
+            double[] chartLineData = ProfitByYear(year ?? currentYear);
+            string[] chartLineLable = { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4",
+                "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8",
+                "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12", };
+
+            // Truyền dữ liệu qua ViewBag hoặc Model
+            ViewBag.ChartPieData = chartPieData;
+            ViewBag.ChartPieLable = chartPieLable;
+
+            ViewBag.ChartLineData = chartLineData;
+            ViewBag.ChartLineLable = chartLineLable;
+
+            return View();
         }
         private double[] GetChartPieData(int ? year)
         {
