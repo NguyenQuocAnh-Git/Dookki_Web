@@ -22,10 +22,30 @@
                 <!-- Page Heading -->
                 <h1 class="h3 mb-2 text-gray-800">Trang chủ</h1>
 
+                <!-- create check box with label: Trạng thái bàn
+    and checkbox title: Full
+    if checkbox.IsChecked == true then in webUser will get value true or false-->
+
+                @using (Html.BeginForm("UpdateStatus", "AdminHome", FormMethod.Post, new { id = "statusForm" }))
+                {
+                    <div class="form-group row align-items-center">
+                        @Html.Label("Trạng thái bàn:", htmlAttributes: new { @class = "col-form-label col-md-2" })
+                        <div class="col-md-6 d-flex align-items-center">
+                            <div class="form-check mr-3">
+                                @* Explicitly check if ViewBag.IsFull is null and cast it to a non-nullable bool *@
+                                @Html.CheckBox("IsFull", (bool)(ViewBag.IsFull ?? false), new { @class = "form-check-input", id = "isFullCheckbox" })
+                                <label class="form-check-label" for="isFullCheckbox">Full</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </div>
+                }
+
+
                 @using (Html.BeginForm("Index", "AdminHome", FormMethod.Get))
                 {
                     <div class="form-group row align-items-center">
-                        @Html.Label("Chọn năm thống kê:", htmlAttributes: new { @class = "col-form-label col-md-2 pr-0 text-left" }) 
+                        @Html.Label("Chọn năm thống kê:", htmlAttributes: new { @class = "col-form-label col-md-2 pr-0 text-left" })
                         <div class="col-md-4 pl-0">
                             <!-- Adjust column width -->
                             @Html.DropDownList("Year", ViewBag.Years as SelectList, "Chọn năm", new { @class = "form-control", onchange = "this.form.submit();" })
@@ -93,7 +113,11 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-
+<script>
+    document.getElementById("isFullCheckbox").addEventListener("change", function (event) {
+        event.preventDefault(); // Prevent page reload
+    });
+</script>
 <!-- biểu đồ tròn -->
 <script>
     Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
@@ -246,6 +270,4 @@
         }
       }
     });
-
-
 </script>

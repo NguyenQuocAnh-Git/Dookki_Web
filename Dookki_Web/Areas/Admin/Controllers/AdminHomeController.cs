@@ -11,8 +11,22 @@ namespace Dookki_Web.Areas.Admin.Controllers
     {
         DOOKKIEntities db = new DOOKKIEntities();
         // GET: Admin/HomeAdmin
+        [HttpPost]
+        public ActionResult UpdateStatus(bool IsFull)
+        {
+            // Store the checkbox state in the database or session
+            Session["TableStatus"] = IsFull;  // Example with session
+                                              // Redirect back to the same view to avoid resubmission on refresh
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
         public ActionResult Index(int? year)
         {
+            // Retrieve the checkbox state from the session
+            bool isFull = (Session["TableStatus"] != null) ? (bool)Session["TableStatus"] : false;
+
+            // Pass the value to the view using ViewBag
+            ViewBag.IsFull = isFull;
 
             // caculate year
             // Generate a list of years (e.g., from 2000 to the current year)
