@@ -3,9 +3,11 @@ using Dookki_Web.Models;
 using Dookki_Web.Models.Map;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace Dookki_Web.Areas.Admin.Controllers
 {
@@ -64,13 +66,114 @@ namespace Dookki_Web.Areas.Admin.Controllers
 
             return View(account);
         }
-        public ActionResult EditAdmin()
+
+        [HttpGet]
+        public ActionResult EditAdmin(int id)
         {
-            return View();
+            // Tìm admin dựa vào IDAccount
+            var admin = (from a in _context.Admins
+                         join ac in _context.ACCOUNTs on a.IDAccount equals ac.ID
+                         where a.IDAccount == id
+                         select new AdminViewModel
+                         {
+                             IDAccount = ac.ID,
+                             Username = ac.UserName,
+                             Password = ac.Password,
+                             Role = ac.Role,
+                             Name = a.Name,
+                             Phone = a.Phone
+                         }).FirstOrDefault();
+
+            if (admin == null)
+            {
+                Response.StatusCode = 404;
+                return HttpNotFound("Không tìm thấy admin.");
+            }
+
+            return View(admin);
         }
-        public ActionResult RemoveAdmin()
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult EditAdmin(AdminViewModel model)
         {
-            return View();
+            // Kiểm tra dữ liệu hợp lệ
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Thongbao = "Dữ liệu không hợp lệ.";
+                return View(model);
+            }
+
+            // Tìm tài khoản và admin liên quan
+            var account = _context.ACCOUNTs.SingleOrDefault(ac => ac.ID == model.IDAccount);
+            var admin = _context.Admins.SingleOrDefault(ad => ad.IDAccount == model.IDAccount);
+
+            if (account == null || admin == null)
+            {
+                Response.StatusCode = 404;
+                return HttpNotFound("Không tìm thấy admin để chỉnh sửa.");
+            }
+
+            // Cập nhật thông tin tài khoản
+            account.UserName = model.Username;
+            account.Password = model.Password;
+
+            // Vai trò luôn là "admin"
+            account.Role = "admin";
+
+            // Cập nhật thông tin admin
+            admin.Name = model.Name;
+            admin.Phone = model.Phone;
+
+            // Lưu thay đổi vào cơ sở dữ liệu
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+       [HttpGet]
+        public ActionResult RemoveAdmin(int id)
+        {
+            // Lấy thông tin Admin cần xóa dựa trên IDAccount
+            var admin = _context.Admins.FirstOrDefault(a => a.IDAccount == id);
+            if (admin == null)
+            {
+                return HttpNotFound("Không tìm thấy admin cần xóa.");
+            }
+
+            return View(admin);
+        }
+        [HttpPost, ActionName("RemoveAdmin")]
+        public ActionResult RemoveAdminConfirm(int id)
+        {
+            try
+            {
+                // Tìm Admin theo IDAccount
+                var admin = _context.Admins.FirstOrDefault(a => a.IDAccount == id);
+                if (admin != null)
+                {
+                    // Xóa Admin
+                    _context.Admins.Remove(admin);
+                }
+
+                // Xóa tài khoản trong bảng ACCOUNT
+                var account = _context.ACCOUNTs.FirstOrDefault(a => a.ID == id);
+                if (account != null)
+                {
+                    _context.ACCOUNTs.Remove(account);
+                }
+
+                // Lưu thay đổi
+                _context.SaveChanges();
+
+                // Chuyển hướng về danh sách admin
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Có lỗi xảy ra khi xóa admin: " + ex.Message);
+                return View();
+            }
         }
     }
 }

@@ -5,42 +5,46 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
+<h2>QUẢN LÍ ADMIN</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "AddAdmin")
-</p>
-<table class="table table-bordered">
+</p>*@
+<table class="table" border="1">
+    <p>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("AddAdmin", "AdminManagement")'">
+            Thêm mới vé
+        </button>
+    </p>
+
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Role)
-        </th>
-        <th></th>
+        <th style="width: 100px;">Tài khoản</th>
+        <th style="width: 100px;">Mật khẩu</th>
+        <th style="width: 100px; text-align: right">Vai trò</th>
+        <th style="width: 200px;"></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Role)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td >
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td style="text-align:right">
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td style="text-align:right">
+                <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("EditAdmin", "AdminManagement", new { id = item.ID })'">
+                    Sửa admin
+                </button> |
+                <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("RemoveAdmin", "AdminManagement", new { id = item.ID })'">
+                    Xóa admin
+                </button>
+            </td>
+        </tr>
+    }
 
 </table>

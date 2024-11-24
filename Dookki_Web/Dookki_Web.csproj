@@ -1913,6 +1913,7 @@
     <Compile Include="Models\Employee.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Map\AdminViewModel.cs" />
     <Compile Include="Models\Map\mapAccount.cs" />
     <Compile Include="Models\Map\mapEmployee.cs" />
     <Compile Include="Models\Order.cs">
@@ -2067,7 +2068,6 @@
     <Content Include="Areas\Admin\Views\AdminOrder\AddItem.cshtml" />
     <Content Include="Areas\Admin\Views\AdminOrder\EditItem.cshtml" />
     <Content Include="Areas\Admin\Views\AdminOrder\RemoveItem.cshtml" />
-    <Content Include="Areas\Admin\Views\AdminManagement\AddAdmin1.cshtml" />
     <Content Include="Areas\Admin\Views\AdminManagement\EditAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\AdminManagement\RemoveAdmin.cshtml" />
     <None Include="Web.Debug.config">
@@ -2079,7 +2079,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Contents\js\" />
   </ItemGroup>
   <ItemGroup>
