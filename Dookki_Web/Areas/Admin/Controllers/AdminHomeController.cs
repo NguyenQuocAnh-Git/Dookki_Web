@@ -1,4 +1,5 @@
-﻿using Dookki_Web.Models;
+﻿using Dookki_Web.App_Start;
+using Dookki_Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Dookki_Web.Areas.Admin.Controllers
 {
+    [RoleUser]
     public class AdminHomeController : Controller
     {
         DOOKKIEntities db = new DOOKKIEntities();
