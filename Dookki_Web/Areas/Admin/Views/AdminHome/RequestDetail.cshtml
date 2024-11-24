@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "RequestDetail";
+}
+
+<h2>RequestDetail của id : @ViewBag.idDetail</h2>
+
+<td style="text-align:right">
+    <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("AcceptRequest", "AdminHome", new { id = @ViewBag.idDetail })'">
+        Chấp nhận yêu cầu
+    </button> |
+    <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("DeleteRequest", "AdminHome", new { id = @ViewBag.idDetail })'">
+        Xóa yêu cầu
+    </button>
+</td>

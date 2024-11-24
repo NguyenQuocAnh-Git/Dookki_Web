@@ -194,5 +194,24 @@ namespace Dookki_Web.Areas.Admin.Controllers
             SessionConfig.SetUser(null);
             return RedirectToAction("Login");
         }
+        public ActionResult RequestDetail(int id)
+        {
+            ViewBag.idDetail = id;
+            return View();
+        }
+        public ActionResult AcceptRequest(int id)
+        {
+            ViewBag.idAccept = id;
+            return View();
+        }
+        public ActionResult DeleteRequest(int id)
+        {
+            ViewBag.idDelete = id;
+            return View();
+        }
+        public ActionResult ListAcceptedRequest()
+        {
+            return View();
+        }
     }
 }
