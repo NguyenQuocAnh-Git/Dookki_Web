@@ -1,4 +1,5 @@
 ﻿using Dookki_Web.Models;
+using Dookki_Web.App_Start;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Dookki_Web.Areas.Admin.Controllers
 {
+    [RoleUser]
     public class AdminOrderController : Controller
     {
         // GET: Admin/AdminOrder
@@ -79,9 +81,6 @@ namespace Dookki_Web.Areas.Admin.Controllers
         [ValidateInput(false)]
         public ActionResult EditItem(Ticket ticket)
         {
-
-
-            
             if (ModelState.IsValid)
             {
                 db.Tickets.AddOrUpdate(ticket); // Thêm mới bản ghi thay vì UpdateModel

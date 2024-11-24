@@ -163,5 +163,10 @@ namespace Dookki_Web.Areas.Admin.Controllers
 
             return monthlyRevenues;
         }
+        public ActionResult Logout()
+        {
+            SessionConfig.SetUser(null);
+            return RedirectToAction("Login");
+        }
     }
 }
