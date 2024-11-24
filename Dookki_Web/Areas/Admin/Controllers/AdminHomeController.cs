@@ -1,5 +1,6 @@
 ﻿using Dookki_Web.App_Start;
 using Dookki_Web.Models;
+using Dookki_Web.Models.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,6 @@ using System.Web.Mvc;
 
 namespace Dookki_Web.Areas.Admin.Controllers
 {
-    [RoleUser]
     public class AdminHomeController : Controller
     {
         DOOKKIEntities db = new DOOKKIEntities();
@@ -21,6 +21,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
                                               // Redirect back to the same view to avoid resubmission on refresh
             return RedirectToAction("Index");
         }
+        [RoleUser]
         [HttpGet]
         public ActionResult Index(int? year)
         {
@@ -66,6 +67,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
             return View();
         }
 
+        [RoleUser]
         public ActionResult Statistical(int? year)
         {
             // caculate year
@@ -164,6 +166,28 @@ namespace Dookki_Web.Areas.Admin.Controllers
             ViewBag.TotalRevenue = totalRevenue.ToString("N0", new System.Globalization.CultureInfo("vi-VN")); ;
 
             return monthlyRevenues;
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(string username, string password)
+        {
+            mapAccount map = new mapAccount();
+            var user = map.find(username, password);
+
+            //1. Co: sang trang dashboard admin
+            if (user != null)
+            {
+                SessionConfig.SetUser(user);
+                return RedirectToAction("Index");
+            }
+
+            //2. ko co: Quay lai trang login, bao loi
+            ViewBag.error = "Tên đăng nhập hoặc mật khẩu không đúng";
+            return View();
         }
         public ActionResult Logout()
         {
