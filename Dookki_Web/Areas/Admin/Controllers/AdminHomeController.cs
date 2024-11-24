@@ -99,7 +99,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
             ViewBag.ChartLineData = chartLineData;
             ViewBag.ChartLineLable = chartLineLable;
 
-            return View();
+            return RedirectToAction("Index");
         }
         private double[] GetChartPieData(int ? year)
         {
@@ -152,6 +152,14 @@ namespace Dookki_Web.Areas.Admin.Controllers
                     monthlyRevenues[month] += (double)totalBill;
                 }
             }
+
+            
+            double totalRevenue = monthlyRevenues.Sum();
+
+
+            // Format the total revenue in VND (Vietnamese Dong) format
+            //string formattedRevenue = totalRevenue.ToString("N0", new System.Globalization.CultureInfo("vi-VN"));
+            ViewBag.TotalRevenue = totalRevenue.ToString("N0", new System.Globalization.CultureInfo("vi-VN")); ;
 
             return monthlyRevenues;
         }

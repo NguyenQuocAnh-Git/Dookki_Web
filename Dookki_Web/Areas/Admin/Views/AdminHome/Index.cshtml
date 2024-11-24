@@ -7,7 +7,6 @@
     var chartLineData = ViewBag.ChartLineData;
     var chartLineLable = ViewBag.ChartLineLable;
 }
-
 <!-- Page Wrapper -->
 <div id="wrapper">
 
@@ -67,13 +66,15 @@
                         <!-- Area Chart -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Biểu đồ đường - Doanh thu của cửa hàng trong năm @ViewBag.Year</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Doanh thu của cửa hàng trong năm @ViewBag.Year</h6>
                             </div>
                             <div class="card-body">
                                 <div class="chart-area">
                                     <canvas id="myAreaChart"></canvas>
                                 </div>
                                 <hr>
+                                <!-- Hiển thị tổng doanh thu dưới biểu đồ -->
+                                <p class="text-primary font-weight-bold">Tổng doanh thu trong năm @ViewBag.Year: @ViewBag.TotalRevenue VND</p>
                             </div>
                         </div>
 
@@ -84,7 +85,7 @@
                         <div class="card shadow mb-4">
                             <!-- Card Header - Dropdown -->
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Biểu đồ tròn - Tỉ lệ loại khách trong năm @ViewBag.Year</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Tỉ lệ loại khách trong năm @ViewBag.Year</h6>
                             </div>
                             <!-- Card Body -->
                             <div class="card-body">
@@ -151,7 +152,14 @@
                 caretPadding: 10,
             },
             legend: {
-                display: false
+                display: true, // Hiển thị legend (chú thích)
+                position: 'bottom', // Đặt vị trí legend ở dưới biểu đồ
+                labels: {
+                    fontSize: 14, // Kích thước chữ cho legend
+                    fontColor: '#858796', // Màu chữ cho legend
+                    padding: 15, // Khoảng cách giữa các mục trong legend
+                    boxWidth: 20, // Chiều rộng của hộp màu trong legend
+                },
             },
             cutoutPercentage: 80,
         },
