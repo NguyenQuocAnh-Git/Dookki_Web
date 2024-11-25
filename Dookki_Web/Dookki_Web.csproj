@@ -98,10 +98,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Contents\css\bootstrap.min.css" />
+    <Content Include="Contents\css\elegant-icons.css" />
+    <Content Include="Contents\css\font-awesome.min.css" />
+    <Content Include="Contents\css\jquery-ui.min.css" />
     <Content Include="Contents\css\main.css" />
+    <Content Include="Contents\css\nice-select.css" />
+    <Content Include="Contents\css\owl.carousel.min.css" />
     <Content Include="Contents\css\sb-admin-2.css" />
     <Content Include="Contents\css\sb-admin-2.min.css" />
     <Content Include="Contents\img\about dookki.jpg" />
+    <Content Include="Contents\css\slicknav.min.css" />
+    <Content Include="Contents\css\style.css" />
     <Content Include="Contents\img\about-2.jpg" />
     <Content Include="Contents\img\about.jpg" />
     <Content Include="Contents\img\apple-touch-icon.png" />
@@ -1863,6 +1871,14 @@
     <Content Include="Contents\vendor\swiper\swiper-bundle.min.css" />
     <Content Include="Contents\vendor\swiper\swiper-bundle.min.js" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\ShoppingCart\bootstrap.min.js" />
+    <Content Include="Scripts\ShoppingCart\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\ShoppingCart\jquery-ui.min.js" />
+    <Content Include="Scripts\ShoppingCart\jquery.nice-select.min.js" />
+    <Content Include="Scripts\ShoppingCart\jquery.slicknav.js" />
+    <Content Include="Scripts\ShoppingCart\main.js" />
+    <Content Include="Scripts\ShoppingCart\mixitup.min.js" />
+    <Content Include="Scripts\ShoppingCart\owl.carousel.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1874,6 +1890,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1883,6 +1900,7 @@
     <Compile Include="Models\Admin.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
@@ -1931,6 +1949,7 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Table.cs" />
     <Compile Include="Models\Ticket.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
@@ -2074,6 +2093,16 @@
     <Content Include="Areas\Admin\Views\AdminOrder\RemoveItem.cshtml" />
     <Content Include="Areas\Admin\Views\AdminManagement\EditAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\AdminManagement\RemoveAdmin.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Order.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\DisplayCart.cshtml" />
+    <Content Include="Views\Order\Checkout.cshtml" />
+    <Content Include="Views\Order\Confirm.cshtml" />
+    <Content Include="Views\Order\FillInfo.cshtml" />
+    <Content Include="Views\Order\DisplayBill.cshtml" />
+    <Content Include="Views\Order\BookTable.cshtml" />
+    <Content Include="Views\Order\DisplaySucces.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

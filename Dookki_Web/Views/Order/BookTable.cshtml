@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "BookTable";
+    Layout = "~/Views/Share/_LayoutPage1.cshtml";
+}
+<link rel="stylesheet" href="~/Contents/css/style.css" type="text/css">
+
+<section class="checkout spad">
+    <div class="container">
+        <div class="row">
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true)
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="checkout__input">
+                            <p>Name<span>*</span></p>
+                            @Html.TextBox("FirstName", "", new { @class = "checkout__input__add" })
+                            <div>
+                                @ViewData["firstName"]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="checkout__input">
+                            <p>Last Name<span>*</span></p>
+                            @Html.TextBox("LastName", "", new { @class = "checkout__input__add" })
+                            <div>
+                                @ViewData["lastName"]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="checkout__input">
+                            <p>Phone<span>*</span></p>
+                            @Html.TextBox("Phone", "", new { @class = "checkout__input__add" })
+                            <div>
+                                @ViewData["phone"]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="checkout__input">
+                            <p>Seat<span>*</span></p>
+                            @Html.TextBox("Seat", "", new { @type = "number" , @class = "checkout__input__add" })
+                            <div>
+                                @ViewData["seat"]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="site-btn">BOOK</button>
+            }
+        </div>
+    </div>
+</section>

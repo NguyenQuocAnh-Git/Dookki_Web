@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "DisplayBill";
+    Layout = "~/Views/Share/_LayoutPage1.cshtml";
+}
+<link rel="stylesheet" href="~/Contents/css/style.css" type="text/css">
+
+<section class="checkout spad">
+    <div class="container">
+        <div class="row">
+            <div>
+                <h3>Cảm ơn vì đã mua hàng của chúng tôi.</h3>
+            </div>
+            <div class="checkout__order">
+                <h4>Your Order</h4>
+                <div class="checkout__order__products">Products <span>Total</span></div>
+                <ul>
+                    @foreach (var item in ViewBag.Cart)
+                    {
+                        <li>@item.name <span>@(item.price * item.quantily)đ</span></li>
+                    }
+                </ul>
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="checkout__order__subtotal" style="text-align: left">Number of product</div>
+                        <div class="checkout__order__total" style="text-align: left">Total</div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="checkout__order__subtotal">@ViewBag.NumProduct</div>
+                        <div class="checkout__order__total">@ViewBag.Total đ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

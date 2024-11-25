@@ -1,0 +1,67 @@
+﻿@using Dookki_Web.Models;
+@model List<Cart>
+@{
+    ViewBag.Title = "Confirm";
+    Layout = "~/Views/Share/_LayoutPage1.cshtml";
+}
+<link rel="stylesheet" href="~/Contents/css/style.css" type="text/css">
+
+<h2>Confirm show thông tin khách hàng + thông tin món ăn + lấy phương thức thanh toán</h2>
+
+<section class="checkout spad">
+    <div class="container">
+        <div class="checkout__form">
+            <h4>Billing Details</h4>
+            @using (Html.BeginForm())
+            {
+                <div class="row">
+                    <div class="col-lg-8 col-md-6">
+                        <div class="checkout__input">
+                            <p>Name</p>
+                            <input type="text" value="@ViewBag.Name" class="checkout__input__add" disabled />
+                        </div>
+                    </div>
+                    <div class="checkout__input">
+                        <p>Address</p>
+                        <input type="text" value="@ViewBag.Address" class="checkout__input__add" disabled>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="checkout__input">
+                                <p>Phone</p>
+                                <input type="text" value="@ViewBag.Phone" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="checkout__input">
+                                <p>Email</p>
+                                <input type="text" value="@ViewBag.Email" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="checkout__order">
+                        <h4>Your Order</h4>
+                        <div class="checkout__order__products">Products <span>Total</span></div>
+                        <ul>
+                            @foreach (var item in Model)
+                            {
+                                <li>@item.name <span>@(item.price * item.quantily)đ</span></li>
+                            }
+                        </ul>
+                        <div class="checkout__order__subtotal">Subtotal <span>@ViewBag.NumProduct</span></div>
+                        <div class="checkout__order__total">Total <span>@ViewBag.Totalđ</span></div>
+                        <div>
+                            <label>
+                                @Html.CheckBox("Payment")
+                                By cash
+                            </label>
+                        </div>
+                        <button type="submit" class="site-btn">Pay the order</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

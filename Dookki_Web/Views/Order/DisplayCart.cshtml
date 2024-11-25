@@ -1,0 +1,130 @@
+﻿@using Dookki_Web.Models
+@model List<Cart>
+<link rel="stylesheet" href="~/Contents/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="~/Contents/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="~/Contents/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="~/Contents/css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="~/Contents/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="~/Contents/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="~/Contents/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="~/Contents/css/style.css" type="text/css">
+@{
+    ViewBag.Title = "DisplayCart";
+    Layout = "~/Views/Share/_LayoutPage1.cshtml";
+}
+
+<main class="main">
+    <section id="menu" class="menu section">
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <div class="shoping-cart spad">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="shoping__cart__table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="shoping__product">Products</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                            <th>Total</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td class="shoping__cart__item">
+                                                    <img src="img/cart/cart-1.jpg" alt="">
+                                                    <h5> @item.name</h5>
+                                                </td>
+                                                @using (Html.BeginForm("UpdateCart", "Order", new { @ID = item.ticketID }))
+                                                {
+                                                    <td class="shoping__cart__price">
+                                                        @item.price.ToString("#,###")đ
+                                                    </td>
+                                                    <td class="shoping__cart__quantity">
+                                                        <div class="quantity">
+                                                            <div class="pro-qty">
+                                                                <input type="text" name="quantity" value="@item.quantily">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="shoping__cart__total">
+                                                        @((item.price * item.quantily).ToString("#,###"))đ
+                                                    </td>
+                                                    <td class="shoping__cart__item__close">
+                                                        <a class="primary-btn cart-btn" style="border: none; cursor: pointer" href="@Url.Action("DeleteCart", "Order", new {@ID = item.ticketID})">X</a>
+                                                    </td>
+                                                    <td>
+                                                        <input type="submit" class="primary-btn cart-btn" style="border: none" value="Update"/>
+                                                    </td>
+                                                }
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="shoping__cart__btns">
+                                <a href="@Url.Action("Order","Home")" class="primary-btn cart-btn cart-btn-left">CONTINUE SHOPPING</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="shoping__continue">
+                                <div class="shoping__discount">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="shoping__checkout">
+                                <h5>Cart Total</h5>
+                                <ul>
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-sm">
+                                                <div class="checkout__order__subtotal" style="text-align: left">Number of product:</div>
+                                            </div>
+                                            <div class="col-sm">
+                                                <div class="checkout__order__subtotal">@ViewBag.NumProduct</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-sm">
+                                                <div class="checkout__order__total" style="text-align: left">Total:</div>
+                                            </div>
+                                            <div class="col-sm">
+                                                <div class="checkout__order__total">@String.Format("{0:0,0}", ViewBag.Total)</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                @*<ul>
+                                    <li>Product: <span>@ViewBag.NumProduct</span></li>
+                                    <li>Total: <span>@String.Format("{0:0,0}", ViewBag.Total)</span></li>
+                                </ul>*@
+                                <a href="@Url.Action("Confirm","Order")" class="primary-btn">PROCEED TO CHECKOUT</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- /Menu Section -->
+</main>
+<script src="~/Scripts/ShoppingCart/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/ShoppingCart/bootstrap.min.js"></script>
+<script src="~/Scripts/ShoppingCart/jquery.nice-select.min.js"></script>
+<script src="~/Scripts/ShoppingCart/jquery-ui.min.js"></script>
+<script src="~/Scripts/ShoppingCart/jquery.slicknav.js"></script>
+<script src="~/Scripts/ShoppingCart/mixitup.min.js"></script>
+<script src="~/Scripts/ShoppingCart/owl.carousel.min.js"></script>
+<script src="~/Scripts/ShoppingCart/main.js"></script>
