@@ -113,7 +113,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
             ViewBag.ChartLineData = chartLineData;
             ViewBag.ChartLineLable = chartLineLable;
 
-            return RedirectToAction("Index");
+            return View();
         }
 
         

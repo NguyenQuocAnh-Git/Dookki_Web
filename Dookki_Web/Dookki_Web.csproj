@@ -1889,6 +1889,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminOrderController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StatisticalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Global.asax.cs">
@@ -2082,14 +2083,13 @@
     <Content Include="Areas\Admin\Views\AdminManagement\AddAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\AdminHome\RequestDetail.cshtml" />
     <Content Include="Areas\Admin\Views\AdminHome\AcceptRequest.cshtml" />
-    <Content Include="Areas\Admin\Views\AdminHome\DeleteRequest.cshtml" />
     <Content Include="Areas\Admin\Views\AdminHome\ListAcceptedRequest.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminHome\Statistical.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\test.cshtml" />
     <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Statistical\Statistical.cshtml" />
     <Content Include="Areas\Admin\Views\AdminOrder\Display.cshtml" />
     <Content Include="Areas\Admin\Views\AdminOrder\AddItem.cshtml" />
     <Content Include="Areas\Admin\Views\AdminOrder\EditItem.cshtml" />
