@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Login";
-    Layout = "~/Views/Share/_LayoutPage1.cshtml";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 <div class="container">
 
@@ -41,6 +41,9 @@
                                         <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                                     </a>
                                 </form>
+                                <a href="@Url.Action("FillInfo","Order")" class="btn btn-facebook btn-user btn-block">
+                                    Continue withou an account
+                                </a>
                                 <hr>
                                 <div class="text-center">
                                     <a class="small" href="forgot-password.html">Forgot Password?</a>

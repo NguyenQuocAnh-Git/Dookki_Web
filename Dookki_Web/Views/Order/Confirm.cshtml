@@ -2,11 +2,9 @@
 @model List<Cart>
 @{
     ViewBag.Title = "Confirm";
-    Layout = "~/Views/Share/_LayoutPage1.cshtml";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 <link rel="stylesheet" href="~/Contents/css/style.css" type="text/css">
-
-<h2>Confirm show thông tin khách hàng + thông tin món ăn + lấy phương thức thanh toán</h2>
 
 <section class="checkout spad">
     <div class="container">
@@ -40,7 +38,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div>
                     <div class="checkout__order">
                         <h4>Your Order</h4>
                         <div class="checkout__order__products">Products <span>Total</span></div>
@@ -51,7 +49,7 @@
                             }
                         </ul>
                         <div class="checkout__order__subtotal">Subtotal <span>@ViewBag.NumProduct</span></div>
-                        <div class="checkout__order__total">Total <span>@ViewBag.Totalđ</span></div>
+                        <div class="checkout__order__total">Total <span>@String.Format("{0:0,0}", ViewBag.Total) đ</span></div>
                         <div>
                             <label>
                                 @Html.CheckBox("Payment")

@@ -2,7 +2,7 @@
 @model List<Cart>
 @{
     ViewBag.Title = "FillInfo";
-    Layout = "~/Views/Share/_LayoutPage1.cshtml";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 <link rel="stylesheet" href="~/Contents/css/style.css" type="text/css">
 
@@ -74,7 +74,7 @@
                                 }
                             </ul>
                             <div class="checkout__order__subtotal">Subtotal <span>@ViewBag.NumProduct</span></div>
-                            <div class="checkout__order__total">Total <span>@ViewBag.Totalđ</span></div>
+                            <div class="checkout__order__total">Total <span>@String.Format("{0:0,0}", ViewBag.Total) đ</span></div>
                             <button type="submit" class="site-btn">NEXT</button>
                         </div>
                     </div>

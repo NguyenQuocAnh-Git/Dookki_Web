@@ -2103,6 +2103,7 @@
     <Content Include="Views\Order\BookTable.cshtml" />
     <Content Include="Views\Order\DisplaySucces.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Order\DisplayCartPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

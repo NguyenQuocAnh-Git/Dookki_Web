@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "BookTable";
-    Layout = "~/Views/Share/_LayoutPage1.cshtml";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 <link rel="stylesheet" href="~/Contents/css/style.css" type="text/css">
 
@@ -44,9 +44,29 @@
                     <div class="col-lg-6">
                         <div class="checkout__input">
                             <p>Seat<span>*</span></p>
-                            @Html.TextBox("Seat", "", new { @type = "number" , @class = "checkout__input__add" })
+                            @Html.TextBox("Seat", "", new { @type = "number", @class = "checkout__input__add" })
                             <div>
                                 @ViewData["seat"]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="checkout__input">
+                            <p>Phone<span>*</span></p>
+                            @Html.TextBox("Date", DateTime.Now, new { @type="date", @class = "checkout__input__add" })
+                            <div>
+                                @ViewData["date"]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="checkout__input">
+                            <p>Seat<span>*</span></p>
+                            @Html.TextBox("Time", DateTime.Now.TimeOfDay, new { @type = "time", @class = "checkout__input__add" })
+                            <div>
+                                @ViewData["time"]
                             </div>
                         </div>
                     </div>

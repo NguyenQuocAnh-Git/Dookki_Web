@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="~/Contents/css/style.css" type="text/css">
 @{
     ViewBag.Title = "DisplayCart";
-    Layout = "~/Views/Share/_LayoutPage1.cshtml";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
 <main class="main">
@@ -102,7 +102,7 @@
                                                 <div class="checkout__order__total" style="text-align: left">Total:</div>
                                             </div>
                                             <div class="col-sm">
-                                                <div class="checkout__order__total">@String.Format("{0:0,0}", ViewBag.Total)</div>
+                                                <div class="checkout__order__total">@String.Format("{0:0,0}", ViewBag.Total) đ</div>
                                             </div>
                                         </div>
                                     </li>

@@ -10,5 +10,7 @@ namespace Dookki_Web.Models
         public string Name { get; set; }
         public string Phone { get; set; }
         public int Seat { get; set; }
+        public DateTime Date { get; set; }
+        public TimeSpan Time { get; set; }
     }
 }

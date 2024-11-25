@@ -27,6 +27,20 @@ namespace Dookki_Web.Controllers
             ViewBag.Total = Total();
             return View(cart);
         }
+        public ActionResult DisplayCartPartial()
+        {
+            var num = NumProduct();
+            if (num != 0)
+            {
+                ViewBag.NumProduct = num;
+            }
+            else
+            {
+                ViewBag.NumProduct = "";
+            }
+
+            return PartialView();
+        }
         public List<Cart> GetCart()
         {
             List<Cart> cart = Session["Cart"] as List<Cart>;
@@ -266,6 +280,8 @@ namespace Dookki_Web.Controllers
             var lastName = collection["LastName"];
             var phone = collection["Phone"];
             var seat = collection["Seat"];
+            var date = collection["Date"];
+            var time = collection["Time"];
             if (String.IsNullOrEmpty(firstName))
             {
                 ViewData["firstName"] = "This is required information";
@@ -282,12 +298,22 @@ namespace Dookki_Web.Controllers
             {
                 ViewData["seat"] = "This is required information";
             }
+            else if (String.IsNullOrEmpty(date))
+            {
+                ViewData["date"] = "This is required information";
+            }
+            else if (String.IsNullOrEmpty(time))
+            {
+                ViewData["time"] = "This is required information";
+            }
             else
             {
                 Table t = new Table();
                 t.Name = firstName + " " + lastName;
                 t.Seat = int.Parse(seat);
                 t.Phone = phone;
+                t.Date = DateTime.Parse(date);
+                t.Time = TimeSpan.Parse(time);
                 Session["Table"] = t;
                 return RedirectToAction("DisplaySucces");
             }
@@ -300,6 +326,8 @@ namespace Dookki_Web.Controllers
             ViewBag.Name = t.Name;
             ViewBag.Phone = t.Phone;
             ViewBag.Seat = t.Seat;
+            ViewBag.Time = t.Time;
+            ViewBag.Date = t.Date;
             return View();
         }
     }
