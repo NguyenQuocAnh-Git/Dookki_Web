@@ -30,6 +30,18 @@
           <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="IDAccount" Type="int" />
         </EntityType>
+        <EntityType Name="BookingRequests">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="NumberOfSeat" Type="int" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Time" Type="time" Precision="7" />
+          <Property Name="Status" Type="nvarchar" MaxLength="15" />
+        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="ID" />
@@ -235,6 +247,7 @@
           <EntitySet Name="__EFMigrationsHistory" EntityType="Self.__EFMigrationsHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACCOUNT" EntityType="Self.ACCOUNT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookingRequests" EntityType="Self.BookingRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DayWork" EntityType="Self.DayWork" Schema="dbo" store:Type="Tables" />
@@ -573,6 +586,7 @@
             <End Role="Payment" EntitySet="Payments" />
           </AssociationSet>
           <EntitySet Name="C__EFMigrationsHistory" EntityType="DOOKKIModel.C__EFMigrationsHistory" />
+          <EntitySet Name="BookingRequests" EntityType="DOOKKIModel.BookingRequest" />
         </EntityContainer>
         <EntityType Name="C__EFMigrationsHistory">
           <Key>
@@ -580,6 +594,18 @@
           </Key>
           <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="BookingRequest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfSeat" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Time" Type="Time" Precision="7" />
+          <Property Name="Status" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -715,6 +741,19 @@
               <MappingFragment StoreEntitySet="__EFMigrationsHistory">
                 <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
                 <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingRequests">
+            <EntityTypeMapping TypeName="DOOKKIModel.BookingRequest">
+              <MappingFragment StoreEntitySet="BookingRequests">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="NumberOfSeat" ColumnName="NumberOfSeat" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

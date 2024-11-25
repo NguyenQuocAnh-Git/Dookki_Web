@@ -12,17 +12,14 @@ namespace Dookki_Web.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Ticket
+    public partial class BookingRequest
     {
-        public Ticket()
-        {
-            this.OrderDetails = new HashSet<OrderDetail>();
-        }
-    
         public int ID { get; set; }
         public string Name { get; set; }
-        public decimal Price { get; set; }
-    
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public string Phone { get; set; }
+        public Nullable<int> NumberOfSeat { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<System.TimeSpan> Time { get; set; }
+        public string Status { get; set; }
     }
 }

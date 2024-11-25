@@ -1,11 +1,11 @@
-﻿
+﻿@model IEnumerable<Dookki_Web.Models.BookingRequest>
 @{
     ViewBag.Title = "ListAcceptedRequest";
 
 }
 
 <div class="mb-2">
-    <form class="form-inline mr-auto ml-md-3 my-2 my-md-0 navbar-search ml-auto d-flex justify-content-end" method="get" action="@Url.Action("Display", "AdminOrder")">
+    <form class="form-inline mr-auto ml-md-3 my-2 my-md-0 navbar-search ml-auto d-flex justify-content-end" method="get" action="@Url.Action("ListAcceptedRequest", "AdminHome")">
         <div class="input-group">
             @*<div class="input-group-append mr-2">
                 <button type="button" class="btn btn-primary d-flex justify-content-end" onclick="window.location.href='@Url.Action("ListAcceptedRequest", "AdminHome")'">
@@ -30,22 +30,24 @@
         <th style="width: 100px; text-align: right">Thời gian</th>
         <th style="width: 200px;"></th>
     </tr>
-
-    @for (int i = 0; i < 10; i++)
+    @for (int i = 0; i < Model.Count(); i++)
     {
-        <tr>
-            <td>
-                @Html.Label("Vương " + i)
-            </td>
-            <td style="text-align:right">
-                @i
-
-            </td>
-            <td style="text-align:right">
-                <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("DeleteRequest", "AdminHome", new { id = @ViewBag.idAccept })'">
-                    Xóa yêu cầu
-                </button>
-            </td>
-        </tr>
+        var booking = Model.ElementAt(i);
+        if (booking.Status == "Accepted")
+        {
+            <tr>
+                <td>
+                    @Html.Label(booking.Name + " (" + booking.Phone + ")")
+                </td>
+                <td style="text-align:right">
+                    @Html.Label(booking.Time.ToString())
+                </td>
+                <td style="text-align:right">
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("RequestDetail", "AdminHome", new { id = booking.ID })'">
+                        Xem yêu cầu
+                    </button>
+                </td>
+            </tr>
+        }
     }
 </table>

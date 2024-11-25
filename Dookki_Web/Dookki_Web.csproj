@@ -1900,6 +1900,9 @@
     <Compile Include="Models\Admin.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BookingRequest.cs">
+      <DependentUpon>DOOKKI.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>

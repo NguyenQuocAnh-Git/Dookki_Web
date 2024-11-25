@@ -3,6 +3,8 @@ using Dookki_Web.Models;
 using Dookki_Web.Models.Map;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -23,8 +25,9 @@ namespace Dookki_Web.Areas.Admin.Controllers
         }
         [RoleUser]
         [HttpGet]
-        public ActionResult Index(int? year)
+        public ActionResult Index(string searchTerm, int? year)
         {
+            
             // Retrieve the checkbox state from the session
             bool isFull = (Session["TableStatus"] != null) ? (bool)Session["TableStatus"] : false;
 
@@ -64,7 +67,14 @@ namespace Dookki_Web.Areas.Admin.Controllers
             ViewBag.ChartLineData = chartLineData;
             ViewBag.ChartLineLable = chartLineLable;
 
-            return View();
+            var requests = db.BookingRequests.AsQueryable();
+            // Nếu có từ khóa tìm kiếm
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                requests = requests.Where(t => t.Name.ToLower().Contains(searchTerm.ToLower())
+                || t.Phone.Contains(searchTerm));
+            }
+            return View(requests.ToList());
         }
 
         [RoleUser]
@@ -105,6 +115,9 @@ namespace Dookki_Web.Areas.Admin.Controllers
 
             return RedirectToAction("Index");
         }
+
+        
+
         private double[] GetChartPieData(int ? year)
         {
             int totalBill = db.Orders.Count(); 
@@ -196,22 +209,42 @@ namespace Dookki_Web.Areas.Admin.Controllers
         }
         public ActionResult RequestDetail(int id)
         {
-            ViewBag.idDetail = id;
-            return View();
+            var booking = db.BookingRequests.FirstOrDefault(bk => bk.ID == id);
+            return View(booking);
         }
         public ActionResult AcceptRequest(int id)
         {
-            ViewBag.idAccept = id;
-            return View();
+            var booking = db.BookingRequests.FirstOrDefault(bk => bk.ID == id);
+            booking.Status = "Accepted";
+            db.BookingRequests.AddOrUpdate(booking);
+            db.SaveChanges();
+            return View(booking);
         }
         public ActionResult DeleteRequest(int id)
         {
-            ViewBag.idDelete = id;
-            return View();
+            var booking = db.BookingRequests.FirstOrDefault(bk => bk.ID == id);
+            booking.Status = "Deleted";
+            db.BookingRequests.AddOrUpdate(booking);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
-        public ActionResult ListAcceptedRequest()
+
+        [HttpGet]
+        public ActionResult ListAcceptedRequest(string searchTerm)
         {
-            return View();
+            IQueryable<BookingRequest> bookingsQuery = db.BookingRequests.Where(bk => bk.Status == "Accepted");
+
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                bookingsQuery = bookingsQuery.Where(bk => bk.Name.ToLower().Contains(searchTerm.ToLower())
+                                                        || bk.Phone.Contains(searchTerm));
+            }
+
+
+            var bookings = bookingsQuery.ToList();
+
+            return View(bookings);
         }
     }
 }

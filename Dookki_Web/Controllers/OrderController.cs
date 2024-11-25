@@ -314,6 +314,16 @@ namespace Dookki_Web.Controllers
                 t.Phone = phone;
                 t.Date = DateTime.Parse(date);
                 t.Time = TimeSpan.Parse(time);
+
+                BookingRequest bkq = new BookingRequest();
+                bkq.Name = t.Name;
+                bkq.Phone = t.Phone;
+                bkq.Time = t.Time;
+                bkq.NumberOfSeat = t.Seat;
+                bkq.Date = t.Date;
+                bkq.Status = "Pending";
+                db.BookingRequests.Add(bkq);
+                db.SaveChanges();
                 Session["Table"] = t;
                 return RedirectToAction("DisplaySucces");
             }
