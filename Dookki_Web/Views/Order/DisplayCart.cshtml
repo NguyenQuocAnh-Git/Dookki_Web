@@ -86,10 +86,32 @@
                             <div class="shoping__checkout">
                                 <h5>Cart Total</h5>
                                 <ul>
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-sm">
+                                                <div class="checkout__order__subtotal" style="text-align: left">Number of product:</div>
+                                            </div>
+                                            <div class="col-sm">
+                                                <div class="checkout__order__subtotal">@ViewBag.NumProduct</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-sm">
+                                                <div class="checkout__order__total" style="text-align: left">Total:</div>
+                                            </div>
+                                            <div class="col-sm">
+                                                <div class="checkout__order__total">@String.Format("{0:0,0}", ViewBag.Total)</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                @*<ul>
                                     <li>Product: <span>@ViewBag.NumProduct</span></li>
                                     <li>Total: <span>@String.Format("{0:0,0}", ViewBag.Total)</span></li>
-                                </ul>
-                                <a href="@Url.Action("Checkout","Order")" class="primary-btn">PROCEED TO CHECKOUT</a>
+                                </ul>*@
+                                <a href="@Url.Action("Confirm","Order")" class="primary-btn">PROCEED TO CHECKOUT</a>
                             </div>
                         </div>
                     </div>

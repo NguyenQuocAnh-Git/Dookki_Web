@@ -1941,6 +1941,7 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Table.cs" />
     <Compile Include="Models\Ticket.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
@@ -2083,6 +2084,11 @@
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Order\DisplayCart.cshtml" />
     <Content Include="Views\Order\Checkout.cshtml" />
+    <Content Include="Views\Order\Confirm.cshtml" />
+    <Content Include="Views\Order\FillInfo.cshtml" />
+    <Content Include="Views\Order\DisplayBill.cshtml" />
+    <Content Include="Views\Order\BookTable.cshtml" />
+    <Content Include="Views\Order\DisplaySucces.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

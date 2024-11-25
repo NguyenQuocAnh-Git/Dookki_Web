@@ -680,7 +680,7 @@ ol {
 	border: none;
 	height: 48px;
 	font-size: 16px;
-	color: #b2b2b2;
+	color: black;
 	padding-left: 20px;
 }
 
@@ -2006,7 +2006,7 @@ ol {
 	height: 46px;
 	border: 1px solid #cccccc;
 	font-size: 16px;
-	color: #b2b2b2;
+	color: black;
 	text-align: center;
 	display: inline-block;
 	margin-right: 15px;
@@ -2129,7 +2129,7 @@ ol {
 	border: 1px solid #ebebeb;
 	padding-left: 20px;
 	font-size: 16px;
-	color: #b2b2b2;
+	color: #000000;
 	border-radius: 4px;
 }
 
@@ -2138,7 +2138,7 @@ ol {
 }
 
 .checkout__input input::placeholder {
-	color: #b2b2b2;
+	color: #000000;
 }
 
 .checkout__input__checkbox {
