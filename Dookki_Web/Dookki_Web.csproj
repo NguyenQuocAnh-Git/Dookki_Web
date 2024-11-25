@@ -2093,7 +2093,6 @@
     <Content Include="Areas\Admin\Views\AdminOrder\RemoveItem.cshtml" />
     <Content Include="Areas\Admin\Views\AdminManagement\EditAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\AdminManagement\RemoveAdmin.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Order.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Order\DisplayCart.cshtml" />
@@ -2103,6 +2102,7 @@
     <Content Include="Views\Order\DisplayBill.cshtml" />
     <Content Include="Views\Order\BookTable.cshtml" />
     <Content Include="Views\Order\DisplaySucces.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
