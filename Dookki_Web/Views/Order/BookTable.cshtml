@@ -4,6 +4,12 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 <link rel="stylesheet" href="~/Contents/css/style.css" type="text/css">
+<p style="position: fixed; bottom: 10px; left: 10px; background-color: #f9f9f9; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); z-index: 9999;">
+    Current table status:
+    <span style="color: @(Session["TableStatus"] != null && (bool)Session["TableStatus"] ? "red" : "green");">
+        @(Session["TableStatus"] != null && (bool)Session["TableStatus"] ? "Full" : "Empty")
+    </span>
+</p>
 
 <section class="checkout spad">
     <div class="container">
@@ -55,7 +61,7 @@
                     <div class="col-lg-6">
                         <div class="checkout__input">
                             <p>Phone<span>*</span></p>
-                            @Html.TextBox("Date", DateTime.Now, new { @type="date", @class = "checkout__input__add" })
+                            @Html.TextBox("Date", DateTime.Now, new { @type = "date", @class = "checkout__input__add" })
                             <div>
                                 @ViewData["date"]
                             </div>

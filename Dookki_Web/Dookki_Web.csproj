@@ -151,6 +151,7 @@
     <Content Include="Contents\img\undraw_profile_2.svg" />
     <Content Include="Contents\img\undraw_profile_3.svg" />
     <Content Include="Contents\img\undraw_rocket.svg" />
+    <Content Include="Content\Site.css" />
     <Content Include="Models\DOOKKI.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DOOKKI.edmx</DependentUpon>
@@ -2107,6 +2108,9 @@
     <Content Include="Views\Order\DisplaySucces.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Order\DisplayCartPartial.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
