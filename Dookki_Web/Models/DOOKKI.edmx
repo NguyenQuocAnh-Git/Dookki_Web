@@ -89,6 +89,7 @@
           <Property Name="Time" Type="time" Precision="7" Nullable="false" />
           <Property Name="customerID" Type="int" />
           <Property Name="discount" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -374,6 +375,7 @@
           <Property Name="discount" Type="Int32" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_Order_customerID" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -679,6 +681,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="DOOKKIModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="customerID" ColumnName="customerID" />

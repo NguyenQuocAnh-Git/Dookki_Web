@@ -222,7 +222,7 @@ namespace Dookki_Web.Controllers
             newOrder.customerID = client.ID;
             newOrder.Time = DateTime.Now.TimeOfDay;
             newOrder.discount = 0;
-
+            newOrder.Status = "Pending";
             Payment payment = new Payment();
             payment.amount = decimal.Parse(Total().ToString());
             payment.day = DateTime.Now;

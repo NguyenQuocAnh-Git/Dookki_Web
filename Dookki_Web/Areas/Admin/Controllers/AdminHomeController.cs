@@ -60,6 +60,15 @@ namespace Dookki_Web.Areas.Admin.Controllers
                 "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8",
                 "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12", };
 
+            var today = DateTime.Now.Date;  // Only day/month/year
+            var ordersToday = db.Orders
+                .Where(o => o.OrderDetails.Any(od => od.Payment.day == today))
+                .ToList();
+
+            ViewBag.Today = today.ToString("dd/MM/yyyy"); 
+            ViewBag.OrdersToday = ordersToday;
+
+
             // Truyền dữ liệu qua ViewBag hoặc Model
             ViewBag.ChartPieData = chartPieData;
             ViewBag.ChartPieLable = chartPieLable;
@@ -106,13 +115,15 @@ namespace Dookki_Web.Areas.Admin.Controllers
                 "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8",
                 "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12", };
 
+
+            
+
             // Truyền dữ liệu qua ViewBag hoặc Model
             ViewBag.ChartPieData = chartPieData;
             ViewBag.ChartPieLable = chartPieLable;
 
             ViewBag.ChartLineData = chartLineData;
             ViewBag.ChartLineLable = chartLineLable;
-
             return View();
         }
 
@@ -207,11 +218,19 @@ namespace Dookki_Web.Areas.Admin.Controllers
             SessionConfig.SetUser(null);
             return RedirectToAction("Login");
         }
+        public ActionResult RequestDetailOrder(int id)
+        {
+            var order = db.Orders.FirstOrDefault(o => o.ID == id);
+            ViewBag.Today = DateTime.Now.Date.ToString("dd/MM/yyyy");
+            
+            return View(order);
+        }
         public ActionResult RequestDetail(int id)
         {
             var booking = db.BookingRequests.FirstOrDefault(bk => bk.ID == id);
             return View(booking);
         }
+
         public ActionResult AcceptRequest(int id)
         {
             var booking = db.BookingRequests.FirstOrDefault(bk => bk.ID == id);
@@ -220,15 +239,31 @@ namespace Dookki_Web.Areas.Admin.Controllers
             db.SaveChanges();
             return View(booking);
         }
+        public ActionResult AcceptRequestOrder(int id)
+        {
+            var order = db.Orders.FirstOrDefault(bk => bk.ID == id);
+            order.Status = "Accepted";
+            db.Orders.AddOrUpdate(order);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         public ActionResult DeleteRequest(int id)
         {
             var booking = db.BookingRequests.FirstOrDefault(bk => bk.ID == id);
             booking.Status = "Deleted";
             db.BookingRequests.AddOrUpdate(booking);
             db.SaveChanges();
+            
+            return RedirectToAction("ListAcceptedRequest","AdminHome");
+        }
+        public ActionResult DeleteRequestOrder(int id)
+        {
+            var order = db.Orders.FirstOrDefault(bk => bk.ID == id);
+            order.Status = "Finish";
+            db.Orders.AddOrUpdate(order);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         [HttpGet]
         public ActionResult ListAcceptedRequest(string searchTerm)
         {
@@ -244,7 +279,8 @@ namespace Dookki_Web.Areas.Admin.Controllers
 
             var bookings = bookingsQuery.ToList();
 
-            return View(bookings);
+                return View(bookings);
+
         }
     }
 }

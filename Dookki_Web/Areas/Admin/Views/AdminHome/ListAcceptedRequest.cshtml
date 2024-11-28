@@ -8,10 +8,10 @@
     <form class="form-inline mr-auto ml-md-3 my-2 my-md-0 navbar-search ml-auto d-flex justify-content-end" method="get" action="@Url.Action("ListAcceptedRequest", "AdminHome")">
         <div class="input-group">
             @*<div class="input-group-append mr-2">
-                <button type="button" class="btn btn-primary d-flex justify-content-end" onclick="window.location.href='@Url.Action("ListAcceptedRequest", "AdminHome")'">
-                    Xem danh sách chờ yêu cầu
-                </button>
-            </div>*@
+                    <button type="button" class="btn btn-primary d-flex justify-content-end" onclick="window.location.href='@Url.Action("ListAcceptedRequest", "AdminHome")'">
+                        Xem danh sách chờ yêu cầu
+                    </button>
+                </div>*@
             <div class="input-group-append">
                 <input type="text" name="searchTerm" class="form-control bg-light border-1 small" placeholder="Tìm kiếm..."
                        aria-label="Search" aria-describedby="basic-addon2">
@@ -43,11 +43,23 @@
                     @Html.Label(booking.Time.ToString())
                 </td>
                 <td style="text-align:right">
-                    <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("RequestDetail", "AdminHome", new { id = booking.ID })'">
-                        Xem yêu cầu
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete(@booking.ID)">
+                        Xóa yêu cầu
                     </button>
                 </td>
             </tr>
         }
     }
 </table>
+<div style="position:relative;">
+    @Html.ActionLink("Về trang chủ", "Index", "AdminHome", null, new { @class = "btn btn-primary", @style = "position: absolute; right:0"})
+</div>
+
+<script>
+    function confirmDelete(id) {
+        if (confirm('Bạn có chắc chắn muốn xóa yêu cầu này không?')) {
+            // Chuyển hướng đến action DeleteRequest nếu người dùng xác nhận
+            window.location.href = '@Url.Action("DeleteRequest", "AdminHome")' + '?id=' + id;
+        }
+    }
+</script>

@@ -59,7 +59,7 @@ namespace Dookki_Web.Contents
         }
 
         [HttpPost]
-        public ActionResult Register(string username, string password, string name, string email, string address, int marks)
+        public ActionResult Register(string username, string password, string name, string email, string address)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(name))
             {
@@ -92,7 +92,7 @@ namespace Dookki_Web.Contents
                 Email = email,
                 Address = address,
                 IDAccount = accountId,
-                Marks = marks,
+                Marks = 0,
             };
 
             db.Customers.Add(newCustomer);

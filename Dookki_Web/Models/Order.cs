@@ -23,6 +23,7 @@ namespace Dookki_Web.Models
         public System.TimeSpan Time { get; set; }
         public Nullable<int> customerID { get; set; }
         public Nullable<int> discount { get; set; }
+        public string Status { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

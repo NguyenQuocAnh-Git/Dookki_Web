@@ -7,7 +7,7 @@
 
     var chartLineData = ViewBag.ChartLineData;
     var chartLineLable = ViewBag.ChartLineLable;
-
+    var ordersToday = ViewBag.OrdersToday as List<Dookki_Web.Models.Order>;
 }
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -35,9 +35,9 @@
                             <div class="form-check mr-3">
                                 @* Explicitly check if ViewBag.IsFull is null and cast it to a non-nullable bool *@
                                 @Html.CheckBox("IsFull", (bool)(ViewBag.IsFull ?? false), new { @class = "form-check-input", id = "isFullCheckbox" })
-                                <label class="form-check-label" for="isFullCheckbox">Full</label>
+                                <label class="form-check-label" for="isFullCheckbox">Hết bàn</label>
                             </div>
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-primary">Cập nhật</button>
                         </div>
                     </div>
                 }
@@ -64,15 +64,15 @@
                 <table class="table" border="1">
 
                     <tr>
-                        <th style="width: 100px;">Tên yêu cầu</th>
+                        <th style="width: 100px;">Tên yêu cầu đặt bàn</th>
                         <th style="width: 100px; text-align: right">Thời gian</th>
                         <th style="width: 200px;"></th>
                     </tr>
 
                     @for (int i = 0; i < Model.Count(); i++)
                     {
-                        var booking = Model.ElementAt(i);  
-                        if (booking.Status == "Pending")  
+                        var booking = Model.ElementAt(i);
+                        if (booking.Status == "Pending")
                         {
                             <tr>
                                 <td>
@@ -90,6 +90,49 @@
                         }
                     }
                 </table>
+                <hr />
+                <table class="table" border="1">
+                    <tr>
+                        <th style="width: 100px;">Tên yêu cầu mua mang về</th>
+                        <th style="width: 100px; text-align: right">Thời gian</th>
+                        <th style="width: 200px;"></th>
+                    </tr>
+
+                    @if (ViewBag.OrdersToday != null)
+                    {
+
+
+                        foreach (var order in ordersToday)
+                        {
+                            if (order.Status == "Pending")
+                            {
+                                var customer = order.Customer;
+                                <tr>
+                                    <td>
+                                        @Html.Label(customer.Name + " (" + customer.Phone + ")")
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.Label(order.Time.ToString(@"hh\:mm\:ss"))
+                                    </td>
+                                    <td style="text-align:right">
+                                        <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("RequestDetailOrder", "AdminHome", new { id = order.ID })'">
+                                            Xem yêu cầu
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+
+
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="3" style="text-align: center;">Chưa có yêu cầu nào.</td>
+                        </tr>
+                    }
+                </table>
+
                 <!-- Content Row -->
                 <div class="row">
 

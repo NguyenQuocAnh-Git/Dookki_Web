@@ -18,8 +18,12 @@ namespace Dookki_Web.Areas.Admin.Controllers
         // GET: Admin/AdminManagement
         public ActionResult Index()
         {
-            return View(new mapAccount().ListAccount());
+            var accounts = new mapAccount().ListAccount()
+                                           .OrderBy(account => account.Role) // Sorts by Role in ascending order
+                                           .ToList(); // Converts to a list (if not already a list)
+            return View(accounts);
         }
+
 
         [HttpGet]
         public ActionResult AddAdmin()
