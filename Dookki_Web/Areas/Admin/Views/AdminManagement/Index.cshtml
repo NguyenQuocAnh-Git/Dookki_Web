@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>QUẢN LÍ ADMIN</h2>
+<h2>QUẢN LÍ TÀI KHOẢN</h2>
 
 @*<p>
     @Html.ActionLink("Create New", "AddAdmin")
@@ -12,7 +12,7 @@
 <table class="table" border="1">
     <p>
         <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("AddAdmin", "AdminManagement")'">
-            Thêm mới vé
+            Thêm mới tài khoản
         </button>
     </p>
 
@@ -29,19 +29,23 @@
             <td>
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
-            <td >
+            <td>
                 @Html.DisplayFor(modelItem => item.Password)
             </td>
             <td style="text-align:right">
                 @Html.DisplayFor(modelItem => item.Role)
             </td>
             <td style="text-align:right">
-                <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("EditAdmin", "AdminManagement", new { id = item.ID })'">
-                    Sửa admin
-                </button> |
-                <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("RemoveAdmin", "AdminManagement", new { id = item.ID })'">
-                    Xóa admin
-                </button>
+                @if (item.Role == "admin")
+                {
+                   <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("EditAdmin", "AdminManagement", new { id = item.ID })'">
+                       Sửa tài khoản
+                   </button>
+                    <span>|</span>
+                   <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("RemoveAdmin", "AdminManagement", new { id = item.ID })'">
+                       Xóa tài khoản
+                   </button>
+                }
             </td>
         </tr>
     }
