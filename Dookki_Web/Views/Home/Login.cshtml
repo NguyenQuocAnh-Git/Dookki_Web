@@ -22,34 +22,31 @@
                                 </div>
                                 <form class="user" method="post">
                                     <div class="form-group">
-                                        <input name="username" class="form-control form-control-user">
+                                        <input name="username" placeholder="User Name" class="form-control form-control-user">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="password" class="form-control form-control-user" />
+                                        <input type="password" name="password" placeholder="Password" class="form-control form-control-user" />
                                     </div>
                                     <p>
                                         @ViewBag.error
                                     </p>
-                                    <button type="submit" class="btn btn-primary btn-user btn-block">
-                                        Login
-                                    </button>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block" style="width: 420px;">
+                                            Login
+                                        </button>
+                                    </div>
+                                    
                                     <hr>
-                                    <a href="index.html" class="btn btn-google btn-user btn-block">
-                                        <i class="fab fa-google fa-fw"></i> Login with Google
-                                    </a>
-                                    <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                        <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                    </a>
                                 </form>
-                                <a href="@Url.Action("FillInfo","Order")" class="btn btn-facebook btn-user btn-block">
-                                    Continue withou an account
-                                </a>
+                                <div class="text-center">
+                                    <a class="small" href="@Url.Action("FillInfo","Order")" class="btn btn-facebook btn-user btn-block">
+                                        Continue withou an account
+                                    </a>
+                                </div>
+                                
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                </div>
-                                <div class="text-center">
-                                    <a class="small" href="register.html">Create an Account!</a>
+                                    <a class="small" href="@Url.Action("Register", "Home")">Create an Account!</a>
                                 </div>
                             </div>
                         </div>
