@@ -31,19 +31,23 @@
             <td>
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
-            <td >
+            <td>
                 @Html.DisplayFor(modelItem => item.Password)
             </td>
             <td style="text-align:right">
                 @Html.DisplayFor(modelItem => item.Role)
             </td>
             <td style="text-align:right">
-                <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("EditAdmin", "AdminManagement", new { id = item.ID })'">
-                    Sửa admin
-                </button> |
-                <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("RemoveAdmin", "AdminManagement", new { id = item.ID })'">
-                    Xóa admin
-                </button>
+                @if (item.Role == "admin")
+                {
+                   <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("EditAdmin", "AdminManagement", new { id = item.ID })'">
+                       Sửa tài khoản
+                   </button>
+                    <span>|</span>
+                   <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("RemoveAdmin", "AdminManagement", new { id = item.ID })'">
+                       Xóa tài khoản
+                   </button>
+                }
             </td>
         </tr>
     }
