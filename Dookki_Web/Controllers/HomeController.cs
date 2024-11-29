@@ -39,7 +39,6 @@ namespace Dookki_Web.Contents
                 Session["UserID"] = account.ID;
                 Session["UserName"] = account.UserName;
                 Session["Role"] = account.Role;
-
                 return RedirectToAction("index", "Home");
             }
             else
@@ -47,6 +46,11 @@ namespace Dookki_Web.Contents
                 ViewBag.error = "Please enter your full username and password.";
                 return View();
             }
+        }
+        public ActionResult Logout()
+        {
+            Session.Clear(); // Xóa tất cả session
+            return RedirectToAction("Login", "Home"); // Quay lại trang Login
         }
         public ActionResult Order()
         {
