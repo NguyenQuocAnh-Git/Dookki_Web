@@ -3,6 +3,7 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
+
 <div class="container">
 
     <!-- Outer Row -->
@@ -14,17 +15,19 @@
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                        <div class="col-lg-6 d-none d-lg-block bg-login-image">
+                            <img src="~/Contents/img/dookki_Login1.jpg" alt="Alternate Text" style="width: 500px; height: auto; border-radius: 5px;" />
+                        </div>
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                 </div>
                                 <form class="user" method="post">
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-bottom: 20px;">
                                         <input name="username" placeholder="User Name" class="form-control form-control-user">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-top: 10px;">
                                         <input type="password" name="password" placeholder="Password" class="form-control form-control-user" />
                                     </div>
                                     <p>
@@ -35,7 +38,7 @@
                                             Login
                                         </button>
                                     </div>
-                                    
+
                                     <hr>
                                 </form>
                                 <div class="text-center">
@@ -43,10 +46,10 @@
                                         Continue withou an account
                                     </a>
                                 </div>
-                                
+
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="@Url.Action("Register", "Home")">Create an Account!</a>
+                                    <a class="small" href="@Url.Action("Register", "Customer")">Create an Account!</a>
                                 </div>
                             </div>
                         </div>
