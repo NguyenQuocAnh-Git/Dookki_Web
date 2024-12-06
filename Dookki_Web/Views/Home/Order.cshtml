@@ -4,7 +4,20 @@
     ViewBag.Title = "Order";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
+
 <main class="main">
+    <div style="position: fixed; top: 100px; right:8%; width: 300px;">
+        <form action="@Url.Action("Search", "Home")" method="get" style="display: flex; align-items: center;">
+            <input type="text"
+                   name="keyword"
+                   placeholder="Search for a product"
+                   style="flex: 1; padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 10px;" />
+            <button type="submit"
+                    style="padding: 5px 10px; background-color: #ce1212; color: white; border: none; border-radius: 5px; cursor: pointer; ">
+                Search
+            </button>
+        </form>
+    </div>
     <section id="menu" class="menu section">
 
         <!-- Section Title -->
@@ -21,24 +34,24 @@
                     <div class="row gy-5">
                         @foreach (var item in Model)
                         {
-                            if(item.ID <= 2)
+                            if (item.ID <= 2)
                             {
                                 continue;
                             }
                             else
                             {
-                            <div class="col-lg-4 menu-item">
-                                <a href="~/Contents/img/menu/menu-item-1.png" class="glightbox"><img src="~/Contents/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
-                                <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
-                                <div class="price">
-                                    <div>
-                                        <p>@decimal.Parse(@Html.DisplayFor(modelItem => item.Price).ToString()).ToString("#,###")đ</p>
+                                <div class="col-lg-4 menu-item">
+                                    <a href="~/Contents/img/menu/menu-item-1.png" class="glightbox"><img src="~/Contents/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
+                                    <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
+                                    <div class="price">
+                                        <div>
+                                            <p>@decimal.Parse(@Html.DisplayFor(modelItem => item.Price).ToString()).ToString("#,###")đ</p>
+                                        </div>
+                                        <div style="border: 1px solid #ce1212; border-radius: 10px; background-color: #ce1212; cursor: pointer; margin: 0 150px" onclick="location.href='@Url.Action("AddtoCart", "Order", new { @ticketID = item.ID})'">
+                                            <a class="btn-getstarted" style="color: white" href="#">Select</a>
+                                        </div>
                                     </div>
-                                    <div style="border: 1px solid #ce1212; border-radius: 10px; background-color: #ce1212; cursor: pointer; margin: 0 150px" onclick="location.href='@Url.Action("AddtoCart", "Order", new { @ticketID = item.ID})'">
-                                        <a class="btn-getstarted" style="color: white" href="#">Select</a>
-                                    </div>
-                                </div>
-                            </div><!-- Menu Item -->
+                                </div><!-- Menu Item -->
                             }
                         }
                     </div>

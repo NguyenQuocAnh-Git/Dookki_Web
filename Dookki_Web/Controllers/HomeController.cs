@@ -22,5 +22,12 @@ namespace Dookki_Web.Contents
         {
             return View(db.Tickets.ToList());
         }
+        public ActionResult Search(string keyword)
+        {
+            var result = db.Tickets
+                           .Where(t => t.Name.Contains(keyword))
+                           .ToList();
+            return View("Order", result);
+        }
     }
 }
