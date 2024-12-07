@@ -579,16 +579,8 @@
             <End Role="PaymentMethod" EntitySet="PaymentMethods" />
             <End Role="Payment" EntitySet="Payments" />
           </AssociationSet>
-          <EntitySet Name="C__EFMigrationsHistory" EntityType="DOOKKIModel.C__EFMigrationsHistory" />
           <EntitySet Name="BookingRequests" EntityType="DOOKKIModel.BookingRequest" />
         </EntityContainer>
-        <EntityType Name="C__EFMigrationsHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-          </Key>
-          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="BookingRequest">
           <Key>
             <PropertyRef Name="ID" />
