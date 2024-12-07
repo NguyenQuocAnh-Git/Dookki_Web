@@ -1918,9 +1918,6 @@
     <Compile Include="Models\Customer.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\C__EFMigrationsHistory.cs">
-      <DependentUpon>DOOKKI.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DayWork.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
