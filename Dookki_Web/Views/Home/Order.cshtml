@@ -34,7 +34,7 @@
                     <div class="row gy-5">
                         @foreach (var item in Model)
                         {
-                            if (item.ID <= 2)
+                            if (item.CategoryTicket.Name == "Stay-here") // stay-here
                             {
                                 continue;
                             }
