@@ -14,26 +14,28 @@
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-register-image"></div>
+                        <div class="col-lg-6 d-none d-lg-block bg-register-image">
+                            <img src="~/Contents/img/dookki_Login2.jpg" alt="Alternate Text" style="width: 500px; height: auto; border-radius: 5px;" />
+                        </div>
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Create a Customer Account</h1>
                                 </div>
-                                <form class="user" method="post" action="@Url.Action("Register", "Home")">
-                                    <div class="form-group">
+                                <form class="user" method="post" action="@Url.Action("Register", "Customer")">
+                                    <div class="form-group" style="margin-bottom: 15px;">
                                         <input name="username" class="form-control form-control-user" placeholder="Phone (Username)" required>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-bottom: 15px;">
                                         <input type="password" name="password" class="form-control form-control-user" placeholder="Password" required>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-bottom: 15px;">
                                         <input name="name" class="form-control form-control-user" placeholder="Full Name" required>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-bottom: 15px;">
                                         <input name="email" class="form-control form-control-user" placeholder="Email">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-bottom: 15px;">
                                         <input name="address" class="form-control form-control-user" placeholder="Address">
                                     </div>
                                     <p class="text-danger">

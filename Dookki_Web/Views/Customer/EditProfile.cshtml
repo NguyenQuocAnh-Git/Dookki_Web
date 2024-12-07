@@ -1,0 +1,51 @@
+﻿@model Dookki_Web.Models.Customer
+@{
+    ViewBag.Title = "EditProfile";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<link rel="stylesheet" href="~/Contents/css/style.css" type="text/css">
+
+<section class="checkout spad">
+    <div class="container">
+        <div class="checkout__form">
+            <h4>Edit Profile</h4>
+            @using (Html.BeginForm("EditProfile", "Customer", FormMethod.Post))
+            {
+                <div class="row">
+                    @Html.HiddenFor(m => m.ID)
+                    <div class="col-lg-8 col-md-6">
+                        <!-- Name -->
+                        <div class="checkout__input">
+                            <p>Name</p>
+                            @Html.TextBoxFor(m => m.Name, new { @class = "checkout__input__add", @placeholder = "Enter your name" })
+                        </div>
+                        <!-- Address -->
+                        <div class="checkout__input">
+                            <p>Address</p>
+                            @Html.TextBoxFor(m => m.Address, new { @class = "checkout__input__add", @placeholder = "Enter your address" })
+                        </div>
+                        <div class="row">
+                            <!-- Phone -->
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Phone</p>
+                                    @Html.TextBoxFor(m => m.Phone, new { @class = "checkout__input__add", @placeholder = "Enter your phone number" })
+                                </div>
+                            </div>
+                            <!-- Email -->
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Email</p>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "checkout__input__add", @placeholder = "Enter your email", @type = "email" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="site-btn">Update Profile</button>
+            }
+        </div>
+</section>
+
+
+

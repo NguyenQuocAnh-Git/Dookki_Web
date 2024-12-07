@@ -28,6 +28,8 @@
         <AssociationConnector Association="DOOKKIModel.FK_Payment_PaymentMethod" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DOOKKIModel.C__EFMigrationsHistory" Width="1.5" PointX="0.75" PointY="10.75" />
         <EntityTypeShape EntityType="DOOKKIModel.BookingRequest" Width="1.5" PointX="10.375" PointY="4.75" />
+        <EntityTypeShape EntityType="DOOKKIModel.CategoryTicket" Width="1.5" PointX="3" PointY="11" />
+        <AssociationConnector Association="DOOKKIModel.FK__Ticket__ID_Categ__02FC7413" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -114,6 +114,8 @@
     <Content Include="Contents\img\about.jpg" />
     <Content Include="Contents\img\apple-touch-icon.png" />
     <Content Include="Contents\img\dookki-bg.jpg" />
+    <Content Include="Contents\img\dookki_Login1.jpg" />
+    <Content Include="Contents\img\dookki_Login2.jpg" />
     <Content Include="Contents\img\events-1.jpg" />
     <Content Include="Contents\img\events-2.jpg" />
     <Content Include="Contents\img\events-3.jpg" />
@@ -1891,6 +1893,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\StatisticalController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1907,6 +1910,9 @@
     </Compile>
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs">
+      <DependentUpon>DOOKKI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CategoryTicket.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs">
@@ -2107,11 +2113,12 @@
     <Content Include="Views\Order\DisplayBill.cshtml" />
     <Content Include="Views\Order\BookTable.cshtml" />
     <Content Include="Views\Order\DisplaySucces.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Order\DisplayCartPartial.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Customer\EditProfile.cshtml" />
+    <Content Include="Views\Customer\Login.cshtml" />
+    <Content Include="Views\Customer\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
