@@ -36,6 +36,7 @@
     <tr>
         <th style="width: 100px;">Tên Vé</th>
         <th style="width: 100px; text-align: right">Giá bán</th>
+        <th style="width: 100px; text-align: right">Loại vé</th>
         <th style="width: 200px;"></th>
     </tr>
 
@@ -47,7 +48,9 @@
             </td>
             <td style="text-align:right">
                 @string.Format("{0:N0}", item.Price) VNĐ
-
+            </td>
+            <td  style="text-align:right">
+                @Html.DisplayFor(modelItem => item.CategoryTicket.Name)
             </td>
             <td style="text-align:right">
                 <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("EditItem", "AdminOrder", new { id = item.ID })'">

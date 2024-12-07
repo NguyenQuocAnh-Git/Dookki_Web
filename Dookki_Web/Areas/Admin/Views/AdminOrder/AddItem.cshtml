@@ -28,7 +28,21 @@
             @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    <div class="form-group">
+        @Html.Label("Loại", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.DropDownListFor(
+                model => model.ID_Category,
+                new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "Take-away", Value = "1" },
+                    new SelectListItem { Text = "Stay-here", Value = "2" }
+                },
+                new { @class = "form-control", @id = "idCategoryTicket" }
+            )
+            @Html.ValidationMessageFor(model => model.ID_Category, "", new { @class = "text-danger" })
+        </div>
+    </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10 d-flex justify-content-start">
             <input type="submit" value="Thêm mới" class="btn btn-outline-success mr-2 w-25" />

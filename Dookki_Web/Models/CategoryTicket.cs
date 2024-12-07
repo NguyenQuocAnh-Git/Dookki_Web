@@ -12,19 +12,16 @@ namespace Dookki_Web.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Ticket
+    public partial class CategoryTicket
     {
-        public Ticket()
+        public CategoryTicket()
         {
-            this.OrderDetails = new HashSet<OrderDetail>();
+            this.Tickets = new HashSet<Ticket>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
-        public decimal Price { get; set; }
-        public Nullable<int> ID_Category { get; set; }
     
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        public virtual CategoryTicket CategoryTicket { get; set; }
+        public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

@@ -49,6 +49,13 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
+        <EntityType Name="CategoryTicket">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="ID" />
@@ -135,6 +142,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ID_Category" Type="int" />
         </EntityType>
         <Association Name="FK__Admin__IDAccount__3B75D760">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
@@ -157,6 +165,18 @@
             </Principal>
             <Dependent Role="Customer">
               <PropertyRef Name="IDAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ticket__ID_Categ__02FC7413">
+          <End Role="CategoryTicket" Type="Self.CategoryTicket" Multiplicity="0..1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryTicket">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="ID_Category" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -250,6 +270,7 @@
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BookingRequests" EntityType="Self.BookingRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryTicket" EntityType="Self.CategoryTicket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DayWork" EntityType="Self.DayWork" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
@@ -266,6 +287,10 @@
           <AssociationSet Name="FK__Customer__IDAcco__403A8C7D" Association="Self.FK__Customer__IDAcco__403A8C7D">
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
             <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ticket__ID_Categ__02FC7413" Association="Self.FK__Ticket__ID_Categ__02FC7413">
+            <End Role="CategoryTicket" EntitySet="CategoryTicket" />
+            <End Role="Ticket" EntitySet="Ticket" />
           </AssociationSet>
           <AssociationSet Name="FK_DayWork_Employee" Association="Self.FK_DayWork_Employee">
             <End Role="Employee" EntitySet="Employee" />
@@ -429,6 +454,8 @@
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Ticket" FromRole="Ticket" ToRole="OrderDetail" />
+          <Property Name="ID_Category" Type="Int32" />
+          <NavigationProperty Name="CategoryTicket" Relationship="DOOKKIModel.FK__Ticket__ID_Categ__02FC7413" FromRole="Ticket" ToRole="CategoryTicket" />
         </EntityType>
         <Association Name="FK__Admin__IDAccount__4D94879B">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
@@ -589,6 +616,11 @@
           </AssociationSet>
           <EntitySet Name="C__EFMigrationsHistory" EntityType="DOOKKIModel.C__EFMigrationsHistory" />
           <EntitySet Name="BookingRequests" EntityType="DOOKKIModel.BookingRequest" />
+          <EntitySet Name="CategoryTickets" EntityType="DOOKKIModel.CategoryTicket" />
+          <AssociationSet Name="FK__Ticket__ID_Categ__02FC7413" Association="DOOKKIModel.FK__Ticket__ID_Categ__02FC7413">
+            <End Role="CategoryTicket" EntitySet="CategoryTickets" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__EFMigrationsHistory">
           <Key>
@@ -609,6 +641,26 @@
           <Property Name="Time" Type="Time" Precision="7" />
           <Property Name="Status" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="CategoryTicket">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tickets" Relationship="DOOKKIModel.FK__Ticket__ID_Categ__02FC7413" FromRole="CategoryTicket" ToRole="Ticket" />
+        </EntityType>
+        <Association Name="FK__Ticket__ID_Categ__02FC7413">
+          <End Type="DOOKKIModel.CategoryTicket" Role="CategoryTicket" Multiplicity="0..1" />
+          <End Type="DOOKKIModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryTicket">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="ID_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -733,6 +785,7 @@
           <EntitySetMapping Name="Tickets">
             <EntityTypeMapping TypeName="DOOKKIModel.Ticket">
               <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="ID_Category" ColumnName="ID_Category" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
@@ -755,6 +808,14 @@
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="NumberOfSeat" ColumnName="NumberOfSeat" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryTickets">
+            <EntityTypeMapping TypeName="DOOKKIModel.CategoryTicket">
+              <MappingFragment StoreEntitySet="CategoryTicket">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

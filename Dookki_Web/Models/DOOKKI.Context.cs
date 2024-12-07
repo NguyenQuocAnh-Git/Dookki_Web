@@ -39,5 +39,6 @@ namespace Dookki_Web.Models
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<C__EFMigrationsHistory> C__EFMigrationsHistory { get; set; }
         public DbSet<BookingRequest> BookingRequests { get; set; }
+        public DbSet<CategoryTicket> CategoryTickets { get; set; }
     }
 }

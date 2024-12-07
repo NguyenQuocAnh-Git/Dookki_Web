@@ -1912,6 +1912,9 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CategoryTicket.cs">
+      <DependentUpon>DOOKKI.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Customer.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
