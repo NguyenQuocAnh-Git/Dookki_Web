@@ -2122,6 +2122,7 @@
     <Content Include="Areas\Admin\Views\AdminHome\ListAcceptedRequest.cshtml" />
     <Content Include="Areas\Admin\Views\AdminHome\Statistical.cshtml" />
     <Content Include="Areas\Admin\Views\AdminHome\RequestDetailOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminHome\Delivery.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
