@@ -138,11 +138,11 @@ namespace Dookki_Web.Areas.Admin.Controllers
             int customerHasAccount = 0;
 
 
-            foreach (var order in db.Orders)
+            foreach (var order in db.Orders.Include(o=>o.Customer))
             {
                 if (order.OrderDetails.Any() && order.OrderDetails.ElementAt(0).Payment.day.Year == year && order.Status == "Finish")
                 {
-                    if (order.customerID != 0)
+                    if (order.Customer.IDAccount != 0)
                     {
                         customerHasAccount++;
                     }

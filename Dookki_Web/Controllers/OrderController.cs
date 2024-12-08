@@ -20,23 +20,39 @@ namespace Dookki_Web.Controllers
         {
             return View();
         }
-        [RoleUser]
+
         public ActionResult DisplayCart(bool isUpdate = false, int idOrderUpdate = -1)
         {
-            if (isUpdate != false && idOrderUpdate != -1)
+            if(Session["isWithoutAccount"] != null)
             {
-                Session["IsUpdate"] = isUpdate;
-                Session["OrderID"] = idOrderUpdate;
-            }
-            List<Cart> cart = GetCart();
-            if (cart.Count == 0)
-            {
-                return RedirectToAction("Index");
-            }
-            ViewBag.NumProduct = NumProduct();
-            ViewBag.Total = Total();
+                List<Cart> cart = GetCart();
+                if (cart.Count == 0)
+                {
+                    return RedirectToAction("Index");
+                }
+                ViewBag.NumProduct = NumProduct();
+                ViewBag.Total = Total();
 
-            return View(cart);
+                return View(cart);
+            }
+            else
+            {
+                if (isUpdate != false && idOrderUpdate != -1)
+                {
+                    Session["IsUpdate"] = isUpdate;
+                    Session["OrderID"] = idOrderUpdate;
+                }
+                List<Cart> cart = GetCart();
+                if (cart.Count == 0)
+                {
+                    return RedirectToAction("Index");
+                }
+                ViewBag.NumProduct = NumProduct();
+                ViewBag.Total = Total();
+
+                return View(cart);
+            }
+            
         }
         public ActionResult DisplayCartPartial()
         {
@@ -139,7 +155,7 @@ namespace Dookki_Web.Controllers
             ViewBag.Total = Total();
             return View(cart);
         }
-        [RoleUser]
+
         [HttpPost]
         public ActionResult FillInfo(FormCollection collection)
         {
@@ -184,8 +200,9 @@ namespace Dookki_Web.Controllers
                 tmp.Password = cus.Phone;
                 tmp.Role = "temp";
                 //Save tmp account
-                Session["Account"] = tmp;
-                if(db.Customers.SingleOrDefault(n=>n.Phone == cus.Phone) == null)
+                Session["isWithoutAccount"] = true;
+                SessionConfig.SetUser(tmp);
+                if (db.Customers.SingleOrDefault(n=>n.Phone == cus.Phone) == null)
                 {
                     db.Customers.Add(cus);
                     db.SaveChanges();
@@ -194,7 +211,6 @@ namespace Dookki_Web.Controllers
             }
             return this.FillInfo();
         }
-        [RoleUser]
         [HttpGet]
         public ActionResult Confirm()
         {
@@ -202,48 +218,67 @@ namespace Dookki_Web.Controllers
             //{
             //    return RedirectToAction("Login", "Customer");
             //}
-
-            if (Session["Cart"] == null)
+            if (SessionConfig.GetUser() == null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Customer");
             }
+            if (Session["isWithoutAccount"] != null)
+            {
+                if (Session["Cart"] == null)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                
+                var acc = SessionConfig.GetUser();
 
-            var acc  = SessionConfig.GetUser();
+                Customer cus = db.Customers.SingleOrDefault(x => x.Phone == acc.UserName);
+                ViewBag.Name = cus.Name;
+                ViewBag.Phone = cus.Phone;
+                ViewBag.Email = cus.Email;
+                ViewBag.Address = cus.Address;
 
-            Customer cus = db.Customers.SingleOrDefault(x => x.Phone == acc.UserName);
-            ViewBag.Name = cus.Name;
-            ViewBag.Phone = cus.Phone;
-            ViewBag.Email = cus.Email;
-            ViewBag.Address = cus.Address;
+                // Lay gio hang tu Session
+                List<Cart> cart = GetCart();
+                ViewBag.NumProduct = NumProduct();
+                ViewBag.Total = Total();
+                return View(cart);
+            }
+            else
+            {
+                if (Session["Cart"] == null)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
 
-            // Lay gio hang tu Session
-            List<Cart> cart = GetCart();
-            ViewBag.NumProduct = NumProduct();
-            ViewBag.Total = Total();
-            return View(cart);
+                var acc = SessionConfig.GetUser();
+
+                Customer cus = db.Customers.SingleOrDefault(x => x.Phone == acc.UserName);
+                ViewBag.Name = cus.Name;
+                ViewBag.Phone = cus.Phone;
+                ViewBag.Email = cus.Email;
+                ViewBag.Address = cus.Address;
+
+                // Lay gio hang tu Session
+                List<Cart> cart = GetCart();
+                ViewBag.NumProduct = NumProduct();
+                ViewBag.Total = Total();
+                return View(cart);
+            }
+            
         }
-        [RoleUser]
         public ActionResult Confirm(FormCollection collection)
         {
-            bool isUpdate = false;
-            int idOrderUpdate = -1;
-            if (Session["IsUpdate"] != null && Session["OrderID"] != null)
+            
+            if (Session["isWithoutAccount"] != null)
             {
-                isUpdate = Convert.ToBoolean(Session["IsUpdate"]);
-                idOrderUpdate = Convert.ToInt32(Session["OrderID"]);
-            }
-
-            //True = Cash, False = transfer
-            bool cash = Convert.ToBoolean(collection["Payment"].Split(',')[0]);
+                //True = Cash, False = transfer
+                bool cash = Convert.ToBoolean(collection["Payment"].Split(',')[0]);
 
 
-            var acc = SessionConfig.GetUser();
-            Customer client = db.Customers.SingleOrDefault(x => x.Phone == acc.UserName);
-            List<Cart> cart = GetCart();
+                var acc = SessionConfig.GetUser();
+                Customer client = db.Customers.SingleOrDefault(x => x.Phone == acc.UserName);
+                List<Cart> cart = GetCart();
 
-            // add new order
-            if(!isUpdate)
-            {
                 Order newOrder = new Order();
                 newOrder.customerID = client.ID;
                 newOrder.Time = DateTime.Now.TimeOfDay;
@@ -269,7 +304,7 @@ namespace Dookki_Web.Controllers
                 {
                     OrderDetail detail = new OrderDetail();
 
-                    detail.quantily= item.quantily;
+                    detail.quantily = item.quantily;
                     detail.ticketID = item.ticketID;
                     detail.paymentID = payment.ID;
                     detail.orderID = newOrder.ID;
@@ -277,80 +312,142 @@ namespace Dookki_Web.Controllers
                     db.OrderDetails.Add(detail);
                     db.SaveChanges();
                 }
-            }else //update order
+                SessionConfig.SetUser(null);
+                Session["isWithoutAccount"] = null;
+                return RedirectToAction("DisplayBill", "Order");
+
+            }
+            else
             {
-                var order = db.Orders.Where(o => o.ID == idOrderUpdate)
-                    .Include(o => o.OrderDetails)
-                    .Include(o =>o.OrderDetails.Select(od=>od.Payment))
-                    .Include(o =>o.OrderDetails.Select(od=>od.Ticket)).FirstOrDefault();
-
-                var orderDetails = order.OrderDetails;
-                var payment = order.OrderDetails.First().Payment;
-                payment.amount = decimal.Parse(Total().ToString());
-                payment.day = DateTime.Now;
-                if (cash)
+                bool isUpdate = false;
+                int idOrderUpdate = -1;
+                if (Session["IsUpdate"] != null && Session["OrderID"] != null)
                 {
-                    payment.paymentMethodID = 1;
+                    isUpdate = Convert.ToBoolean(Session["IsUpdate"]);
+                    idOrderUpdate = Convert.ToInt32(Session["OrderID"]);
                 }
-                else
+
+                //True = Cash, False = transfer
+                bool cash = Convert.ToBoolean(collection["Payment"].Split(',')[0]);
+
+
+                var acc = SessionConfig.GetUser();
+                Customer client = db.Customers.SingleOrDefault(x => x.Phone == acc.UserName);
+                List<Cart> cart = GetCart();
+
+                // add new order
+                if (!isUpdate)
                 {
-                    payment.paymentMethodID = 2;
-                }
-                db.Payments.AddOrUpdate(payment);
-                db.SaveChanges();
-
-                // Xóa các mục không còn tồn tại trong giỏ hàng hoặc có số lượng bằng 0
-                var itemsToRemove = orderDetails.Where(od =>
-                    !cart.Any(c => c.name == od.Ticket.Name) ||
-                    cart.Any(c => c.name == od.Ticket.Name && c.quantily == 0)).ToList();
-
-                foreach (var item in itemsToRemove)
-                {
-                    db.OrderDetails.Remove(item);
-                }
-                db.SaveChanges();
-
-                //update existing items
-                var matchingItems = (from detail in orderDetails
-                                     join uiDetail in cart
-                                     on detail.Ticket.Name equals uiDetail.name
-                                     select new
-                                     {
-                                         ID = detail.ID,
-                                         Quantity = uiDetail.quantily
-                                     }).ToList();
-
-                foreach(var match in matchingItems)
-                {
-                    var detail = orderDetails.FirstOrDefault(o => o.ID == match.ID);
-                    if(detail != null)
+                    Order newOrder = new Order();
+                    newOrder.customerID = client.ID;
+                    newOrder.Time = DateTime.Now.TimeOfDay;
+                    newOrder.discount = 0;
+                    newOrder.Status = "Pending";
+                    Payment payment = new Payment();
+                    payment.amount = decimal.Parse(Total().ToString());
+                    payment.day = DateTime.Now;
+                    if (cash)
                     {
-                        detail.quantily = match.Quantity;
-                        db.OrderDetails.AddOrUpdate(detail);
+                        payment.paymentMethodID = 1;
+                    }
+                    else
+                    {
+                        payment.paymentMethodID = 2;
+                    }
+                    db.Payments.Add(payment);
+                    db.Orders.Add(newOrder);
+                    db.SaveChanges();
+
+
+                    foreach (var item in cart)
+                    {
+                        OrderDetail detail = new OrderDetail();
+
+                        detail.quantily = item.quantily;
+                        detail.ticketID = item.ticketID;
+                        detail.paymentID = payment.ID;
+                        detail.orderID = newOrder.ID;
+
+                        db.OrderDetails.Add(detail);
+                        db.SaveChanges();
                     }
                 }
-                // add new items
-                var newItems = cart.Where(c => orderDetails == null || !orderDetails.Any(ed => ed.Ticket.Name == c.name));
-
-                foreach(var newItem in newItems)
+                else //update order
                 {
-                    var ticket = db.Tickets.FirstOrDefault(f => f.Name == newItem.name);
-                    if (ticket == null) continue;
-                    var orderDetail = new OrderDetail
-                    {
-                        quantily = newItem.quantily,
-                        ticketID = newItem.ticketID,
-                        paymentID = payment.ID,
-                        orderID = order.ID,
-                    };
-                    db.OrderDetails.AddOrUpdate(orderDetail);
-                }
-                db.SaveChanges();
-                Session["IsUpdate"] = false; // reset updating
-                Session["OrderID"] = -1; // reset updating
-            }
+                    var order = db.Orders.Where(o => o.ID == idOrderUpdate)
+                        .Include(o => o.OrderDetails)
+                        .Include(o => o.OrderDetails.Select(od => od.Payment))
+                        .Include(o => o.OrderDetails.Select(od => od.Ticket)).FirstOrDefault();
 
-            return RedirectToAction("DisplayBill", "Order");
+                    var orderDetails = order.OrderDetails;
+                    var payment = order.OrderDetails.First().Payment;
+                    payment.amount = decimal.Parse(Total().ToString());
+                    payment.day = DateTime.Now;
+                    if (cash)
+                    {
+                        payment.paymentMethodID = 1;
+                    }
+                    else
+                    {
+                        payment.paymentMethodID = 2;
+                    }
+                    db.Payments.AddOrUpdate(payment);
+                    db.SaveChanges();
+
+                    // Xóa các mục không còn tồn tại trong giỏ hàng hoặc có số lượng bằng 0
+                    var itemsToRemove = orderDetails.Where(od =>
+                        !cart.Any(c => c.name == od.Ticket.Name) ||
+                        cart.Any(c => c.name == od.Ticket.Name && c.quantily == 0)).ToList();
+
+                    foreach (var item in itemsToRemove)
+                    {
+                        db.OrderDetails.Remove(item);
+                    }
+                    db.SaveChanges();
+
+                    //update existing items
+                    var matchingItems = (from detail in orderDetails
+                                         join uiDetail in cart
+                                         on detail.Ticket.Name equals uiDetail.name
+                                         select new
+                                         {
+                                             ID = detail.ID,
+                                             Quantity = uiDetail.quantily
+                                         }).ToList();
+
+                    foreach (var match in matchingItems)
+                    {
+                        var detail = orderDetails.FirstOrDefault(o => o.ID == match.ID);
+                        if (detail != null)
+                        {
+                            detail.quantily = match.Quantity;
+                            db.OrderDetails.AddOrUpdate(detail);
+                        }
+                    }
+                    // add new items
+                    var newItems = cart.Where(c => orderDetails == null || !orderDetails.Any(ed => ed.Ticket.Name == c.name));
+
+                    foreach (var newItem in newItems)
+                    {
+                        var ticket = db.Tickets.FirstOrDefault(f => f.Name == newItem.name);
+                        if (ticket == null) continue;
+                        var orderDetail = new OrderDetail
+                        {
+                            quantily = newItem.quantily,
+                            ticketID = newItem.ticketID,
+                            paymentID = payment.ID,
+                            orderID = order.ID,
+                        };
+                        db.OrderDetails.AddOrUpdate(orderDetail);
+                    }
+                    db.SaveChanges();
+                    Session["IsUpdate"] = false; // reset updating
+                    Session["OrderID"] = -1; // reset updating
+                }
+
+                return RedirectToAction("DisplayBill", "Order");
+            }
+            
         }
         public ActionResult DisplayBill()
         {
