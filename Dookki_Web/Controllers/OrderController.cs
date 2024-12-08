@@ -196,7 +196,7 @@ namespace Dookki_Web.Controllers
         {
             if (Session["Account"] == null)
             {
-                return RedirectToAction("Login", "Home");
+                return RedirectToAction("Login", "Customer");
             }
 
             if (Session["Cart"] == null)

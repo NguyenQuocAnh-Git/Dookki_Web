@@ -364,5 +364,42 @@ namespace Dookki_Web.Areas.Admin.Controllers
                 return File(stream, contentType, fileName);
             }
         }
+
+        public ActionResult Delivery()
+        {
+            DateTime today = DateTime.Now.Date;
+
+            // Stae = accepted
+            var acceptedOrders = db.Orders
+                .Where(o => (o.Status == "Accepted" || o.Status == "Delivering") && o.Time != null)
+                .ToList();
+
+            ViewBag.Today = today.ToString("dd/MM/yyyy");
+            return View(acceptedOrders);
+        }
+
+        public ActionResult SetDelivering(int id)
+        {
+            var order = db.Orders.FirstOrDefault(o => o.ID == id);
+            if(order != null)
+            {
+                order.Status = "Delivering";
+                db.Orders.AddOrUpdate(order);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Delivery");
+        }
+        public ActionResult SetFinished(int id)
+        {
+            var order = db.Orders.FirstOrDefault(o => o.ID == id);
+            if (order != null)
+            {
+                order.Status = "Finish";
+                db.Orders.AddOrUpdate(order);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Delivery");
+        }
+
     }
 }
