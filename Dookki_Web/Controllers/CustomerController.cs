@@ -1,6 +1,8 @@
 ﻿using Dookki_Web.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -157,6 +159,82 @@ namespace Dookki_Web.Controllers
             }
 
             return View(updatedCustomer);
+        }
+        
+        public ActionResult HistoryOrder()
+        {
+            int accountID = int.Parse(Session["UserID"].ToString());
+            var cus = db.Customers.FirstOrDefault(c => c.IDAccount == accountID);
+
+            var orders = db.Orders
+                .Where(o => o.Status == "Finish" && o.customerID == cus.ID)
+                .Include(o => o.OrderDetails.Select(od => od.Ticket))  // Include Ticket in OrderDetails
+                .Include(o => o.OrderDetails.Select(od => od.Payment))  // Include Payment in OrderDetails
+                .ToList();
+
+            List<OrderViewModel> ordersViewModel = orders.Select(o => new OrderViewModel
+            {
+                IDOrder = o.ID,
+                Day = o.OrderDetails.ElementAt(0).Payment.day,  
+                Time = o.Time,
+                Status = o.Status,
+                Money = o.OrderDetails.Sum(od => od.quantily * (od.Ticket != null ? od.Ticket.Price : 0)) 
+            }).ToList();
+
+            return View(ordersViewModel);
+        }
+        public ActionResult CurrentOrder()
+        {
+            int accountID = int.Parse(Session["UserID"].ToString());
+            var cus = db.Customers.FirstOrDefault(c => c.IDAccount == accountID);
+
+            var orders = db.Orders
+                .Where(o => (o.Status == "Pending" || o.Status == "Accepted" || o.Status == "Delivering") && o.customerID == cus.ID)
+                .Include(o => o.OrderDetails.Select(od => od.Ticket))  // Include Ticket in OrderDetails
+                .Include(o => o.OrderDetails.Select(od => od.Payment))  // Include Payment in OrderDetails
+                .ToList();
+
+            List<OrderViewModel> ordersViewModel = orders.Select(o => new OrderViewModel
+            {
+                IDOrder = o.ID,
+                Day = o.OrderDetails.ElementAt(0).Payment.day,
+                Time = o.Time,
+                Status = o.Status,
+                Money = o.OrderDetails.Sum(od => od.quantily * (od.Ticket != null ? od.Ticket.Price : 0))
+            }).ToList();
+
+            return View(ordersViewModel);
+        }
+        public ActionResult DetailOrder(int id)
+        {
+            var order = db.Orders.Where(o => o.ID == id)
+                .Include(o => o.OrderDetails.Select(od => od.Ticket))
+                .Include(o=> o.OrderDetails.Select(od => od.Payment)).SingleOrDefault();
+
+            return View(order);
+        }
+        public ActionResult CancelOrder(int id)
+        {
+            var order = db.Orders.FirstOrDefault(o => o.ID == id);
+            order.Status = "Deleted";
+            db.Orders.AddOrUpdate(order);
+            db.SaveChanges();
+            return RedirectToAction("CurrentOrder","Customer");
+        }
+        public ActionResult EditOrder(int id)
+        {
+            var order = db.Orders.Where(o=>o.ID == id)
+                .Include(o=>o.OrderDetails)
+                .Include(o=>o.OrderDetails.Select(od=>od.Ticket))
+                .SingleOrDefault();
+            var orderDetails = order.OrderDetails;
+            List<Cart> cart = new List<Cart>();
+            foreach (var orderDetail in orderDetails)
+            {
+                cart.Add(new Cart(orderDetail.Ticket.ID, (int)orderDetail.quantily));
+            }
+            Session["Cart"] = cart;
+            return RedirectToAction("DisplayCart","Order", new { isUpdate = true, idOrderUpdate = id });
         }
     }
 }

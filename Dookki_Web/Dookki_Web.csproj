@@ -1951,6 +1951,7 @@
     <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\Payment.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
@@ -2119,6 +2120,9 @@
     <Content Include="Views\Customer\EditProfile.cshtml" />
     <Content Include="Views\Customer\Login.cshtml" />
     <Content Include="Views\Customer\Register.cshtml" />
+    <Content Include="Views\Customer\HistoryOrder.cshtml" />
+    <Content Include="Views\Customer\CurrentOrder.cshtml" />
+    <Content Include="Views\Customer\DetailOrder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

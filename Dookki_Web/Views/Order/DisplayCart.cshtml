@@ -11,6 +11,8 @@
 @{
     ViewBag.Title = "DisplayCart";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    bool isUpdate = Convert.ToBoolean(Session["IsUpdate"]);
+    int orderIDUpdate = Convert.ToInt32(Session["OrderID"]);
 }
 
 <main class="main">
@@ -59,7 +61,7 @@
                                                         <a class="primary-btn cart-btn" style="border: none; cursor: pointer" href="@Url.Action("DeleteCart", "Order", new {@ID = item.ticketID})">X</a>
                                                     </td>
                                                     <td>
-                                                        <input type="submit" class="primary-btn cart-btn" style="border: none" value="Update"/>
+                                                        <input type="submit" class="primary-btn cart-btn" style="border: none" value="Update" />
                                                     </td>
                                                 }
                                             </tr>
@@ -108,10 +110,18 @@
                                     </li>
                                 </ul>
                                 @*<ul>
-                                    <li>Product: <span>@ViewBag.NumProduct</span></li>
-                                    <li>Total: <span>@String.Format("{0:0,0}", ViewBag.Total)</span></li>
-                                </ul>*@
-                                <a href="@Url.Action("Confirm","Order")" class="primary-btn">PROCEED TO CHECKOUT</a>
+                                        <li>Product: <span>@ViewBag.NumProduct</span></li>
+                                        <li>Total: <span>@String.Format("{0:0,0}", ViewBag.Total)</span></li>
+                                    </ul>*@
+                                @if (isUpdate)
+                                {
+                                    <a href="@Url.Action("Confirm","Order",orderIDUpdate)" class="primary-btn">UPDATE TO CHECKOUT</a>
+                                }
+                                else
+                                {
+
+                                    <a href="@Url.Action("Confirm","Order")" class="primary-btn">PROCEED TO CHECKOUT</a>
+                                }
                             </div>
                         </div>
                     </div>

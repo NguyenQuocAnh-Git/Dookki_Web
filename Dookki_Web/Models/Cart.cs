@@ -20,5 +20,13 @@ namespace Dookki_Web.Models
             price = ticket.Price;
             quantily = 1;
         }
+        public Cart(int ticketID, int quantity)
+        {
+            this.ticketID = ticketID;
+            var ticket = db.Tickets.Single(n => n.ID == ticketID);
+            name = ticket.Name;
+            price = ticket.Price;
+            quantily = quantity;
+        }
     }
 }
