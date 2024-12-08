@@ -78,6 +78,11 @@
                     </div>
                 </div>
 
+                <form action="@Url.Action("ExportChartLineData", "AdminHome")" method="post">
+                    @*@iewbag.Year lay nam hien tai hoac nam da chon trong dropdownlist*@
+                    <input type="hidden" name="year" value="@ViewBag.Year" /> 
+                    <button type="submit" class="btn btn-primary">Xuất Báo Cáo</button>
+                </form>
             </div>
             <!-- /.container-fluid -->
 
