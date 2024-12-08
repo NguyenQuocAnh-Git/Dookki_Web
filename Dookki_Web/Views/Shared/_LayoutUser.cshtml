@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Dookki_Web.App_Start
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -53,7 +54,7 @@
                         <i class="fa-solid fa-bag-shopping" style="color: #ffffff;"></i> @Html.Action("DisplayCartPartial", "Order")
                     </a>
                     <div>
-                        @if (Session["Account"] != null)
+                        @if (SessionConfig.GetUser() != null)
                         {
                             <style>
                                 ul {
@@ -66,7 +67,7 @@
                             <ul id="navmenu" class="navmenu">
                                 <li class="dropdown">
                                     <a class="btn-getstarted" href="#">
-                                        @Session["UserName"]
+                                        @SessionConfig.GetUserName()
                                         <i class="bi bi-chevron-down toggle-dropdown"></i>
                                     </a>
                                     <ul>

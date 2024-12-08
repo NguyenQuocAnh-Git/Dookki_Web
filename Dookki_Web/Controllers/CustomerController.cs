@@ -1,4 +1,6 @@
-﻿using Dookki_Web.Models;
+﻿using Dookki_Web.App_Start;
+using Dookki_Web.Models;
+using Dookki_Web.Models.Map;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -29,17 +31,24 @@ namespace Dookki_Web.Controllers
                 ViewBag.error = "Please enter your full username and password.";
                 return View();
             }
-
-            var account = db.ACCOUNTs.SingleOrDefault(a => a.UserName == username && a.Password == password);
-
-            if (account != null)
+            mapAccount map = new mapAccount();
+            var user = map.find(username, password, "customer");
+            if (user != null)
             {
-                Session["Account"] = account;
-                Session["UserID"] = account.ID;
-                Session["UserName"] = account.UserName;
-                Session["Role"] = account.Role;
+                SessionConfig.SetUser(user);
                 return RedirectToAction("index", "Home");
             }
+
+            //var account = db.ACCOUNTs.SingleOrDefault(a => a.UserName == username && a.Password == password);
+            
+            //if (account != null)
+            //{
+            //    Session["Account"] = account;
+            //    Session["UserID"] = account.ID;
+            //    Session["UserName"] = account.UserName;
+            //    Session["Role"] = account.Role;
+            //    return RedirectToAction("index", "Home");
+            //}
             else
             {
                 ViewBag.error = "Please enter your full username and password.";
@@ -48,7 +57,9 @@ namespace Dookki_Web.Controllers
         }
         public ActionResult Logout()
         {
-            Session.Clear(); // Xóa tất cả session
+            //Session.Clear(); // Xóa tất cả session
+            SessionConfig.SetUser(null);
+            Session["Cart"] = null;
             return RedirectToAction("Login", "Customer"); // Quay lại trang Login
         }
         public ActionResult Register()
@@ -99,14 +110,15 @@ namespace Dookki_Web.Controllers
             TempData["SuccessMessage"] = "Account created successfully. Please login.";
             return RedirectToAction("Login", "Customer");
         }
+        [RoleUser]
         public ActionResult EditProfile()
         {
-            if (Session["Account"] == null)
-            {
-                return RedirectToAction("Login", "Customer"); // Nếu chưa đăng nhập, quay lại Login
-            }
+            //if (Session["Account"] == null)
+            //{
+            //    return RedirectToAction("Login", "Customer"); // Nếu chưa đăng nhập, quay lại Login
+            //}
 
-            int accountId = (int)Session["UserID"];
+            int accountId = SessionConfig.GetUser().ID;
             var customer = db.Customers.FirstOrDefault(c => c.IDAccount == accountId);
 
             if (customer != null)
@@ -160,10 +172,11 @@ namespace Dookki_Web.Controllers
 
             return View(updatedCustomer);
         }
-        
+
+        [RoleUser]
         public ActionResult HistoryOrder()
         {
-            int accountID = int.Parse(Session["UserID"].ToString());
+            int accountID = int.Parse(SessionConfig.GetUser().ID.ToString());
             var cus = db.Customers.FirstOrDefault(c => c.IDAccount == accountID);
 
             var orders = db.Orders
@@ -183,9 +196,10 @@ namespace Dookki_Web.Controllers
 
             return View(ordersViewModel);
         }
+        [RoleUser]
         public ActionResult CurrentOrder()
         {
-            int accountID = int.Parse(Session["UserID"].ToString());
+            int accountID = int.Parse(SessionConfig.GetUser().ID.ToString());
             var cus = db.Customers.FirstOrDefault(c => c.IDAccount == accountID);
 
             var orders = db.Orders
@@ -205,6 +219,7 @@ namespace Dookki_Web.Controllers
 
             return View(ordersViewModel);
         }
+        [RoleUser]
         public ActionResult DetailOrder(int id)
         {
             var order = db.Orders.Where(o => o.ID == id)
@@ -213,6 +228,7 @@ namespace Dookki_Web.Controllers
 
             return View(order);
         }
+        [RoleUser]
         public ActionResult CancelOrder(int id)
         {
             var order = db.Orders.FirstOrDefault(o => o.ID == id);
@@ -221,6 +237,7 @@ namespace Dookki_Web.Controllers
             db.SaveChanges();
             return RedirectToAction("CurrentOrder","Customer");
         }
+        [RoleUser]
         public ActionResult EditOrder(int id)
         {
             var order = db.Orders.Where(o=>o.ID == id)
