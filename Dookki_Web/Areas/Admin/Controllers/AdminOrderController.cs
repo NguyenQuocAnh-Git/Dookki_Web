@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Dookki_Web.Areas.Admin.Controllers
 {
-    [RoleUser]
+    [RoleAdmin]
     public class AdminOrderController : Controller
     {
         // GET: Admin/AdminOrder

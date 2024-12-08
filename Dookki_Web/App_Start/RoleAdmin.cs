@@ -6,19 +6,20 @@ using System.Web.Mvc;
 
 namespace Dookki_Web.App_Start
 {
-    public class RoleUser : AuthorizeAttribute
+    public class RoleAdmin : AuthorizeAttribute
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            var user = SessionConfig.GetUser();
+            var user = SessionConfig.GetAdmin();
             if (user == null)
             {
                 //Dieu huong ve trang login
                 filterContext.Result = new RedirectToRouteResult(
                     new System.Web.Routing.RouteValueDictionary(new
                     {
-                        controller = "Customer",
-                        action = "Login"
+                        controller = "AdminHome",
+                        action = "Login",
+                        area = "Admin"
                     }));
                 return;
             }

@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace Dookki_Web.Areas.Admin.Controllers
 {
-    [RoleUser]
+    [RoleAdmin]
     public class AdminManagementController : Controller
     {
         private readonly DOOKKIEntities _context = new DOOKKIEntities();

@@ -27,7 +27,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
                                               // Redirect back to the same view to avoid resubmission on refresh
             return RedirectToAction("Index");
         }
-        [RoleUser]
+        [RoleAdmin]
         [HttpGet]
         public ActionResult Index(string searchTerm, int? year)
         {
@@ -89,7 +89,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
             return View(requests.ToList());
         }
 
-        [RoleUser]
+        [RoleAdmin]
         public ActionResult Statistical(int? year)
         {
             // caculate year
@@ -203,12 +203,12 @@ namespace Dookki_Web.Areas.Admin.Controllers
         public ActionResult Login(string username, string password)
         {
             mapAccount map = new mapAccount();
-            var user = map.find(username, password);
-
+            var admin = map.find(username, password,"admin");
+            
             //1. Co: sang trang dashboard admin
-            if (user != null)
+            if (admin != null)
             {
-                SessionConfig.SetUser(user);
+                SessionConfig.SetAdmin(admin);
                 return RedirectToAction("Index");
             }
 
@@ -218,9 +218,10 @@ namespace Dookki_Web.Areas.Admin.Controllers
         }
         public ActionResult Logout()
         {
-            SessionConfig.SetUser(null);
+            SessionConfig.SetAdmin(null);
             return RedirectToAction("Login");
         }
+        [RoleAdmin]
         public ActionResult RequestDetailOrder(int id)
         {
             var order = db.Orders.FirstOrDefault(o => o.ID == id);
@@ -228,12 +229,13 @@ namespace Dookki_Web.Areas.Admin.Controllers
 
             return View(order);
         }
+        [RoleAdmin]
         public ActionResult RequestDetail(int id)
         {
             var booking = db.BookingRequests.FirstOrDefault(bk => bk.ID == id);
             return View(booking);
         }
-
+        [RoleAdmin]
         public ActionResult AcceptRequest(int id)
         {
             var booking = db.BookingRequests.FirstOrDefault(bk => bk.ID == id);
@@ -242,6 +244,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
             db.SaveChanges();
             return View(booking);
         }
+        [RoleAdmin]
         public ActionResult AcceptRequestOrder(int id)
         {
             var order = db.Orders.FirstOrDefault(bk => bk.ID == id);
@@ -250,6 +253,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [RoleAdmin]
         public ActionResult DeleteRequest(int id)
         {
             var booking = db.BookingRequests.FirstOrDefault(bk => bk.ID == id);
@@ -259,6 +263,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
 
             return RedirectToAction("ListAcceptedRequest", "AdminHome");
         }
+        [RoleAdmin]
         public ActionResult DeleteRequestOrder(int id)
         {
             var order = db.Orders.FirstOrDefault(bk => bk.ID == id);
@@ -267,6 +272,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [RoleAdmin]
         [HttpGet]
         public ActionResult ListAcceptedRequest(string searchTerm)
         {
