@@ -4,14 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DOOKKIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__EFMigrationsHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-          </Key>
-          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
+    <Schema Namespace="DOOKKIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ACCOUNT">
           <Key>
             <PropertyRef Name="ID" />
@@ -144,7 +137,7 @@
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ID_Category" Type="int" />
         </EntityType>
-        <Association Name="FK__Admin__IDAccount__3B75D760">
+        <Association Name="FK__Admin__IDAccount__4D94879B">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
           <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
           <ReferentialConstraint>
@@ -156,7 +149,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Customer__IDAcco__403A8C7D">
+        <Association Name="FK__Customer__IDAcco__52593CB8">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
           <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -168,7 +161,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ticket__ID_Categ__02FC7413">
+        <Association Name="FK__Ticket__ID_Categ__3C34F16F">
           <End Role="CategoryTicket" Type="Self.CategoryTicket" Multiplicity="0..1" />
           <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
           <ReferentialConstraint>
@@ -265,7 +258,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DOOKKIModelStoreContainer">
-          <EntitySet Name="__EFMigrationsHistory" EntityType="Self.__EFMigrationsHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACCOUNT" EntityType="Self.ACCOUNT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BookingRequests" EntityType="Self.BookingRequests" Schema="dbo" store:Type="Tables" />
@@ -280,15 +272,15 @@
           <EntitySet Name="PaymentMethod" EntityType="Self.PaymentMethod" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Admin__IDAccount__3B75D760" Association="Self.FK__Admin__IDAccount__3B75D760">
+          <AssociationSet Name="FK__Admin__IDAccount__4D94879B" Association="Self.FK__Admin__IDAccount__4D94879B">
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
             <End Role="Admin" EntitySet="Admin" />
           </AssociationSet>
-          <AssociationSet Name="FK__Customer__IDAcco__403A8C7D" Association="Self.FK__Customer__IDAcco__403A8C7D">
+          <AssociationSet Name="FK__Customer__IDAcco__52593CB8" Association="Self.FK__Customer__IDAcco__52593CB8">
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
             <End Role="Customer" EntitySet="Customer" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ticket__ID_Categ__02FC7413" Association="Self.FK__Ticket__ID_Categ__02FC7413">
+          <AssociationSet Name="FK__Ticket__ID_Categ__3C34F16F" Association="Self.FK__Ticket__ID_Categ__3C34F16F">
             <End Role="CategoryTicket" EntitySet="CategoryTicket" />
             <End Role="Ticket" EntitySet="Ticket" />
           </AssociationSet>
@@ -614,7 +606,6 @@
             <End Role="PaymentMethod" EntitySet="PaymentMethods" />
             <End Role="Payment" EntitySet="Payments" />
           </AssociationSet>
-          <EntitySet Name="C__EFMigrationsHistory" EntityType="DOOKKIModel.C__EFMigrationsHistory" />
           <EntitySet Name="BookingRequests" EntityType="DOOKKIModel.BookingRequest" />
           <EntitySet Name="CategoryTickets" EntityType="DOOKKIModel.CategoryTicket" />
           <AssociationSet Name="FK__Ticket__ID_Categ__02FC7413" Association="DOOKKIModel.FK__Ticket__ID_Categ__02FC7413">
@@ -622,13 +613,6 @@
             <End Role="Ticket" EntitySet="Tickets" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="C__EFMigrationsHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-          </Key>
-          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="BookingRequest">
           <Key>
             <PropertyRef Name="ID" />
@@ -792,14 +776,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="C__EFMigrationsHistory">
-            <EntityTypeMapping TypeName="DOOKKIModel.C__EFMigrationsHistory">
-              <MappingFragment StoreEntitySet="__EFMigrationsHistory">
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="BookingRequests">
             <EntityTypeMapping TypeName="DOOKKIModel.BookingRequest">
               <MappingFragment StoreEntitySet="BookingRequests">
@@ -837,7 +813,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

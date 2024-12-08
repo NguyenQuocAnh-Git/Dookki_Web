@@ -1,10 +1,13 @@
 ﻿using Dookki_Web.App_Start;
 using Dookki_Web.Models;
 using Dookki_Web.Models.Map;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.IO;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
@@ -28,7 +31,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Index(string searchTerm, int? year)
         {
-            
+
             // Retrieve the checkbox state from the session
             bool isFull = (Session["TableStatus"] != null) ? (bool)Session["TableStatus"] : false;
 
@@ -116,7 +119,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
                 "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12", };
 
 
-            
+
 
             // Truyền dữ liệu qua ViewBag hoặc Model
             ViewBag.ChartPieData = chartPieData;
@@ -127,14 +130,14 @@ namespace Dookki_Web.Areas.Admin.Controllers
             return View();
         }
 
-        
 
-        private double[] GetChartPieData(int ? year)
+
+        private double[] GetChartPieData(int? year)
         {
-            int totalBill = db.Orders.Count(); 
-            int customerHasAccount = 0;        
+            int totalBill = db.Orders.Count();
+            int customerHasAccount = 0;
 
-            
+
             foreach (var order in db.Orders)
             {
                 if (order.OrderDetails.Any() && order.OrderDetails.ElementAt(0).Payment.day.Year == year && order.Status == "Finish")
@@ -144,25 +147,25 @@ namespace Dookki_Web.Areas.Admin.Controllers
                         customerHasAccount++;
                     }
                 }
-                
+
             }
 
-            int customerHasNotAccount = totalBill - customerHasAccount; 
+            int customerHasNotAccount = totalBill - customerHasAccount;
 
-            
+
             double percentHasNotAccount = Math.Round((double)customerHasNotAccount / totalBill * 100, 2);
             double percentHasAccount = Math.Round((double)customerHasAccount / totalBill * 100, 2);
 
-            
+
             double[] chartData = new double[] { percentHasNotAccount, percentHasAccount };
 
             return chartData;
         }
-        private double[] ProfitByYear(int ? year)
+        private double[] ProfitByYear(int? year)
         {
 
             // Sample data — replace with real data from the database
-            double []monthlyRevenues = new double[12];
+            double[] monthlyRevenues = new double[12];
             foreach (var order in db.Orders)
             {
 
@@ -171,7 +174,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
                     decimal totalBill = 0;
                     foreach (var orderDetail in order.OrderDetails)
                     {
-                        totalBill +=  orderDetail.quantily * orderDetail.Ticket.Price;
+                        totalBill += orderDetail.quantily * orderDetail.Ticket.Price;
                     }
                     // Determine the month (0-based index)
                     int month = order.OrderDetails.ElementAt(0).Payment.day.Month - 1;
@@ -181,7 +184,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
                 }
             }
 
-            
+
             double totalRevenue = monthlyRevenues.Sum();
 
 
@@ -222,7 +225,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
         {
             var order = db.Orders.FirstOrDefault(o => o.ID == id);
             ViewBag.Today = DateTime.Now.Date.ToString("dd/MM/yyyy");
-            
+
             return View(order);
         }
         public ActionResult RequestDetail(int id)
@@ -253,8 +256,8 @@ namespace Dookki_Web.Areas.Admin.Controllers
             booking.Status = "Deleted";
             db.BookingRequests.AddOrUpdate(booking);
             db.SaveChanges();
-            
-            return RedirectToAction("ListAcceptedRequest","AdminHome");
+
+            return RedirectToAction("ListAcceptedRequest", "AdminHome");
         }
         public ActionResult DeleteRequestOrder(int id)
         {
@@ -279,8 +282,87 @@ namespace Dookki_Web.Areas.Admin.Controllers
 
             var bookings = bookingsQuery.ToList();
 
-                return View(bookings);
+            return View(bookings);
 
+        }
+
+        [HttpPost]
+        public ActionResult ExportChartLineData(int? year)
+        {
+            // Đăng ký giấy phép dùng free, ko có dòng này thì code hiểu là mk dùng của thương mại (phải trả phí)
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            // Lấy dữ liệu từ hàm ProfitByYear
+            double[] chartLineData = ProfitByYear(year ?? DateTime.Now.Year);
+            string[] chartLineLable = {
+                        "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4",
+                        "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8",
+                        "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
+                    };
+
+            using(ExcelPackage package = new ExcelPackage())
+            {
+                // Tạo một worksheet
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Báo cáo doanh thu");
+
+                // Thêm title
+                string title = $"Doanh thu năm {year ?? DateTime.Now.Year}";
+                worksheet.Cells[1, 1, 2, 3].Merge = true;
+                worksheet.Cells[1, 1].Value = title;
+                worksheet.Cells[1, 1].Style.Font.Size = 15;
+                worksheet.Cells[1, 1].Style.Font.Bold = true;
+                worksheet.Cells[1, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+                // Thêm tiêu đề 
+                for(int i = 3; i < 16; i++)
+                {
+                    int j = 2;
+                    worksheet.Cells[i, j, i, j + 1].Merge = true;
+                }
+                worksheet.Cells[3, 1].Value = "Tháng";
+                worksheet.Cells[3, 2].Value = "Doanh thu (VND)";
+                worksheet.Row(3).Style.Font.Bold = true;
+
+                // Thêm dữ liệu
+                int startRow = 4;
+                for (int i = 0; i < chartLineData.Length; i++)
+                {
+                    worksheet.Cells[i + 4, 1].Value = chartLineLable[i]; // Tên tháng
+                    worksheet.Cells[i + 4, 2].Value = chartLineData[i];  // Doanh thu
+                }
+
+                // Định dạng cột "Doanh thu"
+                worksheet.Column(2).Style.Numberformat.Format = "#,##0"; // Định dạng số có dấu phẩy
+
+                // TÍnh tổng doanh thu
+                double totalRevenue = chartLineData.Sum();
+                int totalRow = startRow + chartLineData.Length; // DÒng típ theo
+                worksheet.Cells[totalRow, 2, totalRow, 3].Merge = true;
+
+                worksheet.Cells[totalRow, 1].Value = "Tổng doanh thu:";
+                worksheet.Cells[totalRow, 1].Style.Font.Bold = true;
+
+                worksheet.Cells[totalRow, 2].Value = totalRevenue;
+                worksheet.Cells[totalRow, 2].Style.Font.Bold = true;
+                worksheet.Cells[totalRow, 2].Style.Numberformat.Format = "#,##0"; // Định dạng số có dấu phẩy
+
+                // Định dạng tổng cộng (màu nền nhẹ)
+                worksheet.Cells[totalRow, 1, totalRow, 2].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                worksheet.Cells[totalRow, 1, totalRow, 2].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
+
+                // Auto-fit cột
+                worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
+
+                // Trả file Excel về dưới dạng stream
+                var stream = new MemoryStream();
+                package.SaveAs(stream);
+                stream.Position = 0;
+
+                string fileName = $"BaoCaoDoanhThu_{DateTime.Now:yyyy_MM_dd}.xlsx";
+                string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+                return File(stream, contentType, fileName);
+            }
         }
     }
 }
