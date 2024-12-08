@@ -358,7 +358,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
                 package.SaveAs(stream);
                 stream.Position = 0;
 
-                string fileName = $"BaoCaoDoanhThu_{DateTime.Now:yyyy_MM_dd}.xlsx";
+                string fileName = $"BaoCaoDoanhThu_{year}.xlsx";
                 string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
                 return File(stream, contentType, fileName);
