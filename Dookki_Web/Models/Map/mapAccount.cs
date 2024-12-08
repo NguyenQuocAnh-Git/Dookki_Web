@@ -22,7 +22,18 @@ namespace Dookki_Web.Models.Map
                 return null;
             }
         }
-
+        public ACCOUNT find(string username, string password, string role)
+        {
+            var user = db.ACCOUNTs.Where(m => m.UserName == username & m.Password == password && m.Role == role).ToList();
+            if (user.Count > 0)
+            {
+                return user[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
         //2. Lay danh sach
         public List<ACCOUNT> ListAccount()
         {

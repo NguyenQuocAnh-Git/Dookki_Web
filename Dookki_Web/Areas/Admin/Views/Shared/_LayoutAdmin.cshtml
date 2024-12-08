@@ -207,10 +207,10 @@
 
                         <!-- Nav Item - User Information -->
                         @{
-                            var user = Dookki_Web.App_Start.SessionConfig.GetUser();
+                            var admin = Dookki_Web.App_Start.SessionConfig.GetAdmin();
                             var adminName = Dookki_Web.App_Start.SessionConfig.GetAdminName(); // Lấy tên admin
                         }
-                        @if (user != null)
+                        @if (admin != null)
                         {
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
