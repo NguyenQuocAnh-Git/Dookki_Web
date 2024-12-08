@@ -8,9 +8,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Razor.Parser.SyntaxTree;
 using static System.Data.Entity.Infrastructure.Design.Executor;
-
+using Dookki_Web.App_Start;
 namespace Dookki_Web.Controllers
 {
+    
     public class OrderController : Controller
     {
         DOOKKIEntities db = new DOOKKIEntities();
@@ -19,6 +20,7 @@ namespace Dookki_Web.Controllers
         {
             return View();
         }
+        [RoleUser]
         public ActionResult DisplayCart(bool isUpdate = false, int idOrderUpdate = -1)
         {
             if (isUpdate != false && idOrderUpdate != -1)
@@ -137,6 +139,7 @@ namespace Dookki_Web.Controllers
             ViewBag.Total = Total();
             return View(cart);
         }
+        [RoleUser]
         [HttpPost]
         public ActionResult FillInfo(FormCollection collection)
         {
@@ -191,20 +194,22 @@ namespace Dookki_Web.Controllers
             }
             return this.FillInfo();
         }
+        [RoleUser]
         [HttpGet]
         public ActionResult Confirm()
         {
-            if (Session["Account"] == null)
-            {
-                return RedirectToAction("Login", "Customer");
-            }
+            //if (Session["Account"] == null)
+            //{
+            //    return RedirectToAction("Login", "Customer");
+            //}
 
             if (Session["Cart"] == null)
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            ACCOUNT acc = (ACCOUNT)Session["Account"];
+            var acc  = SessionConfig.GetUser();
+
             Customer cus = db.Customers.SingleOrDefault(x => x.Phone == acc.UserName);
             ViewBag.Name = cus.Name;
             ViewBag.Phone = cus.Phone;
@@ -217,6 +222,7 @@ namespace Dookki_Web.Controllers
             ViewBag.Total = Total();
             return View(cart);
         }
+        [RoleUser]
         public ActionResult Confirm(FormCollection collection)
         {
             bool isUpdate = false;
@@ -231,7 +237,7 @@ namespace Dookki_Web.Controllers
             bool cash = Convert.ToBoolean(collection["Payment"].Split(',')[0]);
 
 
-            ACCOUNT acc = (ACCOUNT)Session["Account"];
+            var acc = SessionConfig.GetUser();
             Customer client = db.Customers.SingleOrDefault(x => x.Phone == acc.UserName);
             List<Cart> cart = GetCart();
 

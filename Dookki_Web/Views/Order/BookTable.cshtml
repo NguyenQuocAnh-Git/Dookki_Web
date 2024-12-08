@@ -60,7 +60,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="checkout__input">
-                            <p>Phone<span>*</span></p>
+                            <p>Date<span>*</span></p>
                             @Html.TextBox("Date", DateTime.Now, new { @type = "date", @class = "checkout__input__add" })
                             <div>
                                 @ViewData["date"]
@@ -69,7 +69,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="checkout__input">
-                            <p>Seat<span>*</span></p>
+                            <p>Time<span>*</span></p>
                             @Html.TextBox("Time", DateTime.Now.TimeOfDay, new { @type = "time", @class = "checkout__input__add" })
                             <div>
                                 @ViewData["time"]
