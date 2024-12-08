@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -61,12 +62,11 @@ namespace Dookki_Web.Areas.Admin.Controllers
                 "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12", };
 
             var today = DateTime.Now.Date;  // Only day/month/year
-            var ordersToday = db.Orders
-                .Where(o => o.OrderDetails.Any(od => od.Payment.day == today))
+            var ordersPending = db.Orders
+                .Where(o => o.Status == "Pending")
                 .ToList();
-
             ViewBag.Today = today.ToString("dd/MM/yyyy"); 
-            ViewBag.OrdersToday = ordersToday;
+            ViewBag.OrdersPending = ordersPending;
 
 
             // Truyền dữ liệu qua ViewBag hoặc Model
@@ -137,7 +137,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
             
             foreach (var order in db.Orders)
             {
-                if (order.OrderDetails.Any() && order.OrderDetails.ElementAt(0).Payment.day.Year == year)
+                if (order.OrderDetails.Any() && order.OrderDetails.ElementAt(0).Payment.day.Year == year && order.Status == "Finish")
                 {
                     if (order.customerID != 0)
                     {
@@ -166,7 +166,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
             foreach (var order in db.Orders)
             {
 
-                if (order.OrderDetails.Any() && order.OrderDetails.ElementAt(0).Payment.day.Year == year)
+                if (order.OrderDetails.Any() && order.OrderDetails.ElementAt(0).Payment.day.Year == year && order.Status == "Finish")
                 {
                     decimal totalBill = 0;
                     foreach (var orderDetail in order.OrderDetails)
@@ -259,7 +259,7 @@ namespace Dookki_Web.Areas.Admin.Controllers
         public ActionResult DeleteRequestOrder(int id)
         {
             var order = db.Orders.FirstOrDefault(bk => bk.ID == id);
-            order.Status = "Finish";
+            order.Status = "Deleted";
             db.Orders.AddOrUpdate(order);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -7,7 +7,7 @@
 
     var chartLineData = ViewBag.ChartLineData;
     var chartLineLable = ViewBag.ChartLineLable;
-    var ordersToday = ViewBag.OrdersToday as List<Dookki_Web.Models.Order>;
+    var ordersPending = ViewBag.OrdersPending as List<Dookki_Web.Models.Order>;
 }
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -98,35 +98,30 @@
                         <th style="width: 200px;"></th>
                     </tr>
 
-                    @if (ViewBag.OrdersToday != null)
+                    @if (ViewBag.OrdersPending != null)
                     {
-                        foreach (var order in ordersToday)
+                        foreach (var order in ordersPending)
                         {
-                            if (order.Status == "Pending")
-                            {
-                                var customer = order.Customer;
-                                <tr>
-                                    <td>
-                                        @Html.Label(customer.Name + " (" + customer.Phone + ")")
-                                    </td>
-                                    <td style="text-align:right">
-                                        @Html.Label(order.Time.ToString(@"hh\:mm\:ss"))
-                                    </td>
-                                    <td style="text-align:right">
-                                        <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("RequestDetailOrder", "AdminHome", new { id = order.ID })'">
-                                            Xem yêu cầu
-                                        </button>
-                                    </td>
-                                </tr>
-                            }
-
-
+                            var customer = order.Customer;
+                            <tr>
+                                <td>
+                                    @Html.Label(customer.Name + " (" + customer.Phone + ")")
+                                </td>
+                                <td style="text-align:right">
+                                    @Html.Label(order.Time.ToString(@"hh\:mm\:ss"))
+                                </td>
+                                <td style="text-align:right">
+                                    <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("RequestDetailOrder", "AdminHome", new { id = order.ID })'">
+                                        Xem yêu cầu
+                                    </button>
+                                </td>
+                            </tr>
                         }
                     }
                     else
                     {
                         <tr>
-                            <td colspan="3" style="text-align: center;">Chưa có yêu cầu nào.</td>
+                            <td colspan="3" style="text-align: center;">Chưa có yêu cầu nào. @ordersPending.Count</td>
                         </tr>
                     }
                 </table>
