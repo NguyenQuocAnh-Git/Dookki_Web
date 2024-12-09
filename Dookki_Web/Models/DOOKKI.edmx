@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DOOKKIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DOOKKIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ACCOUNT">
           <Key>
             <PropertyRef Name="ID" />
@@ -35,13 +35,6 @@
           <Property Name="Time" Type="time" Precision="7" />
           <Property Name="Status" Type="nvarchar" MaxLength="15" />
         </EntityType>
-        <EntityType Name="Category">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
-        </EntityType>
         <EntityType Name="CategoryTicket">
           <Key>
             <PropertyRef Name="ID" />
@@ -60,26 +53,6 @@
           <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Marks" Type="int" />
           <Property Name="IDAccount" Type="int" />
-        </EntityType>
-        <EntityType Name="DayWork">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="timeWork" Type="int" />
-          <Property Name="day" Type="date" />
-          <Property Name="employeeID" Type="int" />
-        </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="phone" Type="nvarchar" MaxLength="12" Nullable="false" />
-          <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="amountWage" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="position" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -117,17 +90,6 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="MFG" Type="date" Nullable="false" />
-          <Property Name="EXP" Type="date" Nullable="false" />
-          <Property Name="unitInStock" Type="int" Nullable="false" />
-          <Property Name="categoryID" Type="int" />
-        </EntityType>
         <EntityType Name="Ticket">
           <Key>
             <PropertyRef Name="ID" />
@@ -137,7 +99,7 @@
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ID_Category" Type="int" />
         </EntityType>
-        <Association Name="FK__Admin__IDAccount__4D94879B">
+        <Association Name="FK__Admin__IDAccount__3B75D760">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
           <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
           <ReferentialConstraint>
@@ -149,7 +111,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Customer__IDAcco__52593CB8">
+        <Association Name="FK__Customer__IDAcco__403A8C7D">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
           <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -161,7 +123,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ticket__ID_Categ__3C34F16F">
+        <Association Name="FK_ID_Category">
           <End Role="CategoryTicket" Type="Self.CategoryTicket" Multiplicity="0..1" />
           <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
           <ReferentialConstraint>
@@ -170,18 +132,6 @@
             </Principal>
             <Dependent Role="Ticket">
               <PropertyRef Name="ID_Category" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DayWork_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
-          <End Role="DayWork" Type="Self.DayWork" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="DayWork">
-              <PropertyRef Name="employeeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -245,48 +195,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="categoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DOOKKIModelStoreContainer">
           <EntitySet Name="ACCOUNT" EntityType="Self.ACCOUNT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BookingRequests" EntityType="Self.BookingRequests" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoryTicket" EntityType="Self.CategoryTicket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DayWork" EntityType="Self.DayWork" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentMethod" EntityType="Self.PaymentMethod" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Admin__IDAccount__4D94879B" Association="Self.FK__Admin__IDAccount__4D94879B">
+          <AssociationSet Name="FK__Admin__IDAccount__3B75D760" Association="Self.FK__Admin__IDAccount__3B75D760">
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
             <End Role="Admin" EntitySet="Admin" />
           </AssociationSet>
-          <AssociationSet Name="FK__Customer__IDAcco__52593CB8" Association="Self.FK__Customer__IDAcco__52593CB8">
+          <AssociationSet Name="FK__Customer__IDAcco__403A8C7D" Association="Self.FK__Customer__IDAcco__403A8C7D">
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
             <End Role="Customer" EntitySet="Customer" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ticket__ID_Categ__3C34F16F" Association="Self.FK__Ticket__ID_Categ__3C34F16F">
+          <AssociationSet Name="FK_ID_Category" Association="Self.FK_ID_Category">
             <End Role="CategoryTicket" EntitySet="CategoryTicket" />
             <End Role="Ticket" EntitySet="Ticket" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DayWork_Employee" Association="Self.FK_DayWork_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="DayWork" EntitySet="DayWork" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_customerID" Association="Self.FK_Order_customerID">
             <End Role="Customer" EntitySet="Customer" />
@@ -308,12 +238,9 @@
             <End Role="PaymentMethod" EntitySet="PaymentMethod" />
             <End Role="Payment" EntitySet="Payment" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DOOKKIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -325,8 +252,8 @@
           <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Admins" Relationship="Self.FK__Admin__IDAccount__4D94879B" FromRole="ACCOUNT" ToRole="Admin" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK__Customer__IDAcco__52593CB8" FromRole="ACCOUNT" ToRole="Customer" />
+          <NavigationProperty Name="Admins" Relationship="Self.FK__Admin__IDAccount__3B75D760" FromRole="ACCOUNT" ToRole="Admin" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK__Customer__IDAcco__403A8C7D" FromRole="ACCOUNT" ToRole="Customer" />
         </EntityType>
         <EntityType Name="Admin">
           <Key>
@@ -336,15 +263,27 @@
           <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IDAccount" Type="Int32" />
-          <NavigationProperty Name="ACCOUNT" Relationship="Self.FK__Admin__IDAccount__4D94879B" FromRole="Admin" ToRole="ACCOUNT" />
+          <NavigationProperty Name="ACCOUNT" Relationship="Self.FK__Admin__IDAccount__3B75D760" FromRole="Admin" ToRole="ACCOUNT" />
         </EntityType>
-        <EntityType Name="Category">
+        <EntityType Name="BookingRequest">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_Product_Category" FromRole="Category" ToRole="Product" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfSeat" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Time" Type="Time" Precision="7" />
+          <Property Name="Status" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CategoryTicket">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_ID_Category" FromRole="CategoryTicket" ToRole="Ticket" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -357,30 +296,8 @@
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Marks" Type="Int32" />
           <Property Name="IDAccount" Type="Int32" />
-          <NavigationProperty Name="ACCOUNT" Relationship="Self.FK__Customer__IDAcco__52593CB8" FromRole="Customer" ToRole="ACCOUNT" />
+          <NavigationProperty Name="ACCOUNT" Relationship="Self.FK__Customer__IDAcco__403A8C7D" FromRole="Customer" ToRole="ACCOUNT" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Order_customerID" FromRole="Customer" ToRole="Order" />
-        </EntityType>
-        <EntityType Name="DayWork">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="timeWork" Type="Int32" />
-          <Property Name="day" Type="DateTime" Precision="0" />
-          <Property Name="employeeID" Type="Int32" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_DayWork_Employee" FromRole="DayWork" ToRole="Employee" />
-        </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="amountWage" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="position" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="DayWorks" Relationship="Self.FK_DayWork_Employee" FromRole="Employee" ToRole="DayWork" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -390,9 +307,9 @@
           <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
           <Property Name="customerID" Type="Int32" />
           <Property Name="discount" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_Order_customerID" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -426,18 +343,6 @@
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_PaymentMethod" FromRole="PaymentMethod" ToRole="Payment" />
         </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MFG" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="EXP" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="unitInStock" Type="Int32" Nullable="false" />
-          <Property Name="categoryID" Type="Int32" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
-        </EntityType>
         <EntityType Name="Ticket">
           <Key>
             <PropertyRef Name="ID" />
@@ -445,11 +350,11 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Ticket" FromRole="Ticket" ToRole="OrderDetail" />
           <Property Name="ID_Category" Type="Int32" />
-          <NavigationProperty Name="CategoryTicket" Relationship="DOOKKIModel.FK__Ticket__ID_Categ__02FC7413" FromRole="Ticket" ToRole="CategoryTicket" />
+          <NavigationProperty Name="CategoryTicket" Relationship="Self.FK_ID_Category" FromRole="Ticket" ToRole="CategoryTicket" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Ticket" FromRole="Ticket" ToRole="OrderDetail" />
         </EntityType>
-        <Association Name="FK__Admin__IDAccount__4D94879B">
+        <Association Name="FK__Admin__IDAccount__3B75D760">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
           <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
           <ReferentialConstraint>
@@ -461,7 +366,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Customer__IDAcco__52593CB8">
+        <Association Name="FK__Customer__IDAcco__403A8C7D">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
           <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -473,15 +378,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+        <Association Name="FK_ID_Category">
+          <End Role="CategoryTicket" Type="Self.CategoryTicket" Multiplicity="0..1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Category">
+            <Principal Role="CategoryTicket">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="categoryID" />
+            <Dependent Role="Ticket">
+              <PropertyRef Name="ID_Category" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -494,18 +399,6 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="customerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DayWork_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
-          <End Role="DayWork" Type="Self.DayWork" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="DayWork">
-              <PropertyRef Name="employeeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -560,35 +453,29 @@
         <EntityContainer Name="DOOKKIEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ACCOUNTs" EntityType="Self.ACCOUNT" />
           <EntitySet Name="Admins" EntityType="Self.Admin" />
-          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="BookingRequests" EntityType="Self.BookingRequest" />
+          <EntitySet Name="CategoryTickets" EntityType="Self.CategoryTicket" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
-          <EntitySet Name="DayWorks" EntityType="Self.DayWork" />
-          <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
           <EntitySet Name="Payments" EntityType="Self.Payment" />
           <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethod" />
-          <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Tickets" EntityType="Self.Ticket" />
-          <AssociationSet Name="FK__Admin__IDAccount__4D94879B" Association="Self.FK__Admin__IDAccount__4D94879B">
+          <AssociationSet Name="FK__Admin__IDAccount__3B75D760" Association="Self.FK__Admin__IDAccount__3B75D760">
             <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
             <End Role="Admin" EntitySet="Admins" />
           </AssociationSet>
-          <AssociationSet Name="FK__Customer__IDAcco__52593CB8" Association="Self.FK__Customer__IDAcco__52593CB8">
+          <AssociationSet Name="FK__Customer__IDAcco__403A8C7D" Association="Self.FK__Customer__IDAcco__403A8C7D">
             <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
             <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="Product" EntitySet="Products" />
+          <AssociationSet Name="FK_ID_Category" Association="Self.FK_ID_Category">
+            <End Role="CategoryTicket" EntitySet="CategoryTickets" />
+            <End Role="Ticket" EntitySet="Tickets" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_customerID" Association="Self.FK_Order_customerID">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DayWork_Employee" Association="Self.FK_DayWork_Employee">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="DayWork" EntitySet="DayWorks" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
             <End Role="Order" EntitySet="Orders" />
@@ -606,45 +493,7 @@
             <End Role="PaymentMethod" EntitySet="PaymentMethods" />
             <End Role="Payment" EntitySet="Payments" />
           </AssociationSet>
-          <EntitySet Name="BookingRequests" EntityType="DOOKKIModel.BookingRequest" />
-          <EntitySet Name="CategoryTickets" EntityType="DOOKKIModel.CategoryTicket" />
-          <AssociationSet Name="FK__Ticket__ID_Categ__02FC7413" Association="DOOKKIModel.FK__Ticket__ID_Categ__02FC7413">
-            <End Role="CategoryTicket" EntitySet="CategoryTickets" />
-            <End Role="Ticket" EntitySet="Tickets" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="BookingRequest">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="NumberOfSeat" Type="Int32" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
-          <Property Name="Time" Type="Time" Precision="7" />
-          <Property Name="Status" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="CategoryTicket">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Tickets" Relationship="DOOKKIModel.FK__Ticket__ID_Categ__02FC7413" FromRole="CategoryTicket" ToRole="Ticket" />
-        </EntityType>
-        <Association Name="FK__Ticket__ID_Categ__02FC7413">
-          <End Type="DOOKKIModel.CategoryTicket" Role="CategoryTicket" Multiplicity="0..1" />
-          <End Type="DOOKKIModel.Ticket" Role="Ticket" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CategoryTicket">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Ticket">
-              <PropertyRef Name="ID_Category" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -671,9 +520,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="DOOKKIModel.Category">
-              <MappingFragment StoreEntitySet="Category">
+          <EntitySetMapping Name="BookingRequests">
+            <EntityTypeMapping TypeName="DOOKKIModel.BookingRequest">
+              <MappingFragment StoreEntitySet="BookingRequests">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="NumberOfSeat" ColumnName="NumberOfSeat" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryTickets">
+            <EntityTypeMapping TypeName="DOOKKIModel.CategoryTicket">
+              <MappingFragment StoreEntitySet="CategoryTicket">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
@@ -692,36 +554,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DayWorks">
-            <EntityTypeMapping TypeName="DOOKKIModel.DayWork">
-              <MappingFragment StoreEntitySet="DayWork">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="timeWork" ColumnName="timeWork" />
-                <ScalarProperty Name="day" ColumnName="day" />
-                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="DOOKKIModel.Employee">
-              <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="amountWage" ColumnName="amountWage" />
-                <ScalarProperty Name="position" ColumnName="position" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="DOOKKIModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="customerID" ColumnName="customerID" />
                 <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -754,46 +594,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="DOOKKIModel.Product">
-              <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="MFG" ColumnName="MFG" />
-                <ScalarProperty Name="EXP" ColumnName="EXP" />
-                <ScalarProperty Name="unitInStock" ColumnName="unitInStock" />
-                <ScalarProperty Name="categoryID" ColumnName="categoryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Tickets">
             <EntityTypeMapping TypeName="DOOKKIModel.Ticket">
               <MappingFragment StoreEntitySet="Ticket">
-                <ScalarProperty Name="ID_Category" ColumnName="ID_Category" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BookingRequests">
-            <EntityTypeMapping TypeName="DOOKKIModel.BookingRequest">
-              <MappingFragment StoreEntitySet="BookingRequests">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Time" ColumnName="Time" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="NumberOfSeat" ColumnName="NumberOfSeat" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CategoryTickets">
-            <EntityTypeMapping TypeName="DOOKKIModel.CategoryTicket">
-              <MappingFragment StoreEntitySet="CategoryTicket">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Category" ColumnName="ID_Category" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -813,7 +620,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
