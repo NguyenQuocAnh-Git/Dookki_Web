@@ -215,8 +215,8 @@
 
                         <!-- Nav Item - User Information -->
                         @{
-                            var admin = Dookki_Web.App_Start.SessionConfig.GetAdmin();
-                            var adminName = Dookki_Web.App_Start.SessionConfig.GetAdminName(); // Lấy tên admin
+                            var admin = Dookki_Web.App_Start.CookiesConfig.GetAdmin(Request);
+                            var adminName = Dookki_Web.App_Start.CookiesConfig.GetAdminName(Request); // Lấy tên admin
                         }
                         @if (admin != null)
                         {
