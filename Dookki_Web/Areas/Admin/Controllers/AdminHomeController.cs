@@ -208,7 +208,8 @@ namespace Dookki_Web.Areas.Admin.Controllers
             //1. Co: sang trang dashboard admin
             if (admin != null)
             {
-                SessionConfig.SetAdmin(admin);
+                //SessionConfig.SetAdmin(admin);
+                CookiesConfig.SetACCOUNTCookie(Response, "admin", admin);
                 return RedirectToAction("Index");
             }
 
@@ -218,7 +219,8 @@ namespace Dookki_Web.Areas.Admin.Controllers
         }
         public ActionResult Logout()
         {
-            SessionConfig.SetAdmin(null);
+            //SessionConfig.SetAdmin(null);
+            CookiesConfig.DeleteCookie(Response, "admin");
             return RedirectToAction("Login");
         }
         [RoleAdmin]

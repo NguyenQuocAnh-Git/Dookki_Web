@@ -18,7 +18,6 @@ namespace Dookki_Web.Models
         public string Phone { get; set; }
         public string Name { get; set; }
         public Nullable<int> IDAccount { get; set; }
-    
         public virtual ACCOUNT ACCOUNT { get; set; }
     }
 }

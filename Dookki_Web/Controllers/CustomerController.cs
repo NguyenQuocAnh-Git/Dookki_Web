@@ -21,6 +21,10 @@ namespace Dookki_Web.Controllers
         }
         public ActionResult Login()
         {
+            if(CookiesConfig.GetUser(Request) != null)
+            {
+                return RedirectToAction("index", "Home");
+            }
             return View();
         }
         [HttpPost]
@@ -35,7 +39,8 @@ namespace Dookki_Web.Controllers
             var user = map.find(username, password, "customer");
             if (user != null)
             {
-                SessionConfig.SetUser(user);
+                //SessionConfig.SetUser(user);
+                CookiesConfig.SetACCOUNTCookie(Response, "user", user);
                 return RedirectToAction("index", "Home");
             }
 
@@ -58,7 +63,8 @@ namespace Dookki_Web.Controllers
         public ActionResult Logout()
         {
             //Session.Clear(); // Xóa tất cả session
-            SessionConfig.SetUser(null);
+            //SessionConfig.SetUser(null);
+            CookiesConfig.DeleteCookie(Response, "user");
             Session["Cart"] = null;
             return RedirectToAction("Login", "Customer"); // Quay lại trang Login
         }
@@ -118,7 +124,8 @@ namespace Dookki_Web.Controllers
             //    return RedirectToAction("Login", "Customer"); // Nếu chưa đăng nhập, quay lại Login
             //}
 
-            int accountId = SessionConfig.GetUser().ID;
+            //int accountId = SessionConfig.GetUser().ID;
+            int accountId = CookiesConfig.GetUser(Request).ID;
             var customer = db.Customers.FirstOrDefault(c => c.IDAccount == accountId);
 
             if (customer != null)
@@ -176,7 +183,8 @@ namespace Dookki_Web.Controllers
         [RoleUser]
         public ActionResult HistoryOrder()
         {
-            int accountID = int.Parse(SessionConfig.GetUser().ID.ToString());
+            //int accountID = int.Parse(SessionConfig.GetUser().ID.ToString());
+            int accountID = int.Parse(CookiesConfig.GetUser(Request).ID.ToString());
             var cus = db.Customers.FirstOrDefault(c => c.IDAccount == accountID);
 
             var orders = db.Orders
@@ -199,7 +207,8 @@ namespace Dookki_Web.Controllers
         [RoleUser]
         public ActionResult CurrentOrder()
         {
-            int accountID = int.Parse(SessionConfig.GetUser().ID.ToString());
+            //int accountID = int.Parse(SessionConfig.GetUser().ID.ToString());
+            int accountID = int.Parse(CookiesConfig.GetUser(Request).ID.ToString());
             var cus = db.Customers.FirstOrDefault(c => c.IDAccount == accountID);
 
             var orders = db.Orders

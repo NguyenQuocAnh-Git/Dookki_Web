@@ -54,7 +54,7 @@
                         <i class="fa-solid fa-bag-shopping" style="color: #ffffff;"></i> @Html.Action("DisplayCartPartial", "Order")
                     </a>
                     <div>
-                        @if (SessionConfig.GetUser() != null)
+                        @if (CookiesConfig.GetUser(Request) != null)
                         {
                             <style>
                                 ul {
@@ -67,7 +67,7 @@
                             <ul id="navmenu" class="navmenu">
                                 <li class="dropdown">
                                     <a class="btn-getstarted" href="#">
-                                        @SessionConfig.GetUserName()
+                                        @CookiesConfig.GetUserName(Request)
                                         <i class="bi bi-chevron-down toggle-dropdown"></i>
                                     </a>
                                     <ul>

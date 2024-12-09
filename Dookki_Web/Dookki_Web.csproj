@@ -1917,6 +1917,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\CookiesConfig.cs" />
     <Compile Include="App_Start\RoleAdmin.cs" />
     <Compile Include="App_Start\RoleUser.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -1972,6 +1973,7 @@
     <Compile Include="Models\Employee.cs">
       <DependentUpon>DOOKKI.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\JSONConvertAccount.cs" />
     <Compile Include="Models\Map\AdminViewModel.cs" />
     <Compile Include="Models\Map\mapAccount.cs" />
     <Compile Include="Models\Map\mapEmployee.cs" />

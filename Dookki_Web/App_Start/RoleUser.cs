@@ -10,7 +10,8 @@ namespace Dookki_Web.App_Start
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            var user = SessionConfig.GetUser();
+            var httpRequestBase = new HttpRequestWrapper(HttpContext.Current.Request);
+            var user = CookiesConfig.GetUser(httpRequestBase);
             if (user == null)
             {
                 //Dieu huong ve trang login

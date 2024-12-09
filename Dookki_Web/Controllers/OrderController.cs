@@ -201,7 +201,8 @@ namespace Dookki_Web.Controllers
                 tmp.Role = "temp";
                 //Save tmp account
                 Session["isWithoutAccount"] = true;
-                SessionConfig.SetUser(tmp);
+                //SessionConfig.SetUser(tmp);
+                CookiesConfig.SetACCOUNTCookie(Response, "user", tmp);
                 if (db.Customers.SingleOrDefault(n=>n.Phone == cus.Phone) == null)
                 {
                     db.Customers.Add(cus);
@@ -218,7 +219,8 @@ namespace Dookki_Web.Controllers
             //{
             //    return RedirectToAction("Login", "Customer");
             //}
-            if (SessionConfig.GetUser() == null)
+            //if (SessionConfig.GetUser() == null)
+            if (CookiesConfig.GetUser(Request) == null)
             {
                 return RedirectToAction("Login", "Customer");
             }
@@ -229,7 +231,9 @@ namespace Dookki_Web.Controllers
                     return RedirectToAction("Index", "Home");
                 }
                 
-                var acc = SessionConfig.GetUser();
+                //var acc = SessionConfig.GetUser();
+                var acc = CookiesConfig.GetUser(Request);
+
 
                 Customer cus = db.Customers.SingleOrDefault(x => x.Phone == acc.UserName);
                 ViewBag.Name = cus.Name;
@@ -250,7 +254,8 @@ namespace Dookki_Web.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                var acc = SessionConfig.GetUser();
+                //var acc = SessionConfig.GetUser();
+                var acc = CookiesConfig.GetUser(Request);
 
                 Customer cus = db.Customers.SingleOrDefault(x => x.Phone == acc.UserName);
                 ViewBag.Name = cus.Name;
@@ -275,7 +280,8 @@ namespace Dookki_Web.Controllers
                 bool cash = Convert.ToBoolean(collection["Payment"].Split(',')[0]);
 
 
-                var acc = SessionConfig.GetUser();
+                //var acc = SessionConfig.GetUser();
+                var acc = CookiesConfig.GetUser(Request);
                 Customer client = db.Customers.SingleOrDefault(x => x.Phone == acc.UserName);
                 List<Cart> cart = GetCart();
 
@@ -312,7 +318,8 @@ namespace Dookki_Web.Controllers
                     db.OrderDetails.Add(detail);
                     db.SaveChanges();
                 }
-                SessionConfig.SetUser(null);
+                //SessionConfig.SetUser(null);
+                CookiesConfig.DeleteCookie(Response, "user");
                 Session["isWithoutAccount"] = null;
                 return RedirectToAction("DisplayBill", "Order");
 
@@ -331,7 +338,8 @@ namespace Dookki_Web.Controllers
                 bool cash = Convert.ToBoolean(collection["Payment"].Split(',')[0]);
 
 
-                var acc = SessionConfig.GetUser();
+                //var acc = SessionConfig.GetUser();
+                var acc = CookiesConfig.GetUser(Request);
                 Customer client = db.Customers.SingleOrDefault(x => x.Phone == acc.UserName);
                 List<Cart> cart = GetCart();
 
