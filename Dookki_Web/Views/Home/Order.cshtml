@@ -40,8 +40,10 @@
                             }
                             else
                             {
+                                string imageName = item.Name + ".jpg";
+                                string imagePath = Url.Content($"~/Contents/img/menu/{imageName}");
                                 <div class="col-lg-4 menu-item">
-                                    <a href="~/Contents/img/menu/menu-item-1.png" class="glightbox"><img src="~/Contents/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
+                                    <a href="@imagePath" class="glightbox"><img src="@imagePath" class="menu-img img-fluid" alt=""></a>
                                     <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
                                     <div class="price">
                                         <div>
