@@ -138,45 +138,75 @@ namespace Dookki_Web.Controllers
             }
         }
         [HttpPost]
-        public ActionResult EditProfile(Customer updatedCustomer)
+        public ActionResult EditProfile(Customer updatedCustomer, string NewPassword, string ConfirmPassword)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                // Kiểm tra xem số điện thoại đã tồn tại cho khách hàng khác hay không
-                var duplicatePhone = db.Customers
-                    .FirstOrDefault(c => c.Phone == updatedCustomer.Phone && c.ID != updatedCustomer.ID);
+                ViewBag.Error = "Invalid data.";
+                return View(updatedCustomer);
+            }
 
-                if (duplicatePhone != null)
+            // Kiểm tra số điện thoại trùng lặp
+            if (db.Customers.Any(c => c.Phone == updatedCustomer.Phone && c.ID != updatedCustomer.ID))
+            {
+                ViewBag.Error = "The phone number is already in use by another customer.";
+                return View(updatedCustomer);
+            }
+
+            // Lấy thông tin khách hàng hiện tại
+            var existingCustomer = db.Customers.FirstOrDefault(c => c.ID == updatedCustomer.ID);
+
+            if (existingCustomer == null)
+            {
+                ViewBag.Error = "Customer not found.";
+                return View(updatedCustomer);
+            }
+
+            // Cập nhật thông tin khách hàng
+            existingCustomer.Name = updatedCustomer.Name;
+            existingCustomer.Email = updatedCustomer.Email;
+            existingCustomer.Address = updatedCustomer.Address;
+
+            // Cập nhật số điện thoại nếu thay đổi
+            if (existingCustomer.Phone != updatedCustomer.Phone)
+            {
+                var accountCustomer = db.ACCOUNTs.FirstOrDefault(a => a.UserName == existingCustomer.Phone);
+                if (accountCustomer != null)
                 {
-                    ViewBag.Error = "The phone number is already in use by another customer.";
+                    accountCustomer.UserName = updatedCustomer.Phone;
+                    db.ACCOUNTs.AddOrUpdate(accountCustomer);
+                }
+                existingCustomer.Phone = updatedCustomer.Phone;
+            }
+
+            // Cập nhật mật khẩu nếu có
+            if (!string.IsNullOrEmpty(NewPassword) || !string.IsNullOrEmpty(ConfirmPassword))
+            {
+                if (NewPassword != ConfirmPassword)
+                {
+                    ViewBag.ErrorPassword = "Passwords do not match.";
                     return View(updatedCustomer);
                 }
 
-                // Lấy bản ghi khách hàng hiện tại từ database
-                var existingCustomer = db.Customers.FirstOrDefault(c => c.ID == updatedCustomer.ID);
-
-                if (existingCustomer != null)
+                // Mã hóa mật khẩu trước khi lưu
+                var accountCustomer = db.ACCOUNTs.FirstOrDefault(a => a.UserName == existingCustomer.Phone);
+                if (accountCustomer != null)
                 {
-                    // Cập nhật thông tin khách hàng
-                    existingCustomer.Name = updatedCustomer.Name;
-                    existingCustomer.Phone = updatedCustomer.Phone;
-                    existingCustomer.Email = updatedCustomer.Email;
-                    existingCustomer.Address = updatedCustomer.Address;
-
-                    // Lưu thay đổi
-                    db.SaveChanges();
-                    ViewBag.Success = "Profile updated successfully!";
+                    accountCustomer.Password = NewPassword; 
+                    db.ACCOUNTs.AddOrUpdate(accountCustomer);
                 }
                 else
                 {
-                    ViewBag.Error = "Customer not found.";
+                    ViewBag.Error = "Account not found.";
+                    return View(updatedCustomer);
                 }
             }
-            else
-            {
-                ViewBag.Error = "Invalid data.";
-            }
 
+            // Lưu thay đổi
+            db.Customers.AddOrUpdate(existingCustomer);
+            db.SaveChanges();
+
+            ViewBag.Success = "Profile updated successfully!";
             return View(updatedCustomer);
         }
 

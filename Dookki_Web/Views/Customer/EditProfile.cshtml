@@ -9,6 +9,12 @@
     <div class="container">
         <div class="checkout__form">
             <h4>Edit Profile</h4>
+            @if (ViewBag.Success != null)
+            {
+                <h5>@ViewBag.Success</h5>
+
+            }
+
             @using (Html.BeginForm("EditProfile", "Customer", FormMethod.Post))
             {
                 <div class="row">
@@ -26,6 +32,7 @@
                         </div>
                         <div class="row">
                             <!-- Phone -->
+
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>Phone</p>
@@ -39,7 +46,17 @@
                                     @Html.TextBoxFor(m => m.Email, new { @class = "checkout__input__add", @placeholder = "Enter your email", @type = "email" })
                                 </div>
                             </div>
+                            <p>If you update your phone number, your login account will also update as well.</p>
                         </div>
+                        <div class="checkout__input">
+                            <p>New Password</p>
+                            @Html.TextBox("NewPassword", "", new { @id = "NewPassword", @class = "checkout__input__add", @type = "password" })
+                        </div>
+                        <div class="checkout__input">
+                            <p>Confirm Password</p>
+                            @Html.TextBox("ConfirmPassword", "", new { @id = "ConfirmPassword", @class = "checkout__input__add", @type = "password" })
+                        </div>
+                        <p class="text-danger">@ViewBag.ErrorPassword</p>
                     </div>
                 </div>
                 <button type="submit" class="site-btn">Update Profile</button>
@@ -49,3 +66,13 @@
 
 
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var successMessage = '@ViewBag.Success';
+        if (successMessage) {
+            // Reset the password fields
+            document.getElementById("NewPassword").value = "";
+            document.getElementById("ConfirmPassword").value = "";
+        }
+    });
+</script>

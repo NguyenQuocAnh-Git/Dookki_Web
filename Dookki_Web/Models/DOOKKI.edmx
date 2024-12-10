@@ -98,8 +98,9 @@
           <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ID_Category" Type="int" />
+          <Property Name="urlImage" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <Association Name="FK__Admin__IDAccount__3B75D760">
+        <Association Name="FK__Admin__IDAccount__3D5E1FD2">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
           <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
           <ReferentialConstraint>
@@ -111,7 +112,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Customer__IDAcco__403A8C7D">
+        <Association Name="FK__Customer__IDAcco__4222D4EF">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
           <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -206,11 +207,11 @@
           <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentMethod" EntityType="Self.PaymentMethod" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Admin__IDAccount__3B75D760" Association="Self.FK__Admin__IDAccount__3B75D760">
+          <AssociationSet Name="FK__Admin__IDAccount__3D5E1FD2" Association="Self.FK__Admin__IDAccount__3D5E1FD2">
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
             <End Role="Admin" EntitySet="Admin" />
           </AssociationSet>
-          <AssociationSet Name="FK__Customer__IDAcco__403A8C7D" Association="Self.FK__Customer__IDAcco__403A8C7D">
+          <AssociationSet Name="FK__Customer__IDAcco__4222D4EF" Association="Self.FK__Customer__IDAcco__4222D4EF">
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
             <End Role="Customer" EntitySet="Customer" />
           </AssociationSet>
@@ -252,8 +253,8 @@
           <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Admins" Relationship="Self.FK__Admin__IDAccount__3B75D760" FromRole="ACCOUNT" ToRole="Admin" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK__Customer__IDAcco__403A8C7D" FromRole="ACCOUNT" ToRole="Customer" />
+          <NavigationProperty Name="Admins" Relationship="Self.FK__Admin__IDAccount__3D5E1FD2" FromRole="ACCOUNT" ToRole="Admin" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK__Customer__IDAcco__4222D4EF" FromRole="ACCOUNT" ToRole="Customer" />
         </EntityType>
         <EntityType Name="Admin">
           <Key>
@@ -263,7 +264,7 @@
           <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IDAccount" Type="Int32" />
-          <NavigationProperty Name="ACCOUNT" Relationship="Self.FK__Admin__IDAccount__3B75D760" FromRole="Admin" ToRole="ACCOUNT" />
+          <NavigationProperty Name="ACCOUNT" Relationship="Self.FK__Admin__IDAccount__3D5E1FD2" FromRole="Admin" ToRole="ACCOUNT" />
         </EntityType>
         <EntityType Name="BookingRequest">
           <Key>
@@ -296,7 +297,7 @@
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Marks" Type="Int32" />
           <Property Name="IDAccount" Type="Int32" />
-          <NavigationProperty Name="ACCOUNT" Relationship="Self.FK__Customer__IDAcco__403A8C7D" FromRole="Customer" ToRole="ACCOUNT" />
+          <NavigationProperty Name="ACCOUNT" Relationship="Self.FK__Customer__IDAcco__4222D4EF" FromRole="Customer" ToRole="ACCOUNT" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Order_customerID" FromRole="Customer" ToRole="Order" />
         </EntityType>
         <EntityType Name="Order">
@@ -351,10 +352,11 @@
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ID_Category" Type="Int32" />
+          <Property Name="urlImage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CategoryTicket" Relationship="Self.FK_ID_Category" FromRole="Ticket" ToRole="CategoryTicket" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Ticket" FromRole="Ticket" ToRole="OrderDetail" />
         </EntityType>
-        <Association Name="FK__Admin__IDAccount__3B75D760">
+        <Association Name="FK__Admin__IDAccount__3D5E1FD2">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
           <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
           <ReferentialConstraint>
@@ -366,7 +368,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Customer__IDAcco__403A8C7D">
+        <Association Name="FK__Customer__IDAcco__4222D4EF">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
           <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -461,11 +463,11 @@
           <EntitySet Name="Payments" EntityType="Self.Payment" />
           <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethod" />
           <EntitySet Name="Tickets" EntityType="Self.Ticket" />
-          <AssociationSet Name="FK__Admin__IDAccount__3B75D760" Association="Self.FK__Admin__IDAccount__3B75D760">
+          <AssociationSet Name="FK__Admin__IDAccount__3D5E1FD2" Association="Self.FK__Admin__IDAccount__3D5E1FD2">
             <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
             <End Role="Admin" EntitySet="Admins" />
           </AssociationSet>
-          <AssociationSet Name="FK__Customer__IDAcco__403A8C7D" Association="Self.FK__Customer__IDAcco__403A8C7D">
+          <AssociationSet Name="FK__Customer__IDAcco__4222D4EF" Association="Self.FK__Customer__IDAcco__4222D4EF">
             <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
             <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
@@ -601,6 +603,7 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ID_Category" ColumnName="ID_Category" />
+                <ScalarProperty Name="urlImage" ColumnName="urlImage" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

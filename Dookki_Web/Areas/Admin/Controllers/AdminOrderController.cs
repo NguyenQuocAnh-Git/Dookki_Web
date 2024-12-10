@@ -39,8 +39,47 @@ namespace Dookki_Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult AddItem(Ticket ticket)
+        public ActionResult AddItem(Ticket ticket, HttpPostedFileBase ImageFile)
         {
+            if (ImageFile == null)
+            {
+                ModelState.AddModelError("urlImage", "Vui lòng chọn một tệp ảnh.");
+                return View(ticket);
+            }
+            if (ImageFile.ContentLength > 5 * 1024 * 1024) // 5MB
+            {
+                ModelState.AddModelError("urlImage", "Kích thước ảnh không được vượt quá 5MB.");
+                return View(ticket);
+            }
+
+            if (ImageFile != null && ImageFile.ContentLength > 0)
+            {
+                // Kiểm tra định dạng file
+                string[] allowedExtensions = { ".jpg", ".jpeg", ".png" };
+                string fileExtension = Path.GetExtension(ImageFile.FileName).ToLower();
+
+                if (!allowedExtensions.Contains(fileExtension))
+                {
+                    ModelState.AddModelError("urlImage", "Chỉ hỗ trợ các định dạng .jpg, .jpeg, .png.");
+                    return View(ticket);
+                }
+
+                // Tạo đường dẫn để lưu ảnh
+                string fileName = Path.GetFileName(ImageFile.FileName);
+                string filePath = Path.Combine(Server.MapPath("~/Contents/img/menu/"), fileName);
+
+                // Lưu ảnh vào thư mục
+                ImageFile.SaveAs(filePath);
+
+                // Lưu đường dẫn ảnh vào database
+                ticket.urlImage = fileName;
+            }
+            else
+            {
+                ModelState.AddModelError("urlImage", "Vui lòng chọn một tệp ảnh.");
+                return View(ticket);
+            }
+
             // Kiểm tra xem tên vé đã tồn tại chưa
             if (db.Tickets.Any(t => t.Name == ticket.Name))
             {

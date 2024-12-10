@@ -24,6 +24,7 @@ namespace Dookki_Web.Models
         public string Name { get; set; }
         public decimal Price { get; set; }
         public Nullable<int> ID_Category { get; set; }
+        public string urlImage { get; set; }
     
         public virtual CategoryTicket CategoryTicket { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

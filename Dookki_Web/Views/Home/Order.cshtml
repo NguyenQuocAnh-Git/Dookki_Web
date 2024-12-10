@@ -40,7 +40,7 @@
                             }
                             else
                             {
-                                string imageName = item.Name + ".jpg";
+                                string imageName = item.urlImage;
                                 string imagePath = Url.Content($"~/Contents/img/menu/{imageName}");
                                 <div class="col-lg-4 menu-item">
                                     <a href="@imagePath" class="glightbox"><img src="@imagePath" class="menu-img img-fluid" alt=""></a>
