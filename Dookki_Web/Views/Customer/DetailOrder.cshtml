@@ -6,56 +6,55 @@
     var OrderDetails = Model.OrderDetails;
 }
 
-<div class="container section-title" data-aos="fade-up">
-    <p>Detail order</p>
-</div>
+<section class="py-4 bg-light rounded">
+    <div class="container">
+        <div class="p-4 border bg-white rounded">
+            <h2 class="text-center mb-4" style="font-size: 48px;">Detail order</h2>
 
-<div class="container section-title">
-    <hr />
-    <span class="mg-r-10">
-        <strong>
-            @Html.DisplayNameFor(model => model.Time)
-        </strong>
-        @Html.Label(Model.Time.ToString(@"hh\:mm\:ss"))
-    </span>
-    <span>
-        <strong>
-            @Html.DisplayNameFor(model => model.Status)
-        </strong>
-        @Html.DisplayFor(model => model.Status)
-    </span>
-</div>
+            <div class="container section-title">
+                <hr />
+                <span class="mg-r-10">
+                    <strong>
+                        @Html.DisplayNameFor(model => model.Time)
+                    </strong>
+                    @Html.Label(Model.Time.ToString(@"hh\:mm\:ss"))
+                </span>
+                <span>
+                    <strong>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </strong>
+                    @Html.DisplayFor(model => model.Status)
+                </span>
+            </div>
+
+            <table class="table" border="1">
+                <thead>
+                    <tr>
+                        <th style="width: 100px">@Html.Label("Name")</th>
+                        <th style="width: 100px">@Html.Label("Quantity")</th>
+                        <th style="width: 100px">@Html.Label("Price")</th>
+                        <th style="width: 100px">@Html.Label("Total")</th>
+                    </tr>
+                </thead>
+                <tbory>
+                    @foreach (var item in OrderDetails)
+                    {
+                        var total = item.quantily * item.Ticket.Price;
+                        <tr>
+                            <td>@item.Ticket.Name</td>
+                            <td>@item.quantily</td>
+                            <td>@item.Ticket.Price.ToString("#,##0 VND")</td>
+                            <td>@total.ToString("#,##0 VND")</td>
+                        </tr>
+                    }
+                </tbory>
+            </table>
+
+
+        </div>
+    </div>
+</section>
 
 
 
-@*@Html.ActionLink(
-    "List Current Order", // Text hiển thị trên nút
-    "CurrentOrder",       // Tên action
-    "Customer",           // Tên controller
-    null,                 // Route values (nếu có)
-    new { @class = "btn btn-primary mg-l-10 mg-b-10" } // Thuộc tính HTML
-)*@
 
-
-<table class="table" border="1">
-    <thead>
-        <tr>
-            <th style="width: 100px">@Html.Label("Name")</th>
-            <th style="width: 100px">@Html.Label("Quantity")</th>
-            <th style="width: 100px">@Html.Label("Price")</th>
-            <th style="width: 100px">@Html.Label("Total")</th>
-        </tr>
-    </thead>
-    <tbory>
-        @foreach (var item in OrderDetails)
-        {
-            var total = item.quantily * item.Ticket.Price;
-            <tr>
-                <td>@item.Ticket.Name</td>
-                <td>@item.quantily</td>
-                <td>@item.Ticket.Price.ToString("#,##0 VND")</td>
-                <td>@total.ToString("#,##0 VND")</td>
-            </tr>
-        }
-    </tbory>
-</table>

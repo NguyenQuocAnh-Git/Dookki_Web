@@ -4,62 +4,77 @@
     ViewBag.Title = "Confirm";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
-<link rel="stylesheet" href="~/Contents/css/style.css" type="text/css">
+@*<link rel="stylesheet" href="~/Contents/css/style.css" type="text/css">*@
 
-<section class="checkout spad">
+<section class="checkout py-5">
     <div class="container">
-        <div class="checkout__form">
-            <h4>Billing Details</h4>
-            @using (Html.BeginForm())
-            {
-                <div class="row">
-                    <div class="col-lg-8 col-md-6">
-                        <div class="checkout__input">
-                            <p>Name</p>
-                            <input type="text" value="@ViewBag.Name" class="checkout__input__add" disabled />
-                        </div>
-                    </div>
-                    <div class="checkout__input">
-                        <p>Address</p>
-                        <input type="text" value="@ViewBag.Address" class="checkout__input__add" disabled>
-                    </div>
+        <div class="bg-white border p-4 rounded">
+            <div class="checkout__form">
+                <h1 class="text-center">Billing Details</h1>
+                @using (Html.BeginForm())
+                {
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="checkout__input">
-                                <p>Phone</p>
-                                <input type="text" value="@ViewBag.Phone" disabled>
+                        <!-- Billing Details -->
+                        <div class="col-lg-8">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" id="name" value="@ViewBag.Name" class="form-control" disabled>
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" id="address" value="@ViewBag.Address" class="form-control" disabled>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label">Phone</label>
+                                        <input type="text" id="phone" value="@ViewBag.Phone" class="form-control" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" id="email" value="@ViewBag.Email" class="form-control" disabled>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="checkout__input">
-                                <p>Email</p>
-                                <input type="text" value="@ViewBag.Email" disabled>
+                        <!-- Order Summary -->
+                        <div class="col-lg-4">
+                            <div class="bg-light p-4 rounded">
+                                <h4 class="mb-4 text-center">Your Order</h4>
+                                <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+                                    <strong>Products</strong>
+                                    <strong>Total</strong>
+                                </div>
+                                <ul class="list-unstyled mb-3">
+                                    @foreach (var item in Model)
+                                    {
+                                        <li class="d-flex justify-content-between">
+                                            <span>@item.name</span>
+                                            <span>@String.Format("{0:0,0}", (item.price * item.quantily)) đ</span>
+                                        </li>
+                                    }
+                                </ul>
+                                <div class="d-flex justify-content-between border-top pt-2">
+                                    <strong>Subtotal</strong>
+                                    <span>@ViewBag.NumProduct</span>
+                                </div>
+                                <div class="d-flex justify-content-between border-top pt-2">
+                                    <strong>Total</strong>
+                                    <span>@String.Format("{0:0,0}", ViewBag.Total) đ</span>
+                                </div>
+                                <div class="form-check mt-3">
+                                    @Html.CheckBox("Payment", false, new { @class = "form-check-input" })
+                                    <label class="form-check-label" for="payment">By cash</label>
+                                </div>
+                                <button type="submit" class="btn btn-getstarted w-100 mt-3" style="background-color: #ce1212;color: white; width:100px; border-radius: 20px;">Pay the Order</button>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <div class="checkout__order">
-                        <h4>Your Order</h4>
-                        <div class="checkout__order__products">Products <span>Total</span></div>
-                        <ul>
-                            @foreach (var item in Model)
-                            {
-                                <li>@item.name <span>@(item.price * item.quantily)đ</span></li>
-                            }
-                        </ul>
-                        <div class="checkout__order__subtotal">Subtotal <span>@ViewBag.NumProduct</span></div>
-                        <div class="checkout__order__total">Total <span>@String.Format("{0:0,0}", ViewBag.Total) đ</span></div>
-                        <div>
-                            <label>
-                                @Html.CheckBox("Payment")
-                                By cash
-                            </label>
-                        </div>
-                        <button type="submit" class="site-btn">Pay the order</button>
-                    </div>
-                </div>
-            }
+                }
+            </div>
         </div>
+
     </div>
 </section>

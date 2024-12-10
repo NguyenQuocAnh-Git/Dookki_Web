@@ -2,34 +2,46 @@
     ViewBag.Title = "DisplayBill";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
-<link rel="stylesheet" href="~/Contents/css/style.css" type="text/css">
+@*<link rel="stylesheet" href="~/Contents/css/style.css" type="text/css">*@
 
-<section class="checkout spad">
+<section class="checkout py-5">
     <div class="container">
-        <div class="row">
-            <div>
-                <h3>Thank For Your Oder</h3>
+        <div class="row justify-content-center mb-4">
+            <div class="col-12 text-center">
+                <h1>Thank You For Your Order!</h1>
             </div>
-            <div class="checkout__order">
-                <h4>Your Order</h4>
-                <div class="checkout__order__products">Products <span>Total</span></div>
-                <ul>
-                    @foreach (var item in ViewBag.Cart)
-                    {
-                        <li>@item.name <span>@(item.price * item.quantily)đ</span></li>
-                    }
-                </ul>
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="checkout__order__subtotal" style="text-align: left">Number of product</div>
-                        <div class="checkout__order__total" style="text-align: left">Total</div>
+        </div>
+        <div class="row justify-content-center">
+            <!-- Order Summary -->
+            <div class="col-lg-6">
+                <div class="bg-light p-4 rounded shadow-sm">
+                    <h2 class="mb-4">Your Order</h2>
+                    <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+                        <strong>Products</strong>
+                        <strong>Total</strong>
                     </div>
-                    <div class="col-sm">
-                        <div class="checkout__order__subtotal">@ViewBag.NumProduct</div>
-                        <div class="checkout__order__total">@String.Format("{0:0,0}", ViewBag.Total) đ</div>
+                    <ul class="list-unstyled">
+                        @foreach (var item in ViewBag.Cart)
+                        {
+                            <li class="d-flex justify-content-between">
+                                <span>@item.name</span>
+                                <span>@String.Format("{0:0,0}",(item.price * item.quantily)) đ</span>
+                            </li>
+                        }
+                    </ul>
+                    <div class="border-top pt-3">
+                        <div class="d-flex justify-content-between">
+                            <strong>Number of Products</strong>
+                            <span>@ViewBag.NumProduct</span>
+                        </div>
+                        <div class="d-flex justify-content-between mt-2">
+                            <strong>Total</strong>
+                            <span>@String.Format("{0:0,0}", ViewBag.Total) đ</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
