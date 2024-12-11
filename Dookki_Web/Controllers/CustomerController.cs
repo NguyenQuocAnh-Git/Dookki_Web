@@ -82,6 +82,24 @@ namespace Dookki_Web.Controllers
                 return View("Register");
             }
 
+            if(!System.Text.RegularExpressions.Regex.IsMatch(username, @"^0\d{9}$"))
+            {
+                ViewBag.Error = "Phone number invalidate.";
+                return View("Register");
+            }
+
+            if (!System.Text.RegularExpressions.Regex.IsMatch(password, @"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$"))
+            {
+                ViewBag.Error = "Password must have at least 6 characters, including 1 uppercase letter, 1 number, and 1 special character.";
+                return View("Register");
+            }
+
+            if (!string.IsNullOrEmpty(email) && !System.Text.RegularExpressions.Regex.IsMatch(email, @"^[a-zA-Z0-9._%+-]+@gmail\.com$"))
+            {
+                ViewBag.Error = "Email invalidate.";
+                return View("Register");
+            }
+
             if (db.ACCOUNTs.Any(a => a.UserName == username))
             {
                 ViewBag.Error = "This phone number is already registered.";
