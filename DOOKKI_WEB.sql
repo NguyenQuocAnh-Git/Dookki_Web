@@ -1,6 +1,3 @@
-﻿use master;
-drop database DOOKKI; 
-
 create database DOOKKI_WEB;
 use DOOKKI_WEB;
 
