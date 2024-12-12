@@ -163,6 +163,8 @@
     <Content Include="Contents\img\gallery\8.jpg" />
     <Content Include="Contents\img\hero-img.png" />
     <Content Include="Contents\img\hotpot.png" />
+    <Content Include="Contents\img\Icon\admin_Icon.ico" />
+    <Content Include="Contents\img\Icon\dookki_Icon.ico" />
     <Content Include="Contents\img\logo.png" />
     <Content Include="Contents\img\menu-dookki-buffet.jpg" />
     <Content Include="Contents\img\menu-dookki.jpg" />
